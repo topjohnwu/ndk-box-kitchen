@@ -171,7 +171,10 @@ if $GENERATE; then
   echo "LOCAL_SRC_FILES := \\" > Android_src.mk
   parse_kbuild | sort -u >> Android_src.mk
 
-  cp ../busybox.mk Android.mk 2>/dev/null
+  # Build Android.mk
+  echo 'LOCAL_PATH := $(call my-dir)' > Android.mk
+  cat Makefile | head -n 3 >> Android.mk
+  cat ../busybox.mk >> Android.mk
 
   if $COMMIT; then
     git add -f include
