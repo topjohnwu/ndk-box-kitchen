@@ -1,26 +1,24 @@
 # ndk-busybox-kitchen
 
-This repo is the kitchen used to create and update the pre-generated busybox repo [ndk-busybox](https://github.com/topjohnwu/ndk-busybox), which is meant to be built with the `ndk-build` command included in the NDK package (more info [here](https://developer.android.com/ndk/guides/ndk-build.html)).
+This repo is the kitchen used to create headers and Makefiles for the busybox repo [ndk-busybox](https://github.com/topjohnwu/ndk-busybox), which is meant to build busybox with the `ndk-build` command included in the NDK package (more info [here](https://developer.android.com/ndk/guides/ndk-build.html)).
 
 ### Introduction
 
-The busybox uses the same configuration system as the Linux kernel, thus requires additional setup and configuration before you can build from the sources. As a result, people compiling busybox for Android used to use their own toolchain or NDK's standalone toolchain to cross compile with the Makefile shipped in official BusyBox sources. However, cross compiling requires setting up the environment for your specific device, re-doing configuration for each target architecture, and finally it's not Windows friendly - you need to install POSIX Environment like Cygwin to setup and compile. Of course those willing to go deep can create an automation script to do all the heavy jobs for you, but the solution isn't really that portable and simple to use. Most importantly, that setup process doesn't fit in the build process I created for [Magisk](https://github.com/topjohnwu/Magisk). As a result, this repo is born!
+Busybox uses the same configuration system as the Linux kernel, thus requires additional setup and configuration before you can build from the sources. As a result, people compiling busybox for Android used to use their own toolchain or NDK's standalone toolchain to cross compile with the Makefile shipped in official BusyBox sources. However, setting up a cross compiling environment is quite confusing, and you have to reconfigure every time you switch to another target architecture. To make things even worse, it's not Windows friendly - you need additional POSIX Environment setup like Cygwin to even be possible to start. Of course those willing to go deep can create an automation script to do all the heavy jobs for you, but the solution isn't really that portable and simple to use. 
+
+This makes me wonder, why not utilize the `ndk-build` command, which is a helper script included in NDK that supports easy cross compiling? So this project is born, using some tricks to make `ndk-build` be able to compile busybox. This is also integrated into [Magisk](https://github.com/topjohnwu/Magisk)'s building system.
 
 ### Platforms
 
-The script is meant to run on Unix operating systems. On Linux, it works out of the box; on macOS, which I personally use as daily driver, requires additional setup.  
-Install [homebrew](https://brew.sh/), and install GNU utilities using `brew install coreutils gnu-sed`. Before you call the script, make sure to make the GNU tools in `PATH` by calling  
-`export PATH=$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix gnu-sed)/libexec/gnubin:$PATH`  
-After these commands, the script should work just like it is in Linux environments.
+The generation script (`gen_makefile.sh`) is meant to run on Unix operating systems. It works out of the box on Linux, but requires some additional setup on macOS:
+> The script depends on GNU core utilities and GNU sed. In order to install them on macOS, install via [homebrew](https://brew.sh/) with `brew install coreutils gnu-sed`. These tools by default are not available in `$PATH`, remember to call the following command before running `gen_makefile.sh`: `export PATH=$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix gnu-sed)/libexec/gnubin:$PATH`  
 
-**Not to be confused**, the generated result can be used on any platform that support NDK: Linux, macOS, and Windows. It's just the header/Makefile generation that requires Unix OS to work, which is what the script in this repo does.
+**Don't be confused**, the generated headers and Makefiles can be used on any platform that support NDK: Linux, macOS, and Windows, the **generation** itself is what requires a Unix system.
 
-### Brief Explanation
+### Preparation
 
-This project is inspired by [osm0sis/android-busybox-ndk](https://github.com/osm0sis/android-busybox-ndk), and heavily depends on the patches and the config file in the repo. The script `ndk_busybox_kitchen.sh` will download BusyBox, download `osm0sis/android-busybox-ndk`, apply patches for NDK, fetch the correct config, then finally generates all header files and Android.mk for NDK building.
+Before you can run the script, first you need to clone and setup busybox sources (place it in `busybox`). The official sources can be downloaded with `git clone git://busybox.net/busybox.git`. Next, you will need a series of patches to make things work properly: cherry-pick all commits started with `[PATCH]` from [ndk-busybox](https://github.com/topjohnwu/ndk-busybox). All of these patches are tweaked/modified from [osm0sis/android-busybox-ndk](https://github.com/osm0sis/android-busybox-ndk), full credits to him.
 
 ### Building BusyBox
 
-This repo also ships with the minimal environment to compile busybox. Once you have properly run `ndk_busybox_kitchen.sh`, the folder `busybox` should be ready for compilation. If you simply just want to build busybox using this repo but don't want / cannot (e.g. you're on Windows) run the script, you can also clone my prebuilt source with `git clone https://github.com/topjohnwu/ndk-busybox busybox`.
-
-After the folder `busybox` is properly setup, simply call `<ndk-path>/ndk-build`, then BusyBox should build graciously :)
+This repo also ships with the minimal environment to compile busybox. If you simply just want to build busybox, you can just clone my prebuilt source with `git clone https://github.com/topjohnwu/ndk-busybox busybox busybox`. After the folder `busybox` is properly setup, call `<ndk-path>/ndk-build`, to start the build.
