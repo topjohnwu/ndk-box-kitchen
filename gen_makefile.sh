@@ -3,7 +3,7 @@
 # Clone busybox, check out to desired tag, cherry-pick / apply patches for NDK, then run this script
 [ ! -d busybox ] && exit 1
 
-[ $1 = "--commit" ] && COMMIT=true || COMMIT==false
+[ "$1" = "--commit" ] && COMMIT=true || COMMIT=false
 
 progress() {
   echo -e "\033[44m\n${1}\n\033[0m"
@@ -31,7 +31,7 @@ cd busybox
 # Copy config and make config
 progress "Generating configuration files"
 cp ../ndk_busybox.config .config
-yes n | make oldconfig 2>/dev/null
+yes n | make oldconfig >/dev/null 2>&1
 
 # Generate headers
 gcc applets/applet_tables.c -o applets/applet_tables
