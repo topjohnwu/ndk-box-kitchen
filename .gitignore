@@ -1,4 +1,5 @@
 busybox
+toybox
 libs
 obj
-osm0sis_patch
+busybox_patches
