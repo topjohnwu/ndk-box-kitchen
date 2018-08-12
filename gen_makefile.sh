@@ -65,8 +65,8 @@ apply_patches() {
   fi
   for p in ../osm0sis_patch/patches/*; do
     case $p in
-      *000*|*001*|*002* )
-        # We don't need the Makefile patches and Cygwin patches
+      *000*|*001*|*002*|*017-d*|*020* )
+        # Skip several patches
         continue
         ;;
       * )
