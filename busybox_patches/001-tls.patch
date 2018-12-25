@@ -1,0 +1,24 @@
+From: osm0sis <osm0sis@outlook.com>
+Date: Thu, 20 Jul 2017 09:16:07 -0300
+Subject: [PATCH] fix tls: avoid problematic ASM code only triggered by x86 NDK builds
+
+---
+ networking/tls.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/networking/tls.h b/networking/tls.h
+index d487f3810..8399070ec 100644
+--- a/networking/tls.h
++++ b/networking/tls.h
+@@ -26,7 +26,7 @@
+ #undef  USE_SEED
+ /* pstm: multiprecision numbers */
+ #undef  DISABLE_PSTM
+-#if defined(__GNUC__) && defined(__i386__)
++#if defined(__GNUC__) && defined(__i386__) && !defined(__ANDROID__)
+   /* PSTM_X86 works correctly. +25 bytes. */
+ # define PSTM_32BIT
+ # define PSTM_X86
+-- 
+2.12.3
+
