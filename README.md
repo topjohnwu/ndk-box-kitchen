@@ -7,7 +7,7 @@ You have to clone sources of \*box to the current directory and checkout to your
 ## Busybox
 Building busybox requires an excessive amount of source code patching, and Makefiles are extremely difficult to create.
 
-`./busybox.sh patch` to apply required patches (clone [osm0sis/android-busybox-ndk](https://github.com/osm0sis/android-busybox-ndk) to `busybox_patches` beforehand)
+`./busybox.sh patch` to apply required patches
 
 `./busybox.sh generate` to generate required Makefiles and headers
 
