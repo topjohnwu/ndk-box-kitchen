@@ -67,7 +67,7 @@ if [ ! -d busybox ]; then
 fi
 
 cd busybox
-CWD=`pwd`
+CWD=`pwd -P`
 
 case "$1" in
   generate )
