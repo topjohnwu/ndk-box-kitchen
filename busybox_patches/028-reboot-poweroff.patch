@@ -1,0 +1,107 @@
+From: Chris Renshaw <osm0sis@outlook.com>
+Date: Mon, 26 Jun 2017 23:53:06 -0300
+Subject: [PATCH] fix reboot+poweroff: hack android_reboot support
+
+based on 'reboot.c' and 'halt.c' patches from CyanogenMod:
+https://github.com/CyanogenMod/android_external_busybox/commit/8aeb3719294721f744239ced474d159f073eef55#diff-51036c2b1c4282b63402a0e0286a066a
+https://github.com/CyanogenMod/android_external_busybox/commit/8aeb3719294721f744239ced474d159f073eef55#diff-fa7fd08ce03ea9138df81c149792b371
+https://github.com/CyanogenMod/android_external_busybox/commit/d0b802581eb4f83e81b652f0b59b8b9b98105e66
+
+then updated and simplified using:
+https://github.com/android/platform_system_core/blob/master/libcutils/android_reboot.c
+https://github.com/android/platform_system_core/blob/master/libcutils/include/cutils/android_reboot.h
+
+and added work around to write the property value directly via shell since property_set and __system_property_set require linkage to libcutils and/or libc
+---
+ init/halt.c   | 27 +++++++++++++++++++++++++++
+ init/reboot.c | 33 +++++++++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
+ create mode 100644 init/reboot.c
+
+diff --git a/init/halt.c b/init/halt.c
+index b7fb10869..5287be470 100644
+--- a/init/halt.c
++++ b/init/halt.c
+@@ -83,6 +83,10 @@
+ #include "libbb.h"
+ #include "reboot.h"
+ 
++#ifdef __BIONIC__
++#include "reboot.c"
++#endif
++
+ #if ENABLE_FEATURE_WTMP
+ #include <sys/utsname.h>
+ 
+@@ -152,6 +156,29 @@ int halt_main(int argc UNUSED_PARAM, char **argv)
+ 	if (!(flags & 2)) /* no -n */
+ 		sync();
+ 
++#ifdef __BIONIC__
++	char *mode[4];
++	int c = 1;
++	mode[0] = strdup("reboot");
++	mode[1] = mode[2] = mode[3] = NULL;
++	switch (which) {
++	case 0:
++	case 1:
++		//-p for halt
++		mode[1] = strdup("-p");
++		c = 2;
++		break;
++	case 2:
++		//reboot
++		if (argc > 1) {
++			mode[1] = strdup(argv[1]);
++			c = 2;
++		}
++		break;
++	}
++	return reboot_android(c, mode);
++#endif
++
+ 	/* Perform action. */
+ 	rc = 1;
+ 	if (!(flags & 4)) { /* no -f */
+diff --git a/init/reboot.c b/init/reboot.c
+new file mode 100644
+index 000000000..97fe523a7
+--- /dev/null
++++ b/init/reboot.c
+@@ -0,0 +1,33 @@
++#include <stdio.h>
++#include <stdlib.h>
++#include <unistd.h>
++
++int reboot_android(int argc, char *argv[])
++{
++    int ret;
++
++    const char* restart_cmd = NULL;
++    char* prop_value;
++    char* prop_cmd;
++
++    restart_cmd = "reboot";
++    while (true) {
++        int c = getopt(argc, argv, "p");
++        if (c == EOF)
++            break;
++        switch (c) {
++        case 'p':
++            restart_cmd = "shutdown";
++            break;
++        }
++    }
++
++    if (argc > optind)
++        asprintf(&prop_value, "%s,%s", restart_cmd, argv[optind]);
++    else
++        asprintf(&prop_value, "%s", restart_cmd);
++
++    asprintf(&prop_cmd, "setprop sys.powerctl %s", prop_value);
++    ret = execlp("sh", "sh", "-c", prop_cmd, NULL);
++    return ret;
++}
+-- 
+2.12.3
+

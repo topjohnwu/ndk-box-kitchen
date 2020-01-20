@@ -1,0 +1,84 @@
+From: Umakanthan Chandran <cumakt@gmail.com>
+Date: Fri, 3 Mar 2017 07:32:22 +0530
+Subject: [PATCH] missing_syscalls/semctl: fix missing definitions on x86 and
+ MIPS NDK cross-compiles
+
+Signed-off-by: Umakanthan Chandran <cumakt@gmail.com>
+---
+ libbb/missing_syscalls.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ libbb/semctl.c           |  4 ++++
+ 2 files changed, 48 insertions(+)
+
+diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
+index 9f3025f..ab3dd06 100644
+--- a/libbb/missing_syscalls.c
++++ b/libbb/missing_syscalls.c
+@@ -10,6 +10,50 @@
+ #include <sys/syscall.h>
+ #include "libbb.h"
+ 
++#ifndef __NR_shmget
++#define __NR_shmget 29
++#endif
++
++#ifndef __NR_shmat
++#define __NR_shmat 30
++#endif
++
++#ifndef __NR_shmctl
++#define __NR_shmctl 31
++#endif
++
++#ifndef __NR_semget
++#define __NR_semget 64
++#endif
++
++#ifndef __NR_semop
++#define __NR_semop 65
++#endif
++
++#ifndef __NR_semctl
++#define __NR_semctl 66
++#endif
++
++#ifndef __NR_shmdt
++#define __NR_shmdt 67
++#endif
++
++#ifndef __NR_msgget
++#define __NR_msgget 68
++#endif
++
++#ifndef __NR_msgsnd
++#define __NR_msgsnd 69
++#endif
++
++#ifndef __NR_msgrcv
++#define __NR_msgrcv 70
++#endif
++
++#ifndef __NR_msgctl
++#define __NR_msgctl 71
++#endif
++
+ #if defined(ANDROID) || defined(__ANDROID__)
+ pid_t getsid(pid_t pid)
+ {
+diff --git a/libbb/semctl.c b/libbb/semctl.c
+index 68f846a..5ddd07f 100644
+--- a/libbb/semctl.c
++++ b/libbb/semctl.c
+@@ -27,6 +27,10 @@
+ #include <sys/sem.h>
+ #include "libbb.h"
+ 
++#ifndef __NR_semctl
++#define __NR_semctl 66
++#endif
++
+ /* code from GLIBC */
+ int semctl(int semid, int semnum, int cmd, ...) {
+   union semun arg;
+-- 
+2.8.3
+

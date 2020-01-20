@@ -1,4 +1,12 @@
-# Dummy file, actually calls the external busybox makefile
 LOCAL_PATH := $(call my-dir)
-# include $(LOCAL_PATH)/../busybox/Android.mk
+
+# Define include paths for external.mk
+LIBSELINUX := jni/selinux/libselinux/include
+LIBPCRE2 := jni/pcre/include
+
+# Uncomment to build BusyBox
+include $(LOCAL_PATH)/../external.mk
+include $(LOCAL_PATH)/../busybox/Android.mk
+
+# Uncomment to build ToyBox
 # include $(LOCAL_PATH)/../toybox/Android.mk

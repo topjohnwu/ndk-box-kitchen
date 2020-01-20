@@ -2,3 +2,5 @@ busybox
 toybox
 libs
 obj
+jni/selinux
+jni/pcre
