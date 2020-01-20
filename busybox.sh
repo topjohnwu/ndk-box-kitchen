@@ -36,6 +36,7 @@ generate_files() {
   applets/usage_compressed include/usage_compressed.h applets
   scripts/mkconfigs include/bbconfigopts.h include/bbconfigopts_bz2.h
   scripts/generate_BUFSIZ.sh include/common_bufsiz.h
+  srctree=$CWD HOSTCC=gcc scripts/embedded_scripts include/embedded_scripts.h embed applets_sh
 
   progress "Generating Android_src.mk based on configs"
 
