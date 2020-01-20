@@ -26,7 +26,7 @@ parse_kbuild() {
 generate_files() {
   # Copy config and make config
   progress "Generating configuration files"
-  # cp ../busybox.config .config
+  cp ../busybox.config .config
   yes n | make oldconfig >/dev/null 2>&1
 
   # Generate headers
