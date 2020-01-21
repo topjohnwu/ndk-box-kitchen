@@ -7,7 +7,7 @@ This repo is the kitchen used to create headers and Makefiles for building \*box
 To build BusyBox, clone the following repos:
 
 ```
-git clone https://busybox.net/busybox.git
+git clone https://git.busybox.net/busybox/
 git clone https://github.com/SELinuxProject/selinux.git jni/selinux
 git clone https://android.googlesource.com/platform/external/pcre jni/pcre
 ```
