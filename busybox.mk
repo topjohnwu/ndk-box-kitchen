@@ -3,7 +3,7 @@ BB_VER = $(VERSION).$(PATCHLEVEL).$(SUBLEVEL)$(EXTRAVERSION)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := busybox
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/include $(LIBSELINUX)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_STATIC_LIBRARIES := libselinux
 
 include $(LOCAL_PATH)/Android_src.mk
