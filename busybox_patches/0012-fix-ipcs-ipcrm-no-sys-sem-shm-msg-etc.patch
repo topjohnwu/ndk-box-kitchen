@@ -1,0 +1,45 @@
+From 6130a602aea61c9de8d2ad80ff4fd24bc84172fe Mon Sep 17 00:00:00 2001
+From: Tias Guns <tias@ulyssis.org>
+Date: Tue, 20 Mar 2012 21:26:07 +0000
+Subject: [PATCH 12/34] fix ipcs, ipcrm no sys/sem-shm-msg, etc
+
+patch from 'no-sys-shm,msg,sem' by Dan Drown
+http://dan.drown.org/android/src/busybox/
+
+Signed-off-by: Tias Guns <tias@ulyssis.org>
+---
+ util-linux/ipcrm.c | 3 ++-
+ util-linux/ipcs.c  | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/util-linux/ipcrm.c b/util-linux/ipcrm.c
+index 3d3ad0b56..a97f39f29 100644
+--- a/util-linux/ipcrm.c
++++ b/util-linux/ipcrm.c
+@@ -28,7 +28,8 @@
+ #include <sys/msg.h>
+ #include <sys/sem.h>
+ 
+-#if defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
++#if (defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)) || \
++    defined(__ANDROID__)
+ /* union semun is defined by including <sys/sem.h> */
+ #else
+ /* according to X/OPEN we have to define it ourselves */
+diff --git a/util-linux/ipcs.c b/util-linux/ipcs.c
+index 4863a5c29..dc8dd3f2e 100644
+--- a/util-linux/ipcs.c
++++ b/util-linux/ipcs.c
+@@ -72,7 +72,8 @@ struct shm_info {
+ /* The last arg of semctl is a union semun, but where is it defined?
+    X/OPEN tells us to define it ourselves, but until recently
+    Linux include files would also define it. */
+-#if defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
++#if (defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)) || \
++    defined(__ANDROID__)
+ /* union semun is defined by including <sys/sem.h> */
+ #else
+ /* according to X/OPEN we have to define it ourselves */
+-- 
+2.26.0
+

@@ -1,0 +1,36 @@
+From 1597c9f3d037538fca44bfac3cbe8a9787831dd0 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sat, 2 May 2020 01:48:30 -0700
+Subject: [PATCH 34/34] Disable SELinux features for install
+
+matchpathcon is not usable on Android
+---
+ coreutils/install.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/coreutils/install.c b/coreutils/install.c
+index 8270490bd..12f560451 100644
+--- a/coreutils/install.c
++++ b/coreutils/install.c
+@@ -34,13 +34,15 @@
+ //usage:     "\n	-g GRP	Set group ownership"
+ //usage:     "\n	-m MODE	Set permissions"
+ //usage:     "\n	-t DIR	Install to DIR"
+-//usage:	IF_SELINUX(
+-//usage:     "\n	-Z	Set security context"
+-//usage:	)
+
+ #include "libbb.h"
+ #include "libcoreutils/coreutils.h"
+
++// Force disable SELinux features for this applet
++#undef ENABLE_SELINUX
++#undef IF_SELINUX
++#define IF_SELINUX(...)
++
+ #if ENABLE_FEATURE_INSTALL_LONG_OPTIONS
+ static const char install_longopts[] ALIGN1 =
+ 	IF_FEATURE_VERBOSE(
+--
+2.26.0
+
