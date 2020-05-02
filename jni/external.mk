@@ -1,10 +1,12 @@
-# Define LIBPCRE and LIBSELINUX in higher level Makefiles
+LOCAL_PATH := $(call my-dir)
 
 # libpcre2.a
 include $(CLEAR_VARS)
+LIBPCRE2 := $(LOCAL_PATH)/pcre/include
 LOCAL_MODULE:= libpcre2
 LOCAL_CFLAGS := -DHAVE_CONFIG_H
 LOCAL_C_INCLUDES := $(LIBPCRE2) $(LIBPCRE2)_internal
+LOCAL_EXPORT_C_INCLUDES := $(LIBPCRE2)
 LOCAL_SRC_FILES := \
 	pcre/dist2/src/pcre2_auto_possess.c \
 	pcre/dist2/src/pcre2_chartables.c \
@@ -36,10 +38,14 @@ LOCAL_SRC_FILES := \
 	pcre/dist2/src/pcre2_xclass.c
 include $(BUILD_STATIC_LIBRARY)
 
+SE_PATH := $(LOCAL_PATH)/selinux
+
 # libselinux.a
 include $(CLEAR_VARS)
+LIBSELINUX := $(SE_PATH)/libselinux/include
 LOCAL_MODULE:= libselinux
-LOCAL_C_INCLUDES := $(LIBSELINUX) $(LIBPCRE2)
+LOCAL_C_INCLUDES := $(LIBSELINUX)
+LOCAL_EXPORT_C_INCLUDES := $(LIBSELINUX)
 LOCAL_STATIC_LIBRARIES := libpcre2
 LOCAL_CFLAGS := \
 	-Wno-implicit-function-declaration -Wno-int-conversion -Wno-unused-function \
