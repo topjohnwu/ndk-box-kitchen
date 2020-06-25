@@ -1,0 +1,66 @@
+From bdc8655679579e87f6bee897ed28be7f9a3c39d2 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Thu, 25 Jun 2020 03:54:53 -0700
+Subject: [PATCH] Resolve /proc/self/exe when re-exec ourselves
+
+Use resolved path of /proc/self/exe to workaround Samsung kernel
+blocking executables running as UID=0 in paths such as /proc.
+---
+ shell/ash.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/shell/ash.c b/shell/ash.c
+index f413408e3..23b143fb7 100644
+--- a/shell/ash.c
++++ b/shell/ash.c
+@@ -8066,6 +8066,7 @@ static struct tblentry **cmdtable;
+ 
+ static int builtinloc = -1;     /* index in path of %builtin, or -1 */
+ 
++static char bb_exec_path[4096];
+ 
+ static void
+ tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, char **envp)
+@@ -8080,7 +8081,7 @@ tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, c
+ 			run_noexec_applet_and_exit(applet_no, cmd, argv);
+ 		}
+ 		/* re-exec ourselves with the new arguments */
+-		execve(bb_busybox_exec_path, argv, envp);
++		execve(bb_exec_path, argv, envp);
+ 		/* If they called chroot or otherwise made the binary no longer
+ 		 * executable, fall through */
+ 	}
+@@ -8095,7 +8096,7 @@ tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, c
+ 	execve(cmd, argv, envp);
+ #endif
+ 
+-	if (cmd != bb_busybox_exec_path && errno == ENOEXEC) {
++	if (cmd != bb_exec_path && errno == ENOEXEC) {
+ 		/* Run "cmd" as a shell script:
+ 		 * http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
+ 		 * "If the execve() function fails with ENOEXEC, the shell
+@@ -8113,7 +8114,7 @@ tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, c
+ 		 * to interpret foreign ELF binaries as shell scripts.
+ 		 */
+ 		argv[0] = (char*) cmd;
+-		cmd = bb_busybox_exec_path;
++		cmd = bb_exec_path;
+ 		/* NB: this is only possible because all callers of shellexec()
+ 		 * ensure that the argv[-1] slot exists!
+ 		 */
+@@ -14324,6 +14325,12 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+ 	init();
+ 	setstackmark(&smark);
+ 
++	/*
++	* Hack: use resolved path of /proc/self/exe to workaround Samsung kernel blocking
++	* executables running as UID=0 in paths such as /proc
++	*/
++	readlink("/proc/self/exe", bb_exec_path, sizeof(bb_exec_path));
++
+ #if NUM_SCRIPTS > 0
+ 	if (argc < 0)
+ 		/* Non-NULL minusc tells procargs that an embedded script is being run */
+-- 
+2.27.0
+
