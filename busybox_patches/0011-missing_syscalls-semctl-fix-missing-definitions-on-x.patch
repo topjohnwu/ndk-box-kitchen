@@ -1,7 +1,7 @@
-From 2fe082f4df73252cb3c91dcaf170a98f59e49d2d Mon Sep 17 00:00:00 2001
+From 603389d7e8c2fb9cd9805c825186955311555ee2 Mon Sep 17 00:00:00 2001
 From: Umakanthan Chandran <cumakt@gmail.com>
 Date: Fri, 3 Mar 2017 07:32:22 +0530
-Subject: [PATCH 11/34] missing_syscalls/semctl: fix missing definitions on x86
+Subject: [PATCH 11/33] missing_syscalls/semctl: fix missing definitions on x86
  and MIPS NDK cross-compiles
 
 Signed-off-by: Umakanthan Chandran <cumakt@gmail.com>
@@ -11,7 +11,7 @@ Signed-off-by: Umakanthan Chandran <cumakt@gmail.com>
  2 files changed, 48 insertions(+)
 
 diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
-index bb2d5906b..e347620ce 100644
+index b5ea2612e..f02e8d14c 100644
 --- a/libbb/missing_syscalls.c
 +++ b/libbb/missing_syscalls.c
 @@ -7,6 +7,50 @@
@@ -81,5 +81,5 @@ index 2c600e4f0..84ab1c92e 100644
  int semctl(int semid, int semnum, int cmd, ...) {
    union semun arg;
 -- 
-2.26.0
+2.30.0
 

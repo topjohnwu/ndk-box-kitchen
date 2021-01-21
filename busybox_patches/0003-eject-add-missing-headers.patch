@@ -1,7 +1,7 @@
-From ea99d5bfe6746cc8382a688aee62304626cdf1e5 Mon Sep 17 00:00:00 2001
+From c80954af6d7867a1577222d3ee333b42512bb573 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 3 Dec 2015 17:01:57 -0400
-Subject: [PATCH 03/34] eject: add missing headers
+Subject: [PATCH 03/33] eject: add missing headers
 
 Imported from dorimanx's combined ported header toolchain:
 https://github.com/dorimanx/android-busybox-ndk
@@ -526,5 +526,5 @@ index 000000000..767945236
 +
 +#endif	/* scsi/sg.h */
 -- 
-2.26.0
+2.30.0
 

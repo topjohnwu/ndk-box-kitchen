@@ -1,7 +1,7 @@
-From 3b26720032b96ffe637e2958751e9da94353cb27 Mon Sep 17 00:00:00 2001
+From 1ae695b4cbb6ac4389af85d2165beab36b10b0dc Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sun, 18 Feb 2018 07:54:58 -0400
-Subject: [PATCH 14/34] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
+Subject: [PATCH 14/33] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
  MINIX2_SUPER_MAGIC, MINIX2_SUPER_MAGIC
 
 "there is no setbit/clrbit in bionic"
@@ -18,10 +18,10 @@ Rebased for busybox 1.28.1 by Chris Renshaw <osm0sis@outlook.com>
  2 files changed, 3 insertions(+)
 
 diff --git a/include/platform.h b/include/platform.h
-index 50365a31c..15e46a64a 100644
+index 43bb391bd..c3d7d971e 100644
 --- a/include/platform.h
 +++ b/include/platform.h
-@@ -531,6 +531,7 @@ typedef unsigned smalluint;
+@@ -535,6 +535,7 @@ typedef unsigned smalluint;
  # undef HAVE_UNLOCKED_LINE_OPS
  # undef HAVE_NET_ETHERNET_H
  # undef HAVE_PRINTF_PERCENTM
@@ -43,5 +43,5 @@ index 83ffe6da5..91ced691c 100644
  	BLOCK_SIZE              = 1024,
  	BITS_PER_BLOCK          = BLOCK_SIZE << 3,
 -- 
-2.26.0
+2.30.0
 

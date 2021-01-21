@@ -1,7 +1,7 @@
-From 4d56b941b7502e14d8a298161cd02767041e737f Mon Sep 17 00:00:00 2001
+From 39d11a5fc29d2ab91867713d7dd9632f74d06630 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:48:30 -0300
-Subject: [PATCH 09/34] android syscalls: shmdt shmat sembuf
+Subject: [PATCH 09/33] android syscalls: shmdt shmat sembuf
 
 Patch by Tias Guns <tias@ulyssis.org>
 Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
@@ -10,10 +10,10 @@ Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
  1 file changed, 16 insertions(+)
 
 diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
-index f3c2ad74e..bb2d5906b 100644
+index 018f72d62..b5ea2612e 100644
 --- a/libbb/missing_syscalls.c
 +++ b/libbb/missing_syscalls.c
-@@ -44,6 +44,16 @@ int shmget(key_t key, size_t size, int shmflg)
+@@ -36,6 +36,16 @@ int shmget(key_t key, size_t size, int shmflg)
    return syscall(__NR_shmget, key, size, shmflg);
  }
  
@@ -30,7 +30,7 @@ index f3c2ad74e..bb2d5906b 100644
  int msgget(key_t key, int msgflg)
  {
    return syscall(__NR_msgget, key, msgflg);
-@@ -67,6 +77,12 @@ int shmctl(int shmid, int cmd, struct shmid_ds *buf)
+@@ -59,6 +69,12 @@ int shmctl(int shmid, int cmd, struct shmid_ds *buf)
    return syscall(__NR_shmctl, shmid, cmd, buf);
  }
  
@@ -44,5 +44,5 @@ index f3c2ad74e..bb2d5906b 100644
  int tcdrain(int fd)
  {
 -- 
-2.26.0
+2.30.0
 

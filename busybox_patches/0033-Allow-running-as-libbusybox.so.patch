@@ -1,0 +1,28 @@
+From cda6c81983ac5eca8ac0ca01c343c1586c7eac32 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Thu, 21 Jan 2021 00:07:41 -0800
+Subject: [PATCH 33/33] Allow running as libbusybox.so
+
+---
+ libbb/appletlib.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/libbb/appletlib.c b/libbb/appletlib.c
+index a515c3fe3..056f5177a 100644
+--- a/libbb/appletlib.c
++++ b/libbb/appletlib.c
+@@ -1133,7 +1133,10 @@ int main(int argc UNUSED_PARAM, char **argv)
+ 	if (argv[1] && is_prefixed_with(bb_basename(argv[0]), "busybox"))
+ 		argv++;
+ # endif
+-	applet_name = argv[0];
++	if (is_suffixed_with(argv[0], "busybox.so"))
++		applet_name = "busybox";
++	else
++		applet_name = argv[0];
+ 	if (applet_name[0] == '-')
+ 		applet_name++;
+ 	applet_name = bb_basename(applet_name);
+-- 
+2.30.0
+

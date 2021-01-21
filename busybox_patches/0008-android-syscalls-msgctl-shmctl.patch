@@ -1,7 +1,7 @@
-From 4e34962261ad8fa1605c92b390269225d9c920c5 Mon Sep 17 00:00:00 2001
+From ee37cf5d148002d4855bc6458a4cb9384d9adb90 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:46:40 -0300
-Subject: [PATCH 08/34] android syscalls: msgctl shmctl
+Subject: [PATCH 08/33] android syscalls: msgctl shmctl
 
 Patch by Tias Guns <tias@ulyssis.org>
 Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
@@ -10,10 +10,10 @@ Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
  1 file changed, 13 insertions(+)
 
 diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
-index 652a4a2a8..f3c2ad74e 100644
+index 82b600ced..018f72d62 100644
 --- a/libbb/missing_syscalls.c
 +++ b/libbb/missing_syscalls.c
-@@ -54,6 +54,19 @@ int semget(key_t key, int nsems, int semflg)
+@@ -46,6 +46,19 @@ int semget(key_t key, int nsems, int semflg)
    return syscall(__NR_semget, key, nsems, semflg);
  }
  
@@ -34,5 +34,5 @@ index 652a4a2a8..f3c2ad74e 100644
  int tcdrain(int fd)
  {
 -- 
-2.26.0
+2.30.0
 

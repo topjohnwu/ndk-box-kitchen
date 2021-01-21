@@ -1,7 +1,7 @@
-From 0bc85c31db9e38bd2866d9707537f61e06e0d813 Mon Sep 17 00:00:00 2001
+From 5894ff979698e21b3595a9e6ccabb6c506240469 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Sun, 18 Mar 2012 14:12:41 +0000
-Subject: [PATCH 02/34] android: fix 'mount', 'umount', 'fsck', 'df'
+Subject: [PATCH 02/33] android: fix 'mount', 'umount', 'fsck', 'df'
 
 patch modified from 'Bionic Patch V1.0 (Vitaly Greck)'
 https://code.google.com/p/busybox-android/downloads/detail?name=patch
@@ -320,5 +320,5 @@ index 000000000..107748740
 +  return NULL;
 +}
 -- 
-2.26.0
+2.30.0
 

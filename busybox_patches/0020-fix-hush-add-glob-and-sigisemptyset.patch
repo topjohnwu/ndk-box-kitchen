@@ -1,7 +1,7 @@
-From 64964ef670d0cf552f8e2cc6089818a2681e46b3 Mon Sep 17 00:00:00 2001
+From 98778678a1734c4f20374cd9f3b82d82b22ad4cb Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
-Subject: [PATCH 20/34] fix hush, add glob and sigisemptyset
+Subject: [PATCH 20/33] fix hush, add glob and sigisemptyset
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'glob' by Dan Drown
 http://dan.drown.org/android/src/busybox/
@@ -9,9 +9,9 @@ Rebased for busybox 1.26.1 by Chris Renshaw <osm0sis@outlook.com>
 ---
  shell/glob.c          | 786 ++++++++++++++++++++++++++++++++++++++++++
  shell/glob.h          | 113 ++++++
- shell/hush.c          |   5 +-
+ shell/hush.c          |   3 +-
  shell/sigisemptyset.c |   8 +
- 4 files changed, 911 insertions(+), 1 deletion(-)
+ 4 files changed, 909 insertions(+), 1 deletion(-)
  create mode 100644 shell/glob.c
  create mode 100644 shell/glob.h
  create mode 100644 shell/sigisemptyset.c
@@ -928,22 +928,18 @@ index 000000000..e8e65786d
 +
 +#endif /* !_GLOB_H_ */
 diff --git a/shell/hush.c b/shell/hush.c
-index 8d9ab244e..07163eef5 100644
+index bc6e6014f..c910658f4 100644
 --- a/shell/hush.c
 +++ b/shell/hush.c
-@@ -320,8 +320,11 @@
+@@ -333,6 +333,7 @@
  //applet:IF_BASH_IS_HUSH(APPLET_ODDNAME(bash, hush, BB_DIR_BIN, BB_SUID_DROP, hush))
  
- //kbuild:lib-$(CONFIG_HUSH) += hush.o match.o shell_common.o
-+//kbuild:lib-$(CONFIG_HUSH) += glob.o sigisemptyset.o
- //kbuild:lib-$(CONFIG_SH_IS_HUSH) += hush.o match.o shell_common.o
-+//kbuild:lib-$(CONFIG_SH_IS_HUSH) += glob.o sigisemptyset.o
- //kbuild:lib-$(CONFIG_BASH_IS_HUSH) += hush.o match.o shell_common.o
-+//kbuild:lib-$(CONFIG_BASH_IS_HUSH) += glob.o sigisemptyset.o
+ //kbuild:lib-$(CONFIG_SHELL_HUSH) += hush.o match.o shell_common.o
++//kbuild:lib-$(CONFIG_SHELL_HUSH) += glob.o sigisemptyset.o
  //kbuild:lib-$(CONFIG_HUSH_RANDOM_SUPPORT) += random.o
  
  /* -i (interactive) is also accepted,
-@@ -339,7 +342,7 @@
+@@ -350,7 +351,7 @@
      )
  # include <malloc.h>   /* for malloc_trim */
  #endif
@@ -967,5 +963,5 @@ index 000000000..82973138e
 +  return set;
 +}
 -- 
-2.26.0
+2.30.0
 

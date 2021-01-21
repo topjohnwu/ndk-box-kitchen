@@ -1,7 +1,7 @@
-From 8e1409f26ab788081f57586329c42a9cace7cc74 Mon Sep 17 00:00:00 2001
+From 71e468a49f77837f45d75075400866e1d0ae1645 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 3 Jul 2017 03:17:06 -0300
-Subject: [PATCH 29/34] dietlibc/dnscruft: try to get dns server via command if
+Subject: [PATCH 28/33] dietlibc/dnscruft: try to get dns server via command if
  __sys_property_get fails - bionic libc's property_get and __sys_property_get
  fail for statically compiled binaries - fallback to a default known dns
  server if all else fails
@@ -46,5 +46,5 @@ index 142ffecd1..7804765b9 100644
  
      if (parsesockaddr(propvalue,&_diet_res.nsaddr_list[_diet_res.nscount]))
 -- 
-2.26.0
+2.30.0
 

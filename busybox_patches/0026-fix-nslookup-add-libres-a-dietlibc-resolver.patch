@@ -1,7 +1,7 @@
-From a4cb96bf50a8f185cbe5fe450ba7ca8f16d82b3d Mon Sep 17 00:00:00 2001
+From 9332714db411dd7cb40e64b9d7bd235d0a49d830 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sat, 21 Jul 2018 20:02:13 -0300
-Subject: [PATCH 27/34] fix nslookup, add libres, a dietlibc resolver
+Subject: [PATCH 26/33] fix nslookup, add libres, a dietlibc resolver
 
 Using bionic's resolver functions does not allow changing the dns
 server. Use dietlibc's resolver code instead (see package libres-devel)
@@ -52,7 +52,7 @@ Rebased for busybox 1.29.1 by Chris Renshaw <osm0sis@outlook.com>
  create mode 100644 libres/test.c
 
 diff --git a/Makefile b/Makefile
-index bd94f4941..e391d0633 100644
+index 48b79759b..8c61daee2 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -477,6 +477,7 @@ libs-y		:= \
@@ -1156,7 +1156,7 @@ index 000000000..45095d81d
 +  return 0;
 +}
 diff --git a/networking/nslookup.c b/networking/nslookup.c
-index 24e09d4f0..f504058e3 100644
+index c43e60558..486795999 100644
 --- a/networking/nslookup.c
 +++ b/networking/nslookup.c
 @@ -36,8 +36,9 @@
@@ -1241,5 +1241,5 @@ index 24e09d4f0..f504058e3 100644
  	/* (but it also says "may be enabled in /etc/resolv.conf") */
  	/*_res.options |= RES_USE_INET6;*/
 -- 
-2.26.0
+2.30.0
 

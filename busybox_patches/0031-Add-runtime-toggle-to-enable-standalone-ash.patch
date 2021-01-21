@@ -1,17 +1,17 @@
-From fe3ac9984b29f3bc55f051b5a5b88fb981d92bbe Mon Sep 17 00:00:00 2001
+From fd9e073f9f5e31369c60d9359dfad6f88e366880 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 7 Feb 2020 14:32:06 -0800
-Subject: [PATCH 33/34] Add runtime toggle to enable standalone ash
+Subject: [PATCH 31/33] Add runtime toggle to enable standalone ash
 
 ---
  shell/ash.c | 42 ++++++++++++++++++++++++------------------
  1 file changed, 24 insertions(+), 18 deletions(-)
 
 diff --git a/shell/ash.c b/shell/ash.c
-index f44f154a8..f413408e3 100644
+index 13d4875db..6901c48d4 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -263,16 +263,14 @@ typedef long arith_t;
+@@ -266,16 +266,14 @@ typedef long arith_t;
  #endif
  
  #include "NUM_APPLETS.h"
@@ -36,7 +36,7 @@ index f44f154a8..f413408e3 100644
  
  #ifndef F_DUPFD_CLOEXEC
  # define F_DUPFD_CLOEXEC F_DUPFD
-@@ -320,7 +318,9 @@ static const char *const optletters_optnames[] = {
+@@ -336,7 +334,9 @@ static const char *const optletters_optnames[] = {
  	"a"   "allexport",
  	"b"   "notify",
  	"u"   "nounset",
@@ -47,7 +47,7 @@ index f44f154a8..f413408e3 100644
  #if BASH_PIPEFAIL
  	,"\0"  "pipefail"
  #endif
-@@ -414,14 +414,15 @@ struct globals_misc {
+@@ -431,14 +431,15 @@ struct globals_misc {
  #define bflag optlist[12]
  #define uflag optlist[13]
  #define viflag optlist[14]
@@ -66,7 +66,7 @@ index f44f154a8..f413408e3 100644
  #endif
  
  	/* trap handler commands */
-@@ -8070,7 +8071,7 @@ static void
+@@ -8099,7 +8100,7 @@ static void
  tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, char **envp)
  {
  #if ENABLE_FEATURE_SH_STANDALONE
@@ -75,7 +75,7 @@ index f44f154a8..f413408e3 100644
  		if (APPLET_IS_NOEXEC(applet_no)) {
  			clearenv();
  			while (*envp)
-@@ -8139,7 +8140,7 @@ static void shellexec(char *prog, char **argv, const char *path, int idx)
+@@ -8168,7 +8169,7 @@ static void shellexec(char *prog, char **argv, const char *path, int idx)
  	envp = listvars(VEXPORT, VUNSET, /*strlist:*/ NULL, /*end:*/ NULL);
  	if (strchr(prog, '/') != NULL
  #if ENABLE_FEATURE_SH_STANDALONE
@@ -84,8 +84,8 @@ index f44f154a8..f413408e3 100644
  #endif
  	) {
  		tryexec(IF_FEATURE_SH_STANDALONE(applet_no,) prog, argv, envp);
-@@ -13477,7 +13478,7 @@ find_command(char *name, struct cmdentry *entry, int act, const char *path)
- 	}
+@@ -13573,7 +13574,7 @@ find_command(char *name, struct cmdentry *entry, int act, const char *path)
+ 		goto fail;
  
  #if ENABLE_FEATURE_SH_STANDALONE
 -	{
@@ -93,7 +93,7 @@ index f44f154a8..f413408e3 100644
  		int applet_no = find_applet_by_name(name);
  		if (applet_no >= 0) {
  			entry->cmdtype = CMDNORMAL;
-@@ -13698,7 +13699,7 @@ helpcmd(int argc UNUSED_PARAM, char **argv UNUSED_PARAM)
+@@ -13795,7 +13796,7 @@ helpcmd(int argc UNUSED_PARAM, char **argv UNUSED_PARAM)
  		}
  	}
  # if ENABLE_FEATURE_SH_STANDALONE
@@ -102,7 +102,7 @@ index f44f154a8..f413408e3 100644
  		const char *a = applet_names;
  		while (*a) {
  			col += out1fmt("%c%s", ((col == 0) ? '\t' : ' '), a);
-@@ -14334,6 +14335,11 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14440,6 +14441,11 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  	trace_puts_args(argv);
  #endif
  
@@ -115,5 +115,5 @@ index f44f154a8..f413408e3 100644
  		const char *hp;
  
 -- 
-2.26.0
+2.30.0
 

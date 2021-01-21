@@ -1,7 +1,7 @@
-From 2147507f284101572745157d6676332911b60b5e Mon Sep 17 00:00:00 2001
+From 267054c182e87928847bc5dc963c911bd4c24b5b Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 30 Oct 2019 02:47:24 -0300
-Subject: [PATCH 28/34] hack: use dietlibc's resolver to avoid static
+Subject: [PATCH 27/33] hack: use dietlibc's resolver to avoid static
  compiliation issues with bionic's getaddrinfo() returning only null instead
  of opening the expected connection to /dev/socket/dnsproxyd
 
@@ -10,7 +10,7 @@ Subject: [PATCH 28/34] hack: use dietlibc's resolver to avoid static
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/libbb/xconnect.c b/libbb/xconnect.c
-index eb2871cb1..797f61aa4 100644
+index e9a2470e4..3ab0868d4 100644
 --- a/libbb/xconnect.c
 +++ b/libbb/xconnect.c
 @@ -11,6 +11,8 @@
@@ -41,5 +41,5 @@ index eb2871cb1..797f61aa4 100644
  }
  #if !ENABLE_FEATURE_IPV6
 -- 
-2.26.0
+2.30.0
 

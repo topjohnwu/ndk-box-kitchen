@@ -1,7 +1,7 @@
-From b12a50616e280600682ac3c4e048fdc448085328 Mon Sep 17 00:00:00 2001
+From 1f383c3b5a569f27ac7c91204b300de34fa06ae0 Mon Sep 17 00:00:00 2001
 From: John Wu <topjohnwu@gmail.com>
 Date: Sun, 12 Aug 2018 18:31:26 +0800
-Subject: [PATCH 21/34] glob: minor adjustments to support unified headers
+Subject: [PATCH 21/33] glob: minor adjustments to support unified headers
 
 ---
  shell/glob.h | 6 +++---
@@ -39,5 +39,5 @@ index e8e65786d..c274a8f6a 100644
  #define	GLOB_BRACE	0x0080	/* Expand braces ala csh. */
  #define	GLOB_MAGCHAR	0x0100	/* Pattern had globbing characters. */
 -- 
-2.26.0
+2.30.0
 

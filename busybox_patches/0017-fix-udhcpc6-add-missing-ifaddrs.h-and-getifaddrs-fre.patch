@@ -1,7 +1,7 @@
-From 0d83da5e2e5fee2e4e75a20729191567f462572b Mon Sep 17 00:00:00 2001
+From 12af12adedb960deedbfb9591816a85ff6bc0574 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 19 Jul 2017 17:22:55 -0300
-Subject: [PATCH 17/34] fix udhcpc6: add missing ifaddrs.h and
+Subject: [PATCH 17/33] fix udhcpc6: add missing ifaddrs.h and
  getifaddrs/freeifaddrs functions
 
 ifaddrs implementation from 'android-ifaddrs' by Kenneth MacKay:
@@ -16,7 +16,7 @@ https://github.com/morristech/android-ifaddrs
  create mode 100644 networking/udhcp/ifaddrs.h
 
 diff --git a/networking/udhcp/d6_dhcpc.c b/networking/udhcp/d6_dhcpc.c
-index 422b88882..1275b4cce 100644
+index fc2d672b7..216485097 100644
 --- a/networking/udhcp/d6_dhcpc.c
 +++ b/networking/udhcp/d6_dhcpc.c
 @@ -48,6 +48,7 @@
@@ -28,7 +28,7 @@ index 422b88882..1275b4cce 100644
  //kbuild:lib-$(CONFIG_FEATURE_UDHCPC6_RFC4704) += domain_codec.o
  
 diff --git a/networking/udhcp/d6_socket.c b/networking/udhcp/d6_socket.c
-index 25e622d6f..3f290036f 100644
+index 8ddee5a8e..ccba87469 100644
 --- a/networking/udhcp/d6_socket.c
 +++ b/networking/udhcp/d6_socket.c
 @@ -7,7 +7,7 @@
@@ -707,5 +707,5 @@ index 000000000..9cd19fec1
 +
 +#endif
 -- 
-2.26.0
+2.30.0
 

@@ -1,7 +1,7 @@
-From 5525501d01609e90b0ffe01fc0f4ceaa4b51cbfd Mon Sep 17 00:00:00 2001
+From de130ffd089502e2825836fb27b7dbe7812a1941 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Mon, 19 Mar 2012 18:24:29 +0000
-Subject: [PATCH 15/34] fix ipv6, add ipv6_route.h
+Subject: [PATCH 15/33] fix ipv6, add ipv6_route.h
 
 from 'in6_rtmsg' by Dan Drown
 "in6_rtmsg defined in linux/ipv6_route.h"
@@ -78,7 +78,7 @@ index 000000000..144875dab
 +
 +#endif
 diff --git a/networking/ifconfig.c b/networking/ifconfig.c
-index 5c47abc16..749c715a3 100644
+index b566d91a9..cabaa98e3 100644
 --- a/networking/ifconfig.c
 +++ b/networking/ifconfig.c
 @@ -129,12 +129,14 @@
@@ -97,7 +97,7 @@ index 5c47abc16..749c715a3 100644
  /*
   * Here are the bit masks for the "flags" member of struct options below.
 diff --git a/networking/route.c b/networking/route.c
-index ac1d94c28..f7a5f0390 100644
+index e785b1da6..1a6b19b46 100644
 --- a/networking/route.c
 +++ b/networking/route.c
 @@ -45,6 +45,8 @@
@@ -110,5 +110,5 @@ index ac1d94c28..f7a5f0390 100644
  #include "libbb.h"
  #include "inet_common.h"
 -- 
-2.26.0
+2.30.0
 

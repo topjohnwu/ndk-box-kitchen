@@ -1,7 +1,7 @@
-From f1d79309e36765c9b666cf15f1534b9622a2e69f Mon Sep 17 00:00:00 2001
+From d6acaafa5d8352269bcaaa459ad31d188d939291 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 2 Dec 2015 23:44:06 -0400
-Subject: [PATCH 05/34] fix ether-wake, avoid ether_hostton and include
+Subject: [PATCH 05/33] fix ether-wake, avoid ether_hostton and include
  if_ether
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'no-ether_hostton' by Dan Drown
@@ -13,7 +13,7 @@ Rebased for busybox 1.24.1 by Chris Renshaw <osm0sis@outlook.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/networking/ether-wake.c b/networking/ether-wake.c
-index 4c2fb4333..679b0b7d7 100644
+index 8e8e82845..f77a4c7a4 100644
 --- a/networking/ether-wake.c
 +++ b/networking/ether-wake.c
 @@ -88,6 +88,7 @@
@@ -34,5 +34,5 @@ index 4c2fb4333..679b0b7d7 100644
  		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa_r(eaddr, ether_buf));
  #endif
 -- 
-2.26.0
+2.30.0
 

@@ -1,17 +1,17 @@
-From bf66d97888585b1794088518fc91a6fb2e0472dd Mon Sep 17 00:00:00 2001
+From 31b2b5780bf9fe982e1f3d9df0bd4b1b44d6e394 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 3 Apr 2020 02:09:55 -0700
-Subject: [PATCH 32/34] Remove unnecessary missing syscalls
+Subject: [PATCH 30/33] Remove unnecessary missing syscalls
 
 ---
- libbb/missing_syscalls.c | 16 ----------------
- 1 file changed, 16 deletions(-)
+ libbb/missing_syscalls.c | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
 diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
-index e347620ce..e693ff756 100644
+index f02e8d14c..a6db67da9 100644
 --- a/libbb/missing_syscalls.c
 +++ b/libbb/missing_syscalls.c
-@@ -54,11 +54,6 @@
+@@ -54,21 +54,6 @@
  #if defined(ANDROID) || defined(__ANDROID__)
  /*# include <linux/timex.h> - for struct timex, but may collide with <time.h> */
  # include <sys/syscall.h>
@@ -20,13 +20,6 @@ index e347620ce..e693ff756 100644
 -	return syscall(__NR_getsid, pid);
 -}
 -
- int stime(const time_t *t)
- {
- 	struct timeval tv;
-@@ -67,17 +62,6 @@ int stime(const time_t *t)
- 	return settimeofday(&tv, NULL);
- }
- 
 -int sethostname(const char *name, size_t len)
 -{
 -	return syscall(__NR_sethostname, name, len);
@@ -37,10 +30,9 @@ index e347620ce..e693ff756 100644
 -{
 -	return syscall(__NR_adjtimex, buf);
 -}
--
+ 
  int pivot_root(const char *new_root, const char *put_old)
  {
- 	return syscall(__NR_pivot_root, new_root, put_old);
 -- 
-2.26.0
+2.30.0
 

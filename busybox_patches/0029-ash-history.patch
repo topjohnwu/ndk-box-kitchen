@@ -1,7 +1,7 @@
-From 2cad5b79d1250cbef1ae470bdf122fd502af1d2d Mon Sep 17 00:00:00 2001
+From 38523bea42fdd63746587015ddb8f2edfdb0f6dd Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Fri, 22 Feb 2019 13:01:48 -0400
-Subject: [PATCH 30/34] ash history
+Subject: [PATCH 29/33] ash history
 
 allows ash history to work on Android
 
@@ -15,10 +15,10 @@ Rebased for busybox 1.30.1 by Chris Renshaw <osm0sis@outlook.com>
  3 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index 021100db1..31063b8d2 100644
+index 6be934994..dcb82fca5 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -2126,12 +2126,12 @@ extern struct globals *const ptr_to_globals;
+@@ -2205,12 +2205,12 @@ static ALWAYS_INLINE void* not_const_pp(const void *p) { return (void*)p; }
   * use bb_default_login_shell and following defines.
   * If you change LIBBB_DEFAULT_LOGIN_SHELL,
   * don't forget to change increment constant. */
@@ -34,10 +34,10 @@ index 021100db1..31063b8d2 100644
  /* The following devices are the same on all systems.  */
  #define CURRENT_TTY "/dev/tty"
 diff --git a/init/init.c b/init/init.c
-index 87086b48b..a08ba49d7 100644
+index 28775a65c..eea2bc46d 100644
 --- a/init/init.c
 +++ b/init/init.c
-@@ -1113,7 +1113,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
+@@ -1107,7 +1107,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
  	/* Make sure environs is set to something sane */
  	putenv((char *) "HOME=/");
  	putenv((char *) bb_PATH_root_path);
@@ -47,10 +47,10 @@ index 87086b48b..a08ba49d7 100644
  
  	if (argv[1])
 diff --git a/shell/ash.c b/shell/ash.c
-index 305fb6348..6cdc934d5 100644
+index 07aa2da2e..13d4875db 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -14162,7 +14162,7 @@ procargs(char **argv)
+@@ -14279,7 +14279,7 @@ procargs(char **argv)
  	int login_sh;
  
  	xargv = argv;
@@ -59,7 +59,7 @@ index 305fb6348..6cdc934d5 100644
  #if NUM_SCRIPTS > 0
  	if (minusc)
  		goto setarg0;
-@@ -14351,7 +14351,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14444,7 +14444,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  		const char *hp;
  
  		state = 1;
@@ -68,7 +68,7 @@ index 305fb6348..6cdc934d5 100644
   state1:
  		state = 2;
  		hp = lookupvar("HOME");
-@@ -14396,6 +14396,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14489,6 +14489,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  		if (iflag) {
  			const char *hp = lookupvar("HISTFILE");
  			if (!hp) {
@@ -78,7 +78,7 @@ index 305fb6348..6cdc934d5 100644
  				hp = lookupvar("HOME");
  				if (hp) {
  					INT_OFF;
-@@ -14405,6 +14408,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14498,6 +14501,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  					INT_ON;
  					hp = lookupvar("HISTFILE");
  				}
@@ -87,5 +87,5 @@ index 305fb6348..6cdc934d5 100644
  			if (hp)
  				line_input_state->hist_file = hp;
 -- 
-2.26.0
+2.30.0
 
