@@ -1,13 +1,13 @@
-From 38523bea42fdd63746587015ddb8f2edfdb0f6dd Mon Sep 17 00:00:00 2001
+From 1d23cd87d8483491b436a053d813a5af0f94bc20 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
-Date: Fri, 22 Feb 2019 13:01:48 -0400
+Date: Thu, 6 May 2021 16:44:48 -0300
 Subject: [PATCH 29/33] ash history
 
 allows ash history to work on Android
 
 Patch modified by Tias Guns <tias@ulyssis.org> from 'busybox-android.patch' by Alexandre Courbot
 https://github.com/Gnurou/busybox-android
-Rebased for busybox 1.30.1 by Chris Renshaw <osm0sis@outlook.com>
+Rebased for busybox 1.33.1 by Chris Renshaw <osm0sis@outlook.com>
 ---
  include/libbb.h | 4 ++--
  init/init.c     | 2 +-
@@ -15,10 +15,10 @@ Rebased for busybox 1.30.1 by Chris Renshaw <osm0sis@outlook.com>
  3 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index 6be934994..dcb82fca5 100644
+index cae54658b..ae94e921d 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -2205,12 +2205,12 @@ static ALWAYS_INLINE void* not_const_pp(const void *p) { return (void*)p; }
+@@ -2265,12 +2265,12 @@ static ALWAYS_INLINE void* not_const_pp(const void *p) { return (void*)p; }
   * use bb_default_login_shell and following defines.
   * If you change LIBBB_DEFAULT_LOGIN_SHELL,
   * don't forget to change increment constant. */
@@ -34,7 +34,7 @@ index 6be934994..dcb82fca5 100644
  /* The following devices are the same on all systems.  */
  #define CURRENT_TTY "/dev/tty"
 diff --git a/init/init.c b/init/init.c
-index 28775a65c..eea2bc46d 100644
+index efab5dcb4..de9044751 100644
 --- a/init/init.c
 +++ b/init/init.c
 @@ -1107,7 +1107,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
@@ -47,10 +47,10 @@ index 28775a65c..eea2bc46d 100644
  
  	if (argv[1])
 diff --git a/shell/ash.c b/shell/ash.c
-index 07aa2da2e..13d4875db 100644
+index a33ab0626..ad7978bbe 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -14279,7 +14279,7 @@ procargs(char **argv)
+@@ -14282,7 +14282,7 @@ procargs(char **argv)
  	int login_sh;
  
  	xargv = argv;
@@ -59,7 +59,7 @@ index 07aa2da2e..13d4875db 100644
  #if NUM_SCRIPTS > 0
  	if (minusc)
  		goto setarg0;
-@@ -14444,7 +14444,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14458,7 +14458,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  		const char *hp;
  
  		state = 1;
@@ -68,8 +68,8 @@ index 07aa2da2e..13d4875db 100644
   state1:
  		state = 2;
  		hp = lookupvar("HOME");
-@@ -14489,6 +14489,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
- 		if (iflag) {
+@@ -14503,6 +14503,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+ 		if (line_input_state) {
  			const char *hp = lookupvar("HISTFILE");
  			if (!hp) {
 +#ifdef __ANDROID__
@@ -78,14 +78,14 @@ index 07aa2da2e..13d4875db 100644
  				hp = lookupvar("HOME");
  				if (hp) {
  					INT_OFF;
-@@ -14498,6 +14501,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14512,6 +14515,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  					INT_ON;
  					hp = lookupvar("HISTFILE");
  				}
 +#endif
  			}
  			if (hp)
- 				line_input_state->hist_file = hp;
+ 				line_input_state->hist_file = xstrdup(hp);
 -- 
-2.30.0
+2.31.1
 

@@ -1,4 +1,4 @@
-From 6b79016f3774dd1984bf95fe827d58016a172ac7 Mon Sep 17 00:00:00 2001
+From fe1c2ead89b2b249189e3f3eec1add7d80b6efae Mon Sep 17 00:00:00 2001
 From: John Wu <topjohnwu@gmail.com>
 Date: Sun, 12 Aug 2018 18:31:26 +0800
 Subject: [PATCH 19/33] platform: minor adjustments to support unified headers
@@ -8,7 +8,7 @@ Subject: [PATCH 19/33] platform: minor adjustments to support unified headers
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/include/platform.h b/include/platform.h
-index f924219e2..692acdc91 100644
+index fb881af9b..0d355ae85 100644
 --- a/include/platform.h
 +++ b/include/platform.h
 @@ -124,7 +124,7 @@
@@ -21,5 +21,5 @@ index f924219e2..692acdc91 100644
  #  define FAST_FUNC __attribute__((regparm(3),stdcall))
  /* #elif ... - add your favorite arch today! */
 -- 
-2.30.0
+2.31.1
 

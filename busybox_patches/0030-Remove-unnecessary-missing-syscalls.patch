@@ -1,4 +1,4 @@
-From 31b2b5780bf9fe982e1f3d9df0bd4b1b44d6e394 Mon Sep 17 00:00:00 2001
+From 4556e7333436f9e651657e750948f5849e6fd418 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 3 Apr 2020 02:09:55 -0700
 Subject: [PATCH 30/33] Remove unnecessary missing syscalls
@@ -34,5 +34,5 @@ index f02e8d14c..a6db67da9 100644
  int pivot_root(const char *new_root, const char *put_old)
  {
 -- 
-2.30.0
+2.31.1
 

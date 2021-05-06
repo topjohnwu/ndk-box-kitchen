@@ -1,4 +1,4 @@
-From 4aa018064aaf64e0061c0086e3aa19bd5ec21a41 Mon Sep 17 00:00:00 2001
+From 5f81074e32ea8373e8ad1c8bf500b963c27ada4a Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 26 Jun 2017 23:53:06 -0300
 Subject: [PATCH 24/33] fix reboot+poweroff: hack android_reboot support
@@ -20,7 +20,7 @@ and added work around to write the property value directly via shell since prope
  create mode 100644 init/reboot.c
 
 diff --git a/init/halt.c b/init/halt.c
-index 785c38130..521922d2c 100644
+index fe3cb9e75..895009972 100644
 --- a/init/halt.c
 +++ b/init/halt.c
 @@ -94,6 +94,10 @@
@@ -104,5 +104,5 @@ index 000000000..97fe523a7
 +    return ret;
 +}
 -- 
-2.30.0
+2.31.1
 

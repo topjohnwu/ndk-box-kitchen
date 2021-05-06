@@ -1,4 +1,4 @@
-From 9e991ba65c34da288d5e2cd317ee8a5263bec8a2 Mon Sep 17 00:00:00 2001
+From cc92de78af168a7f82542e25e8133ffa354d9041 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Sun, 5 Aug 2012 15:25:34 +0200
 Subject: [PATCH 10/33] android syscall (non-trivial): semctl
@@ -80,5 +80,5 @@ index 000000000..2c600e4f0
 +  return syscall(__NR_semctl, semid, semnum, cmd, arg);
 +}
 -- 
-2.30.0
+2.31.1
 

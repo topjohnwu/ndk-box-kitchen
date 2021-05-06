@@ -1,4 +1,4 @@
-From c80954af6d7867a1577222d3ee333b42512bb573 Mon Sep 17 00:00:00 2001
+From 47d2878611ba1f38b40e71ec70e23e0ff6cd3098 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 3 Dec 2015 17:01:57 -0400
 Subject: [PATCH 03/33] eject: add missing headers
@@ -526,5 +526,5 @@ index 000000000..767945236
 +
 +#endif	/* scsi/sg.h */
 -- 
-2.30.0
+2.31.1
 

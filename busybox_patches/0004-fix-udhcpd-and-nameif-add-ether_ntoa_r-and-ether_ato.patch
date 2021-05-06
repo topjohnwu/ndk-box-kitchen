@@ -1,4 +1,4 @@
-From ef4fbefa1af01469412711ca30d0563fb60bd037 Mon Sep 17 00:00:00 2001
+From f8bbea7bb539f4c22d02d9d92dd141e9d81eb6f2 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
 Subject: [PATCH 04/33] fix udhcpd and nameif, add ether_ntoa_r and
@@ -24,10 +24,10 @@ Rebased for busybox 1.26.1 by Chris Renshaw <osm0sis@outlook.com>
  create mode 100644 networking/ether_port.h
 
 diff --git a/networking/arping.c b/networking/arping.c
-index 2a256aaa0..cf9358de2 100644
+index d44d7d697..80e9571ec 100644
 --- a/networking/arping.c
 +++ b/networking/arping.c
-@@ -15,6 +15,7 @@
+@@ -14,6 +14,7 @@
  //applet:IF_ARPING(APPLET(arping, BB_DIR_USR_SBIN, BB_SUID_DROP))
  
  //kbuild:lib-$(CONFIG_ARPING) += arping.o
@@ -36,10 +36,10 @@ index 2a256aaa0..cf9358de2 100644
  //usage:#define arping_trivial_usage
  //usage:       "[-fqbDUA] [-c CNT] [-w TIMEOUT] [-I IFACE] [-s SRC_IP] DST_IP"
 diff --git a/networking/ether-wake.c b/networking/ether-wake.c
-index f45d43609..8e8e82845 100644
+index 36e90acfb..809c0d9f0 100644
 --- a/networking/ether-wake.c
 +++ b/networking/ether-wake.c
-@@ -73,6 +73,7 @@
+@@ -72,6 +72,7 @@
  //applet:IF_ETHER_WAKE(APPLET_ODDNAME(ether-wake, ether_wake, BB_DIR_USR_SBIN, BB_SUID_DROP, ether_wake))
  
  //kbuild:lib-$(CONFIG_ETHER_WAKE) += ether-wake.o
@@ -47,7 +47,7 @@ index f45d43609..8e8e82845 100644
  
  //usage:#define ether_wake_trivial_usage
  //usage:       "[-b] [-i IFACE] [-p aa:bb:cc:dd[:ee:ff]/a.b.c.d] MAC"
-@@ -127,13 +128,14 @@ void bb_debug_dump_packet(unsigned char *outpack, int pktsize)
+@@ -126,13 +127,14 @@ void bb_debug_dump_packet(unsigned char *outpack, int pktsize)
  static void get_dest_addr(const char *hostid, struct ether_addr *eaddr)
  {
  	struct ether_addr *eap;
@@ -208,10 +208,10 @@ index 000000000..5e0146b29
 +
 +#endif /* ETHER_PORT_H */
 diff --git a/networking/nameif.c b/networking/nameif.c
-index 91d50536a..38a30ba6f 100644
+index 854594c83..bfb91b5ca 100644
 --- a/networking/nameif.c
 +++ b/networking/nameif.c
-@@ -42,6 +42,7 @@
+@@ -41,6 +41,7 @@
  //applet:IF_NAMEIF(APPLET_NOEXEC(nameif, nameif, BB_DIR_SBIN, BB_SUID_DROP, nameif))
  
  //kbuild:lib-$(CONFIG_NAMEIF) += nameif.o
@@ -232,7 +232,7 @@ index fcb725fbc..2d5739c7e 100644
  lib-$(CONFIG_DHCPRELAY)  += dhcprelay.o common.o socket.o packet.o
  
 diff --git a/networking/udhcp/dhcpd.c b/networking/udhcp/dhcpd.c
-index 9d6604943..5734d3ccb 100644
+index cd32cb437..c9815501b 100644
 --- a/networking/udhcp/dhcpd.c
 +++ b/networking/udhcp/dhcpd.c
 @@ -40,8 +40,12 @@
@@ -249,5 +249,5 @@ index 9d6604943..5734d3ccb 100644
  #include "dhcpc.h"
  #include "dhcpd.h"
 -- 
-2.30.0
+2.31.1
 

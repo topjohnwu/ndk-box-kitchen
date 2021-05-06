@@ -1,4 +1,4 @@
-From a0e0a5cc5719f39c5ff05d7bcbcfb54ca9df7123 Mon Sep 17 00:00:00 2001
+From 411f362efe9a0876a4f0878de292cfbc86088abb Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sat, 2 May 2020 01:48:30 -0700
 Subject: [PATCH 32/33] Disable SELinux features for install
@@ -32,5 +32,5 @@ index c0f1c538a..16c014384 100644
  static const char install_longopts[] ALIGN1 =
  	IF_FEATURE_VERBOSE(
 -- 
-2.30.0
+2.31.1
 
