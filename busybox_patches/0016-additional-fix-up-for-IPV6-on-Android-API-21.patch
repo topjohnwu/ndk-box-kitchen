@@ -1,6 +1,6 @@
-From 62726fa7676fbccc3d04b820cb570b3adf2618b1 Mon Sep 17 00:00:00 2001
+From 93e1a4cc9e849b5c65b5946bfa6dff884c3346bf Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
-Date: Thu, 22 Jun 2017 14:07:04 -0300
+Date: Thu, 6 May 2021 16:09:06 -0300
 Subject: [PATCH 16/33] additional fix-up for IPV6 on Android API 21+
 
 fixes: networking/interface.c:62:8: error: redefinition of 'struct in6_ifreq'
@@ -18,7 +18,7 @@ since sockaddr was moved from linux/socket.h to sys/socket.h in newer NDK revisi
  2 files changed, 3 insertions(+)
 
 diff --git a/networking/interface.c b/networking/interface.c
-index e5e55d8d4..9f1903a09 100644
+index ea6a2c8a8..6f0716680 100644
 --- a/networking/interface.c
 +++ b/networking/interface.c
 @@ -55,6 +55,7 @@
@@ -38,17 +38,17 @@ index e5e55d8d4..9f1903a09 100644
  #endif /* HAVE_AFINET6 */
  
 diff --git a/networking/route.c b/networking/route.c
-index 1a6b19b46..efbb46f91 100644
+index 89617db9d..f20070889 100644
 --- a/networking/route.c
 +++ b/networking/route.c
-@@ -43,6 +43,7 @@
- //usage:     "\n	-e	Display other/more information"
- //usage:     "\n	-A inet" IF_FEATURE_IPV6("{6}") "	Select address family"
+@@ -36,6 +36,7 @@
  
-+#include <netinet/in.h>
  #include <net/route.h>
  #include <net/if.h>
++#include <netinet/in.h>
  #include <linux/in6.h>
+ #include <linux/ipv6_route.h>
+ 
 -- 
-2.30.0
+2.31.1
 

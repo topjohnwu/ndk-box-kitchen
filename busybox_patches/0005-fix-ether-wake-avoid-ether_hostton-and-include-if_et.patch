@@ -1,4 +1,4 @@
-From d6acaafa5d8352269bcaaa459ad31d188d939291 Mon Sep 17 00:00:00 2001
+From a395a49ee47d880db702ec1c4072bc7783a0b9f1 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 2 Dec 2015 23:44:06 -0400
 Subject: [PATCH 05/33] fix ether-wake, avoid ether_hostton and include
@@ -13,10 +13,10 @@ Rebased for busybox 1.24.1 by Chris Renshaw <osm0sis@outlook.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/networking/ether-wake.c b/networking/ether-wake.c
-index 8e8e82845..f77a4c7a4 100644
+index 809c0d9f0..920f0c4a0 100644
 --- a/networking/ether-wake.c
 +++ b/networking/ether-wake.c
-@@ -88,6 +88,7 @@
+@@ -87,6 +87,7 @@
  #include "libbb.h"
  #include <netpacket/packet.h>
  #include <netinet/ether.h>
@@ -24,7 +24,7 @@ index 8e8e82845..f77a4c7a4 100644
  #include <linux/if.h>
  
  /* Note: PF_INET, SOCK_DGRAM, IPPROTO_UDP would allow SIOCGIFHWADDR to
-@@ -133,7 +134,7 @@ static void get_dest_addr(const char *hostid, struct ether_addr *eaddr)
+@@ -132,7 +133,7 @@ static void get_dest_addr(const char *hostid, struct ether_addr *eaddr)
  	eap = ether_aton_r(hostid, eaddr);
  	if (eap) {
  		bb_debug_msg("The target station address is %s\n\n", ether_ntoa_r(eap, ether_buf));
@@ -34,5 +34,5 @@ index 8e8e82845..f77a4c7a4 100644
  		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa_r(eaddr, ether_buf));
  #endif
 -- 
-2.30.0
+2.31.1
 

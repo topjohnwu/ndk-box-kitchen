@@ -1,4 +1,4 @@
-From 603389d7e8c2fb9cd9805c825186955311555ee2 Mon Sep 17 00:00:00 2001
+From 840337a66f736edf95578027ec73f100de0c4194 Mon Sep 17 00:00:00 2001
 From: Umakanthan Chandran <cumakt@gmail.com>
 Date: Fri, 3 Mar 2017 07:32:22 +0530
 Subject: [PATCH 11/33] missing_syscalls/semctl: fix missing definitions on x86
@@ -81,5 +81,5 @@ index 2c600e4f0..84ab1c92e 100644
  int semctl(int semid, int semnum, int cmd, ...) {
    union semun arg;
 -- 
-2.30.0
+2.31.1
 

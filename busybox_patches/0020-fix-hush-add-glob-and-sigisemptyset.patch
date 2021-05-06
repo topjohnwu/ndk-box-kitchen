@@ -1,4 +1,4 @@
-From 98778678a1734c4f20374cd9f3b82d82b22ad4cb Mon Sep 17 00:00:00 2001
+From 0ea8ca8d656c655aa073305a64a67a2d07e0459d Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
 Subject: [PATCH 20/33] fix hush, add glob and sigisemptyset
@@ -928,10 +928,10 @@ index 000000000..e8e65786d
 +
 +#endif /* !_GLOB_H_ */
 diff --git a/shell/hush.c b/shell/hush.c
-index bc6e6014f..c910658f4 100644
+index 9fead37da..603c9f9be 100644
 --- a/shell/hush.c
 +++ b/shell/hush.c
-@@ -333,6 +333,7 @@
+@@ -331,6 +331,7 @@
  //applet:IF_BASH_IS_HUSH(APPLET_ODDNAME(bash, hush, BB_DIR_BIN, BB_SUID_DROP, hush))
  
  //kbuild:lib-$(CONFIG_SHELL_HUSH) += hush.o match.o shell_common.o
@@ -939,7 +939,7 @@ index bc6e6014f..c910658f4 100644
  //kbuild:lib-$(CONFIG_HUSH_RANDOM_SUPPORT) += random.o
  
  /* -i (interactive) is also accepted,
-@@ -350,7 +351,7 @@
+@@ -348,7 +349,7 @@
      )
  # include <malloc.h>   /* for malloc_trim */
  #endif
@@ -963,5 +963,5 @@ index 000000000..82973138e
 +  return set;
 +}
 -- 
-2.30.0
+2.31.1
 

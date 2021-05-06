@@ -1,6 +1,6 @@
-From c9edbdc0e7d2a177c0aa0abf749f0863aadf9c04 Mon Sep 17 00:00:00 2001
+From 8fb538cbe2e65b10c559af8967bc7543fb04a21f Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
-Date: Mon, 12 Sep 2016 16:25:51 -0300
+Date: Thu, 6 May 2021 16:30:26 -0300
 Subject: [PATCH 22/33] modinfo/modprobe: use ifdef block for android
  without-utsrel modules path
 
@@ -13,17 +13,17 @@ from https://github.com/tpruvot/android_external_busybox
 and commit 2df42d3971f1e260e67c3fa4831cb9195fb276c4
 from https://github.com/tpruvot/android_external_busybox
 
-Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
+Rebased for busybox 1.33.1 by Chris Renshaw <osm0sis@outlook.com>
 ---
  modutils/modinfo.c  | 33 +++++++++++++++++++++++++++++----
  modutils/modprobe.c | 18 +++++++++++++++++-
  2 files changed, 46 insertions(+), 5 deletions(-)
 
 diff --git a/modutils/modinfo.c b/modutils/modinfo.c
-index 1e63f745f..d85aa7543 100644
+index d15772f0d..0b6a89329 100644
 --- a/modutils/modinfo.c
 +++ b/modutils/modinfo.c
-@@ -21,6 +21,10 @@
+@@ -20,6 +20,10 @@
  #include "libbb.h"
  #include "modutils.h"
  
@@ -31,10 +31,10 @@ index 1e63f745f..d85aa7543 100644
 +#define DONT_USE_UTS_REL_FOLDER
 +#endif
 +
- static const char *const shortcuts[] = {
+ static const char *const shortcuts[] ALIGN_PTR = {
  	"filename",	// -n
  	"author",	// -a
-@@ -64,7 +68,7 @@ static void modinfo(const char *path, const char *version,
+@@ -63,7 +67,7 @@ static void modinfo(const char *path, const char *version,
  {
  	size_t len;
  	int j;
@@ -43,7 +43,7 @@ index 1e63f745f..d85aa7543 100644
  	char *allocated;
  	int tags = option_mask32;
  
-@@ -75,8 +79,14 @@ static void modinfo(const char *path, const char *version,
+@@ -74,8 +78,14 @@ static void modinfo(const char *path, const char *version,
  		if (path[0] == '/')
  			return;
  		/* Newer depmod puts relative paths in modules.dep */
@@ -60,7 +60,7 @@ index 1e63f745f..d85aa7543 100644
  		if (!the_module) {
  			bb_error_msg("module '%s' not found", path);
  			goto ret;
-@@ -157,9 +167,23 @@ int modinfo_main(int argc UNUSED_PARAM, char **argv)
+@@ -156,9 +166,23 @@ int modinfo_main(int argc UNUSED_PARAM, char **argv)
  	uname(&uts);
  	parser = config_open2(
  		xasprintf("%s/%s/%s", CONFIG_DEFAULT_MODULES_DIR, uts.release, CONFIG_DEFAULT_DEPMOD_FILE),
@@ -85,7 +85,7 @@ index 1e63f745f..d85aa7543 100644
  	while (config_read(parser, tokens, 2, 1, "# \t", PARSE_NORMAL)) {
  		colon = last_char_is(tokens[0], ':');
  		if (colon == NULL)
-@@ -176,6 +200,7 @@ int modinfo_main(int argc UNUSED_PARAM, char **argv)
+@@ -175,6 +199,7 @@ int modinfo_main(int argc UNUSED_PARAM, char **argv)
  	if (ENABLE_FEATURE_CLEAN_UP)
  		config_close(parser);
  
@@ -94,10 +94,10 @@ index 1e63f745f..d85aa7543 100644
  		if (argv[i][0]) {
  			modinfo(argv[i], uts.release, field);
 diff --git a/modutils/modprobe.c b/modutils/modprobe.c
-index 0a372a049..bcfa6522e 100644
+index c334186b8..eecccac1b 100644
 --- a/modutils/modprobe.c
 +++ b/modutils/modprobe.c
-@@ -173,6 +173,10 @@ static const char modprobe_longopts[] ALIGN1 =
+@@ -172,6 +172,10 @@ static const char modprobe_longopts[] ALIGN1 =
  #define MODULE_FLAG_BLACKLISTED         0x0008
  #define MODULE_FLAG_BUILTIN             0x0010
  
@@ -108,7 +108,7 @@ index 0a372a049..bcfa6522e 100644
  struct globals {
  	llist_t *probes; /* MEs of module(s) requested on cmdline */
  #if ENABLE_FEATURE_CMDLINE_MODULE_OPTIONS
-@@ -477,10 +481,17 @@ static int do_modprobe(struct module_entry *m)
+@@ -474,10 +478,17 @@ static int do_modprobe(struct module_entry *m)
  #endif
  
  		if (option_mask32 & OPT_SHOW_DEPS) {
@@ -126,7 +126,7 @@ index 0a372a049..bcfa6522e 100644
  			free(options);
  			continue;
  		}
-@@ -562,6 +573,7 @@ int modprobe_main(int argc UNUSED_PARAM, char **argv)
+@@ -559,6 +570,7 @@ int modprobe_main(int argc UNUSED_PARAM, char **argv)
  	int rc;
  	unsigned opt;
  	struct module_entry *me;
@@ -134,7 +134,7 @@ index 0a372a049..bcfa6522e 100644
  
  	INIT_G();
  
-@@ -573,8 +585,12 @@ int modprobe_main(int argc UNUSED_PARAM, char **argv)
+@@ -570,8 +582,12 @@ int modprobe_main(int argc UNUSED_PARAM, char **argv)
  
  	/* Goto modules location */
  	xchdir(CONFIG_DEFAULT_MODULES_DIR);
@@ -149,5 +149,5 @@ index 0a372a049..bcfa6522e 100644
  	if (opt & OPT_LIST_ONLY) {
  		int i;
 -- 
-2.30.0
+2.31.1
 

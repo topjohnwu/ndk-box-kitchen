@@ -1,4 +1,4 @@
-From 84a5121034b7578d8e2796edb804cdf9294d0063 Mon Sep 17 00:00:00 2001
+From 74fa2bc25dae8105436192a119b1c3bdceb78160 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Tue, 20 Mar 2012 21:30:10 +0000
 Subject: [PATCH 13/33] fix syslogd, logread: add syslog.h, semop shmdt-at
@@ -169,5 +169,5 @@ index 94d8273b6..9a768daa5 100644
  #if 0
  /* For the record: with SYSLOG_NAMES <syslog.h> defines
 -- 
-2.30.0
+2.31.1
 

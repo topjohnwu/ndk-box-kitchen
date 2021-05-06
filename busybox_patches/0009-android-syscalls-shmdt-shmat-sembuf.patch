@@ -1,4 +1,4 @@
-From 39d11a5fc29d2ab91867713d7dd9632f74d06630 Mon Sep 17 00:00:00 2001
+From 8f6ad8a7cc23feb47e083f4129e4d1c78ccd946f Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:48:30 -0300
 Subject: [PATCH 09/33] android syscalls: shmdt shmat sembuf
@@ -44,5 +44,5 @@ index 018f72d62..b5ea2612e 100644
  int tcdrain(int fd)
  {
 -- 
-2.30.0
+2.31.1
 

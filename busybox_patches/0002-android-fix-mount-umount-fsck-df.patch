@@ -1,10 +1,11 @@
-From 5894ff979698e21b3595a9e6ccabb6c506240469 Mon Sep 17 00:00:00 2001
-From: Tias Guns <tias@ulyssis.org>
-Date: Sun, 18 Mar 2012 14:12:41 +0000
+From b9f214dc0434c1ba5c2987945807165dedcb7aa6 Mon Sep 17 00:00:00 2001
+From: Chris Renshaw <osm0sis@outlook.com>
+Date: Tue, 4 May 2021 00:56:55 -0300
 Subject: [PATCH 02/33] android: fix 'mount', 'umount', 'fsck', 'df'
 
-patch modified from 'Bionic Patch V1.0 (Vitaly Greck)'
+Patch by Tias Guns <tias@ulyssis.org>, based on 'Bionic Patch V1.0' by Vitaly Greck
 https://code.google.com/p/busybox-android/downloads/detail?name=patch
+Rebased for busybox 1.33.1 by Chris Renshaw <osm0sis@outlook.com>
 ---
  libbb/Kbuild.src |   3 +
  libbb/mntent_r.c | 288 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -12,7 +13,7 @@ https://code.google.com/p/busybox-android/downloads/detail?name=patch
  create mode 100644 libbb/mntent_r.c
 
 diff --git a/libbb/Kbuild.src b/libbb/Kbuild.src
-index 8c9ba8cca..48e98e77b 100644
+index 676300801..a71cc4527 100644
 --- a/libbb/Kbuild.src
 +++ b/libbb/Kbuild.src
 @@ -112,6 +112,9 @@ lib-y += xgethostbyname.o
@@ -22,9 +23,9 @@ index 8c9ba8cca..48e98e77b 100644
 +# for android-busybox-ndk
 +lib-y += mntent_r.o
 +
- lib-$(CONFIG_PLATFORM_LINUX) += match_fstype.o
+ lib-$(CONFIG_MOUNT) += match_fstype.o
+ lib-$(CONFIG_UMOUNT) += match_fstype.o
  
- lib-$(CONFIG_FEATURE_UTMP) += utmp.o
 diff --git a/libbb/mntent_r.c b/libbb/mntent_r.c
 new file mode 100644
 index 000000000..107748740
@@ -320,5 +321,5 @@ index 000000000..107748740
 +  return NULL;
 +}
 -- 
-2.30.0
+2.31.1
 
