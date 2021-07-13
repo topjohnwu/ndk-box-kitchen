@@ -1,0 +1,6 @@
+[
+    {
+        "comment": "[PATCH] fix undefined icmphdr in ping",
+        "patch_name": "0001-fix-undefined-icmphdr-in-ping.patch"
+    }
+]

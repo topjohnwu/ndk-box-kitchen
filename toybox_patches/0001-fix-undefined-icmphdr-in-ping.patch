@@ -1,13 +1,14 @@
+From 5e2c792ef776546d4e8555910ac5cc2b79edecd9 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sun, 12 Aug 2018 10:56:38 +0800
-Subject: [PATCH] fix undefined icmphdr in ping
+Subject: [PATCH 1/1] fix undefined icmphdr in ping
 
 ---
  toys/net/ping.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/toys/net/ping.c b/toys/net/ping.c
-index 8638479..2eef1ee 100644
+index 018e887..555f1aa 100644
 --- a/toys/net/ping.c
 +++ b/toys/net/ping.c
 @@ -45,6 +45,7 @@ config PING
@@ -17,7 +18,7 @@ index 8638479..2eef1ee 100644
 +#include <linux/icmp.h>
  
  GLOBALS(
-   long w;
+   char *I;
 -- 
-2.17.1
+2.25.1
 

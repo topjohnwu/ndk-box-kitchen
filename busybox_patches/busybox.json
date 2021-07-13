@@ -1,0 +1,134 @@
+[
+    {
+        "comment": "Fix-mconf-lkc-host-warning-statement-with-no-effect.patch",
+        "patch_name": "0001-Fix-mconf-lkc-host-warning-statement-with-no-effect.patch"
+    },
+    {
+        "comment": "android-fix-mount-umount-fsck-df.patch",
+        "patch_name": "0002-android-fix-mount-umount-fsck-df.patch"
+    },
+    {
+        "comment": "eject-add-missing-headers.patch",
+        "patch_name": "0003-eject-add-missing-headers.patch"
+    },
+    {
+        "comment": "fix-udhcpd-and-nameif-add-ether_ntoa_r-and-ether_ato.patch",
+        "patch_name": "0004-fix-udhcpd-and-nameif-add-ether_ntoa_r-and-ether_ato.patch"
+    },
+    {
+        "comment": "fix-ether-wake-avoid-ether_hostton-and-include-if_et.patch",
+        "patch_name": "0005-fix-ether-wake-avoid-ether_hostton-and-include-if_et.patch"
+    },
+    {
+        "comment": "loadfont-setfont-conspy-add-missing-header.patch",
+        "patch_name": "0006-loadfont-setfont-conspy-add-missing-header.patch"
+    },
+    {
+        "comment": "android-syscalls-shmget-msgget-semget.patch",
+        "patch_name": "0007-android-syscalls-shmget-msgget-semget.patch"
+    },
+    {
+        "comment": "android-syscalls-msgctl-shmctl.patch",
+        "patch_name": "0008-android-syscalls-msgctl-shmctl.patch"
+    },
+    {
+        "comment": "android-syscalls-shmdt-shmat-sembuf.patch",
+        "patch_name": "0009-android-syscalls-shmdt-shmat-sembuf.patch"
+    },
+    {
+        "comment": "android-syscall-non-trivial-semctl.patch",
+        "patch_name": "0010-android-syscall-non-trivial-semctl.patch"
+    },
+    {
+        "comment": "missing_syscalls-semctl-fix-missing-definitions-on-x.patch",
+        "patch_name": "0011-missing_syscalls-semctl-fix-missing-definitions-on-x.patch"
+    },
+    {
+        "comment": "fix-ipcs-ipcrm-no-sys-sem-shm-msg-etc.patch",
+        "patch_name": "0012-fix-ipcs-ipcrm-no-sys-sem-shm-msg-etc.patch"
+    },
+    {
+        "comment": "fix-syslogd-logread-add-syslog.h-semop-shmdt-at.patch",
+        "patch_name": "0013-fix-syslogd-logread-add-syslog.h-semop-shmdt-at.patch"
+    },
+    {
+        "comment": "fix-fsck.minix-mkfs.minix-undef-HAVE_SETBIT-MINIX2_S.patch",
+        "patch_name": "0014-fix-fsck.minix-mkfs.minix-undef-HAVE_SETBIT-MINIX2_S.patch"
+    },
+    {
+        "comment": "fix-ipv6-add-ipv6_route.h.patch",
+        "patch_name": "0015-fix-ipv6-add-ipv6_route.h.patch"
+    },
+    {
+        "comment": "additional-fix-up-for-IPV6-on-Android-API-21.patch",
+        "patch_name": "0016-additional-fix-up-for-IPV6-on-Android-API-21.patch"
+    },
+    {
+        "comment": "fix-udhcpc6-add-missing-ifaddrs.h-and-getifaddrs-fre.patch",
+        "patch_name": "0017-fix-udhcpc6-add-missing-ifaddrs.h-and-getifaddrs-fre.patch"
+    },
+    {
+        "comment": "fix-time-hush-add-missing-definitions-on-Android-API.patch",
+        "patch_name": "0018-fix-time-hush-add-missing-definitions-on-Android-API.patch"
+    },
+    {
+        "comment": "platform-minor-adjustments-to-support-unified-header.patch",
+        "patch_name": "0019-platform-minor-adjustments-to-support-unified-header.patch"
+    },
+    {
+        "comment": "fix-hush-add-glob-and-sigisemptyset.patch",
+        "patch_name": "0020-fix-hush-add-glob-and-sigisemptyset.patch"
+    },
+    {
+        "comment": "glob-minor-adjustments-to-support-unified-headers.patch",
+        "patch_name": "0021-glob-minor-adjustments-to-support-unified-headers.patch"
+    },
+    {
+        "comment": "modinfo-modprobe-use-ifdef-block-for-android-without.patch",
+        "patch_name": "0022-modinfo-modprobe-use-ifdef-block-for-android-without.patch"
+    },
+    {
+        "comment": "depmod-fix-syntax-with-modules-in-parameter.patch",
+        "patch_name": "0023-depmod-fix-syntax-with-modules-in-parameter.patch"
+    },
+    {
+        "comment": "fix-reboot-poweroff-hack-android_reboot-support.patch",
+        "patch_name": "0024-fix-reboot-poweroff-hack-android_reboot-support.patch"
+    },
+    {
+        "comment": "fix-tls-avoid-problematic-ASM-code-only-triggered-by.patch",
+        "patch_name": "0025-fix-tls-avoid-problematic-ASM-code-only-triggered-by.patch"
+    },
+    {
+        "comment": "fix-nslookup-add-libres-a-dietlibc-resolver.patch",
+        "patch_name": "0026-fix-nslookup-add-libres-a-dietlibc-resolver.patch"
+    },
+    {
+        "comment": "hack-use-dietlibc-s-resolver-to-avoid-static-compili.patch",
+        "patch_name": "0027-hack-use-dietlibc-s-resolver-to-avoid-static-compili.patch"
+    },
+    {
+        "comment": "dietlibc-dnscruft-try-to-get-dns-server-via-command-.patch",
+        "patch_name": "0028-dietlibc-dnscruft-try-to-get-dns-server-via-command-.patch"
+    },
+    {
+        "comment": "ash-history.patch",
+        "patch_name": "0029-ash-history.patch"
+    },
+    {
+        "comment": "Remove-unnecessary-missing-syscalls.patch",
+        "patch_name": "0030-Remove-unnecessary-missing-syscalls.patch"
+    },
+    {
+        "comment": "Add-runtime-toggle-to-enable-standalone-ash.patch",
+        "patch_name": "0031-Add-runtime-toggle-to-enable-standalone-ash.patch"
+    },
+    {
+        "comment": "Disable-SELinux-features-for-install.patch",
+        "patch_name": "0032-Disable-SELinux-features-for-install.patch"
+    },
+    {
+        "comment": "Allow-running-as-libbusybox.so.patch",
+        "patch_name": "0033-Allow-running-as-libbusybox.so.patch"
+    }
+]
