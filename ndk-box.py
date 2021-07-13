@@ -190,7 +190,7 @@ def GetCommandLineArgs():
         '--commit',
         action='store_true',
         help=
-        'git commit the patches and generatedfiles for ndk-build automatically')
+        'git commit the patches and generated files for ndk-build automatically')
 
     # Parse the command line.
     args_output = parser.parse_args(None if sys.argv[1:] else ['--help'])
