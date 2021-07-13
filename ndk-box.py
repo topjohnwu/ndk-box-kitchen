@@ -149,20 +149,27 @@ def GetCommandLineArgs():
     parser = argparse.ArgumentParser(
         description='A manager for busybox and toybox.')
 
+    # https://stackoverflow.com/questions/24180527/argparse-required-arguments-listed-under-optional-arguments/24181138
+    optional = parser._action_groups.pop()
+    required = parser.add_argument_group('required arguments')
+    parser._action_groups.append(optional)
+
     # Add argument for the absolute path to the unpacked sources.
-    parser.add_argument(
+    required.add_argument(
         '--target',
         type=str,
         choices=['busybox', 'toybox'],
         default=None,
+        required=True,
         help=
         'specify busybox or toybox as target to patch and generate files for ndk-build'
     )
 
-    parser.add_argument(
+    required.add_argument(
         '--src_path',
         type=Path,
         default=None,
+        required=True,
         help='the absolute path to the busybox or toybox source')
 
     parser.add_argument(
