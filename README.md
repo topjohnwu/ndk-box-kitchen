@@ -24,20 +24,24 @@ git clone https://github.com/landley/toybox.git
 
 ```
 root@kali:~/ndk-box-kitchen# python3 ndk-box.py -h
-usage: ndk-box.py [-h] --target {busybox,toybox} --src_path SRC_PATH [--patch] [--generate] [--commit]
+usage: ndk-box.py [-h] --target {busybox,toybox} [--patch]
+                  [--generate] [--commit]
 
 A manager for busybox and toybox.
 
 required arguments:
   --target {busybox,toybox}
-                        specify busybox or toybox as target to patch and generate files for ndk-build
-  --src_path SRC_PATH   the absolute path to the busybox or toybox source
+                        specify busybox or toybox as target to patch
+                        and generate files for ndk-build
 
 optional arguments:
   -h, --help            show this help message and exit
-  --patch               apply busybox or toybox patches to the absolute source of busybox or toybox
-  --generate            generate required files for ndk-build in the absolute source path of busybox or toybox
-  --commit              git commit the patches and generated files for ndk-build automatically
+  --patch               apply busybox or toybox patches to the
+                        absolute source of busybox or toybox
+  --generate            generate required files for ndk-build in the
+                        absolute source path of busybox or toybox
+  --commit              git commit the patches and generated files
+                        for ndk-build automatically
 ```
 
 * requirements:
@@ -58,34 +62,34 @@ automatically.
 
 To apply patches:
 ```
-python3 ndk-box.py --target busybox --src_path <full path of busybox source> --patch
+python3 ndk-box.py --target busybox --patch
 ```
 
 To generate required Makefiles and headers:
 ```
-python3 ndk-box.py --target busybox --src_path <full path of busybox source> --generate
+python3 ndk-box.py --target busybox --generate
 ```
 
 All in One:
 ```
-python3 ndk-box.py --target busybox --src_path <full path of busybox source> --patch --generate --commit
+python3 ndk-box.py --target busybox --patch --generate --commit
 ```
 
 ## Toybox
 
 To apply patches:
 ```
-python3 ndk-box.py --target toybox --src_path <full path of toybox source> --patch
+python3 ndk-box.py --target toybox --patch
 ```
 
 To generate required Makefiles and headers:
 ```
-python3 ndk-box.py --target toybox --src_path <full path of toybox source> --generate
+python3 ndk-box.py --target toybox --generate
 ```
 
 All in One:
 ```
-python3 ndk-box.py --target toybox --src_path <full path of toybox source> --patch --generate --commit
+python3 ndk-box.py --target toybox --patch --generate --commit
 ```
 
 ## Credits

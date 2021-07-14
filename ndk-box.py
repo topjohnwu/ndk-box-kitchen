@@ -137,12 +137,10 @@ def verify_args(target, src_path):
     if target != "busybox" and target != "toybox":
         raise ValueError('Invalid target provided: %s' % target)
 
-    if not src_path:
-        raise ValueError(
-            'No src path provided. Provide the path of busybox or toybox.')
-
     if not os.path.isdir(src_path):
-        raise ValueError('Invalid src path provided: %s' % src_path)
+        raise ValueError(
+            'Please clone %s in the same directory of this script and checkout the correct tag'
+            % target)
 
 
 def GetCommandLineArgs():
@@ -167,13 +165,6 @@ def GetCommandLineArgs():
         help=
         'specify busybox or toybox as target to patch and generate files for ndk-build'
     )
-
-    required.add_argument(
-        '--src_path',
-        type=Path,
-        default=None,
-        required=True,
-        help='the absolute path to the busybox or toybox source')
 
     parser.add_argument(
         '--patch',
@@ -206,18 +197,20 @@ def main():
     """Applies patches to the source tree and takes action on a failed patch."""
     args_output = GetCommandLineArgs()
 
-    verify_args(args_output.target, args_output.src_path)
+    # use the same path as it was defined in busybox.sh and toybox.sh
+    src_path = Path(os.path.join(os.getcwd(), '{}'.format(args_output.target)))
+    verify_args(args_output.target, src_path)
     # Get the results of handling the patches of the package.
     if args_output.patch:
         header('Applying %s patches for ndk-build' % args_output.target)
-        patch_info = handle_patch(args_output.target, args_output.src_path)
+        patch_info = handle_patch(args_output.target, src_path)
         result(patch_info)
     if args_output.generate:
-        generate_config(args_output.target, args_output.src_path)
+        generate_config(args_output.target, src_path)
     if args_output.commit:
         header('commit patches and generated Makefiles of %s for ndk-build' %
                args_output.target)
-        do_commit(args_output.target, args_output.src_path)
+        do_commit(args_output.target, src_path)
 
 
 if __name__ == '__main__':
