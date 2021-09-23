@@ -11,8 +11,4 @@ LOCAL_CFLAGS := \
 -w -include include/autoconf.h -D__USE_BSD \
 -DBB_VER=\"$(BB_VER)\" -DBB_BT=AUTOCONF_TIMESTAMP
 
-ifeq ($(OS),Windows_NT)
-LOCAL_SHORT_COMMANDS := true
-endif
-
 LOCAL_SRC_FILES := \
