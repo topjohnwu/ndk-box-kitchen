@@ -1,6 +1,5 @@
-busybox
-toybox
-libs
-obj
-jni/selinux
-jni/pcre
+/busybox
+/libs
+/obj
+/jni/selinux
+/jni/pcre

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+BUSYBOX_TAG='1_33_1'
+
 progress() {
   echo -e "\n\033[44m${1}\033[0m\n"
 }
@@ -38,16 +40,14 @@ generate_files() {
   scripts/generate_BUFSIZ.sh include/common_bufsiz.h
   srctree=$CWD HOSTCC=gcc scripts/embedded_scripts include/embedded_scripts.h embed applets_sh
 
-  progress "Generating Android_src.mk based on configs"
-
-  # Process Kbuild files
-  echo "LOCAL_SRC_FILES := \\" > Android_src.mk
-  parse_kbuild | sort -u >> Android_src.mk
+  progress "Generating Android.mk based on configs"
 
   # Build Android.mk
   echo 'LOCAL_PATH := $(call my-dir)' > Android.mk
   cat Makefile | head -n 3 >> Android.mk
   cat ../busybox.mk >> Android.mk
+  parse_kbuild | sort -u >> Android.mk
+  echo -e '\ninclude $(BUILD_EXECUTABLE)' >> Android.mk
 
   if $COMMIT; then
     progress "Commit headers and Makefiles"
@@ -58,7 +58,7 @@ generate_files() {
 }
 
 apply_patches() {
-  for p in ../busybox_patches/*; do
+  for p in ../patches/*; do
     if ! git am -3 < $p; then
       # Force use fuzzy patch
       patch -p1 < $p
@@ -66,6 +66,12 @@ apply_patches() {
       git am --continue
     fi
   done
+}
+
+create_patches() {
+  git format-patch ${BUSYBOX_TAG}..HEAD -o ../patches.new
+  rm -rf ../patches
+  mv ../patches.new ../patches
 }
 
 if [ ! -d busybox ]; then
@@ -84,12 +90,17 @@ case "$1" in
   patch )
     apply_patches
     ;;
+  create )
+    create_patches
+    ;;
   * )
     echo "Usage:"
     echo "$0 patch"
-    echo "   Apply patches for busybox"
+    echo "   Apply patches to busybox"
+    echo "$0 create"
+    echo "   Create patch files from busybox"
     echo "$0 generate [--commit]"
-    echo "   Generate Makefiles for compilation"
+    echo "   Generate Makefiles"
     ;;
 esac
 
