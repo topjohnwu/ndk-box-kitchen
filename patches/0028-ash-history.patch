@@ -1,6 +1,7 @@
+From ea650af616d0b853a2c87466098c894337d53c3f Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 11 Aug 2021 23:54:04 -0300
-Subject: [PATCH] ash history
+Subject: [PATCH 28/32] ash history
 
 allows ash history to work on Android
 
@@ -15,10 +16,10 @@ Rebased for busybox 1.33.1 by Chris Renshaw <osm0sis@outlook.com>
  4 files changed, 13 insertions(+), 5 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index cae54658b..ae94e921d 100644
+index 7d6ab4a93..c5883b3e9 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -2265,12 +2265,12 @@ static ALWAYS_INLINE void* not_const_pp(const void *p) { return (void*)p; }
+@@ -2306,12 +2306,12 @@ static ALWAYS_INLINE void* not_const_pp(const void *p) { return (void*)p; }
   * use bb_default_login_shell and following defines.
   * If you change LIBBB_DEFAULT_LOGIN_SHELL,
   * don't forget to change increment constant. */
@@ -30,11 +31,11 @@ index cae54658b..ae94e921d 100644
  /* "sh" */
 -#define DEFAULT_SHELL_SHORT_NAME   (bb_default_login_shell+6)
 +#define DEFAULT_SHELL_SHORT_NAME   (bb_default_login_shell+13)
-
+ 
  /* The following devices are the same on all systems.  */
  #define CURRENT_TTY "/dev/tty"
 diff --git a/init/init.c b/init/init.c
-index efab5dcb4..de9044751 100644
+index efab5dcb4..bd084b546 100644
 --- a/init/init.c
 +++ b/init/init.c
 @@ -1107,7 +1107,7 @@ int init_main(int argc UNUSED_PARAM, char **argv)
@@ -44,7 +45,7 @@ index efab5dcb4..de9044751 100644
 -	putenv((char *) "SHELL=/bin/sh");
 +	putenv((char *) "SHELL=/system/bin/sh");
  	putenv((char *) "USER=root"); /* needed? why? */
-
+ 
  	if (argv[1])
 diff --git a/libbb/get_shell_name.c b/libbb/get_shell_name.c
 index 5aebe9cdc..5af53bdda 100644
@@ -53,7 +54,7 @@ index 5aebe9cdc..5af53bdda 100644
 @@ -17,6 +17,10 @@ const char* FAST_FUNC get_shell_name(void)
  	if (shell && shell[0])
  		return shell;
-
+ 
 +#ifdef __ANDROID__
 +	return DEFAULT_SHELL_SHORT_NAME;
 +#endif
@@ -62,28 +63,28 @@ index 5aebe9cdc..5af53bdda 100644
  	if (pw && pw->pw_shell && pw->pw_shell[0])
  		return pw->pw_shell;
 diff --git a/shell/ash.c b/shell/ash.c
-index a33ab0626..ad7978bbe 100644
+index 53c140930..eded57508 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -14282,7 +14282,7 @@ procargs(char **argv)
+@@ -14443,7 +14443,7 @@ procargs(char **argv)
  	int login_sh;
-
+ 
  	xargv = argv;
 -	login_sh = xargv[0] && xargv[0][0] == '-';
 +	login_sh = 1; /* = xargv[0] && xargv[0][0] == '-'; - make always true for Android */
  #if NUM_SCRIPTS > 0
  	if (minusc)
  		goto setarg0;
-@@ -14458,7 +14458,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14619,7 +14619,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  		const char *hp;
-
+ 
  		state = 1;
 -		read_profile("/etc/profile");
 +		read_profile("/system/etc/profile");
   state1:
  		state = 2;
  		hp = lookupvar("HOME");
-@@ -14503,6 +14503,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14664,6 +14664,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  		if (line_input_state) {
  			const char *hp = lookupvar("HISTFILE");
  			if (!hp) {
@@ -93,7 +94,7 @@ index a33ab0626..ad7978bbe 100644
  				hp = lookupvar("HOME");
  				if (hp) {
  					INT_OFF;
-@@ -14512,6 +14515,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14673,6 +14676,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  					INT_ON;
  					hp = lookupvar("HISTFILE");
  				}
@@ -101,5 +102,6 @@ index a33ab0626..ad7978bbe 100644
  			}
  			if (hp)
  				line_input_state->hist_file = xstrdup(hp);
---
+-- 
 2.31.1
+

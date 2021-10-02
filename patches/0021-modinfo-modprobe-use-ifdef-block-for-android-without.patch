@@ -1,7 +1,7 @@
-From 8fb538cbe2e65b10c559af8967bc7543fb04a21f Mon Sep 17 00:00:00 2001
+From b21ea886ecefce34e95197ff1c1e745e4b7589d1 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 6 May 2021 16:30:26 -0300
-Subject: [PATCH 22/33] modinfo/modprobe: use ifdef block for android
+Subject: [PATCH 21/32] modinfo/modprobe: use ifdef block for android
  without-utsrel modules path
 
 and fixes the modules.dep requirement, it is now optional...
@@ -20,7 +20,7 @@ Rebased for busybox 1.33.1 by Chris Renshaw <osm0sis@outlook.com>
  2 files changed, 46 insertions(+), 5 deletions(-)
 
 diff --git a/modutils/modinfo.c b/modutils/modinfo.c
-index d15772f0d..0b6a89329 100644
+index 0a86c3296..de6b24b4d 100644
 --- a/modutils/modinfo.c
 +++ b/modutils/modinfo.c
 @@ -20,6 +20,10 @@
@@ -94,7 +94,7 @@ index d15772f0d..0b6a89329 100644
  		if (argv[i][0]) {
  			modinfo(argv[i], uts.release, field);
 diff --git a/modutils/modprobe.c b/modutils/modprobe.c
-index c334186b8..eecccac1b 100644
+index 235706fd5..4f4ee11e1 100644
 --- a/modutils/modprobe.c
 +++ b/modutils/modprobe.c
 @@ -172,6 +172,10 @@ static const char modprobe_longopts[] ALIGN1 =

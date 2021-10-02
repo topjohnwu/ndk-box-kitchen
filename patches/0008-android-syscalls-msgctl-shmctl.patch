@@ -1,7 +1,7 @@
-From c4a61a027785c6ce94e3ca872c7415b4e1c2590a Mon Sep 17 00:00:00 2001
+From a3b1a3d269989e1a4934292d221b94f80ddddba7 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:46:40 -0300
-Subject: [PATCH 08/33] android syscalls: msgctl shmctl
+Subject: [PATCH 08/32] android syscalls: msgctl shmctl
 
 Patch by Tias Guns <tias@ulyssis.org>
 Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>

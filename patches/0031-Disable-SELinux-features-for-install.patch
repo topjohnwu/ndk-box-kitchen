@@ -1,7 +1,7 @@
-From 411f362efe9a0876a4f0878de292cfbc86088abb Mon Sep 17 00:00:00 2001
+From a5a9f9a667d105b88c5912f0c0a99557a318296f Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sat, 2 May 2020 01:48:30 -0700
-Subject: [PATCH 32/33] Disable SELinux features for install
+Subject: [PATCH 31/32] Disable SELinux features for install
 
 matchpathcon is not usable on Android
 ---

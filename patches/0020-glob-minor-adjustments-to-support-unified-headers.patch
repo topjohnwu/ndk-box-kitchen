@@ -1,7 +1,7 @@
-From 985a83ace17ce69d3bd776ce3247c5afc745cf62 Mon Sep 17 00:00:00 2001
+From 4a739324cd42e10aebcc03d89882e4068f539a86 Mon Sep 17 00:00:00 2001
 From: John Wu <topjohnwu@gmail.com>
 Date: Sun, 12 Aug 2018 18:31:26 +0800
-Subject: [PATCH 21/33] glob: minor adjustments to support unified headers
+Subject: [PATCH 20/32] glob: minor adjustments to support unified headers
 
 ---
  shell/glob.h | 6 +++---

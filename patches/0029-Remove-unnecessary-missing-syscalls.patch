@@ -1,7 +1,7 @@
-From 4556e7333436f9e651657e750948f5849e6fd418 Mon Sep 17 00:00:00 2001
+From 86511778b323a5aec93d034a9ca2b0ef3833b927 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 3 Apr 2020 02:09:55 -0700
-Subject: [PATCH 30/33] Remove unnecessary missing syscalls
+Subject: [PATCH 29/32] Remove unnecessary missing syscalls
 
 ---
  libbb/missing_syscalls.c | 15 ---------------

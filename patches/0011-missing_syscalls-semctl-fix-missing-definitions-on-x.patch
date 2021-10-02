@@ -1,7 +1,7 @@
-From 840337a66f736edf95578027ec73f100de0c4194 Mon Sep 17 00:00:00 2001
+From 21fbb8fbf06c5f86d3e52c37b4ae83e3c5d91c99 Mon Sep 17 00:00:00 2001
 From: Umakanthan Chandran <cumakt@gmail.com>
 Date: Fri, 3 Mar 2017 07:32:22 +0530
-Subject: [PATCH 11/33] missing_syscalls/semctl: fix missing definitions on x86
+Subject: [PATCH 11/32] missing_syscalls/semctl: fix missing definitions on x86
  and MIPS NDK cross-compiles
 
 Signed-off-by: Umakanthan Chandran <cumakt@gmail.com>
