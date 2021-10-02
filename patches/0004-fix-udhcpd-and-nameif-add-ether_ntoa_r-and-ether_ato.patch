@@ -1,7 +1,7 @@
-From f8bbea7bb539f4c22d02d9d92dd141e9d81eb6f2 Mon Sep 17 00:00:00 2001
+From 6bcdc7ab3573411bad843820dd6e200edc594a98 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
-Subject: [PATCH 04/33] fix udhcpd and nameif, add ether_ntoa_r and
+Subject: [PATCH 04/32] fix udhcpd and nameif, add ether_ntoa_r and
  ether_aton_r from glibc
 
 this patch also fixes part of arping and ether-wake, but not sufficiently yet
@@ -208,7 +208,7 @@ index 000000000..5e0146b29
 +
 +#endif /* ETHER_PORT_H */
 diff --git a/networking/nameif.c b/networking/nameif.c
-index 854594c83..bfb91b5ca 100644
+index 66e042688..15a7b9c94 100644
 --- a/networking/nameif.c
 +++ b/networking/nameif.c
 @@ -41,6 +41,7 @@
@@ -232,7 +232,7 @@ index fcb725fbc..2d5739c7e 100644
  lib-$(CONFIG_DHCPRELAY)  += dhcprelay.o common.o socket.o packet.o
  
 diff --git a/networking/udhcp/dhcpd.c b/networking/udhcp/dhcpd.c
-index cd32cb437..c9815501b 100644
+index 91f70970a..732c0bcfa 100644
 --- a/networking/udhcp/dhcpd.c
 +++ b/networking/udhcp/dhcpd.c
 @@ -40,8 +40,12 @@

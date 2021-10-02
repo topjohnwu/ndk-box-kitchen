@@ -1,7 +1,7 @@
-From 3868d8ef449ca229b2bee9f19d922918830a5ac6 Mon Sep 17 00:00:00 2001
+From e38ebe4d4d3739c95245bf8077a54754d72ec95c Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 16:55:01 -0300
-Subject: [PATCH 23/33] depmod: fix syntax with modules in parameter
+Subject: [PATCH 22/32] depmod: fix syntax with modules in parameter
 
 Patch by Tanguy Pruvot <tanguy.pruvot@gmail.com>
 Change-Id: I21b8664db01cf0132db82f8d6caa1a0e77e71004

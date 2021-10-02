@@ -1,7 +1,7 @@
-From 74fa2bc25dae8105436192a119b1c3bdceb78160 Mon Sep 17 00:00:00 2001
+From 73246102edf999bda0d649a5476947336697178a Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Tue, 20 Mar 2012 21:30:10 +0000
-Subject: [PATCH 13/33] fix syslogd, logread: add syslog.h, semop shmdt-at
+Subject: [PATCH 13/32] fix syslogd, logread: add syslog.h, semop shmdt-at
 
 patch from 'no-sys-shm,msg,sem' and 'sys-syslog' by Dan Drown
 "sys/syslog.h header for syslogd"

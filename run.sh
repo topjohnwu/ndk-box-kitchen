@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BUSYBOX_TAG='1_33_1'
+BUSYBOX_TAG='1_34_1'
 
 progress() {
   echo -e "\n\033[44m${1}\033[0m\n"

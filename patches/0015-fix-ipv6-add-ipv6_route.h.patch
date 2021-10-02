@@ -1,7 +1,7 @@
-From fb787658ad4e638bf15d7d44ac0df1b09c3ad2e3 Mon Sep 17 00:00:00 2001
+From e338db51bab2623214450f933058d51def2705ee Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Mon, 19 Mar 2012 18:24:29 +0000
-Subject: [PATCH 15/33] fix ipv6, add ipv6_route.h
+Subject: [PATCH 15/32] fix ipv6, add ipv6_route.h
 
 from 'in6_rtmsg' by Dan Drown
 "in6_rtmsg defined in linux/ipv6_route.h"
