@@ -1,7 +1,7 @@
 From 7d88a2c2f18de02a65bf041f86ac17055a7310b5 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
-Subject: [PATCH 19/32] fix hush, add glob and sigisemptyset
+Subject: [PATCH 19/34] fix hush, add glob and sigisemptyset
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'glob' by Dan Drown
 http://dan.drown.org/android/src/busybox/

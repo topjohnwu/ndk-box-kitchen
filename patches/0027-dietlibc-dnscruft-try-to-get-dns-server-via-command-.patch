@@ -1,7 +1,7 @@
 From cc3c79f2693797e230a0cb72c5b2dac2ef9e3364 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 3 Jul 2017 03:17:06 -0300
-Subject: [PATCH 27/32] dietlibc/dnscruft: try to get dns server via command if
+Subject: [PATCH 27/34] dietlibc/dnscruft: try to get dns server via command if
  __sys_property_get fails
 
 - bionic libc's property_get and __sys_property_get fail for statically compiled binaries

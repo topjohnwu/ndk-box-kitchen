@@ -1,7 +1,7 @@
 From c252ee61465fcdbf344c7501056f18121a46e0a7 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 19 Jul 2017 17:22:55 -0300
-Subject: [PATCH 17/32] fix udhcpc6: add missing ifaddrs.h and
+Subject: [PATCH 17/34] fix udhcpc6: add missing ifaddrs.h and
  getifaddrs/freeifaddrs functions
 
 ifaddrs implementation from 'android-ifaddrs' by Kenneth MacKay:

@@ -1,7 +1,7 @@
 From 03fb509561ce1a24b411d7b5679a692ee74f3d09 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 26 Jun 2017 23:53:06 -0300
-Subject: [PATCH 23/32] fix reboot+poweroff: hack android_reboot support
+Subject: [PATCH 23/34] fix reboot+poweroff: hack android_reboot support
 
 based on 'reboot.c' and 'halt.c' patches from CyanogenMod:
 https://github.com/CyanogenMod/android_external_busybox/commit/8aeb3719294721f744239ced474d159f073eef55#diff-51036c2b1c4282b63402a0e0286a066a
