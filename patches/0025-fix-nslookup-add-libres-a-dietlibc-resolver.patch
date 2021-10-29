@@ -1,7 +1,7 @@
 From b01c5bdfd1ca84e29e090d3a17b0417ca6647905 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sat, 21 Jul 2018 20:02:13 -0300
-Subject: [PATCH 25/32] fix nslookup, add libres, a dietlibc resolver
+Subject: [PATCH 25/34] fix nslookup, add libres, a dietlibc resolver
 
 Using bionic's resolver functions does not allow changing the dns
 server. Use dietlibc's resolver code instead (see package libres-devel)

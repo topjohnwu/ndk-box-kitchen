@@ -1,7 +1,7 @@
 From ea650af616d0b853a2c87466098c894337d53c3f Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 11 Aug 2021 23:54:04 -0300
-Subject: [PATCH 28/32] ash history
+Subject: [PATCH 28/34] ash history
 
 allows ash history to work on Android
 

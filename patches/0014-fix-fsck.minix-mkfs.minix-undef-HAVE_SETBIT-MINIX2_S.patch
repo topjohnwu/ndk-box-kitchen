@@ -1,7 +1,7 @@
 From be6c23f9fc6863944cdb3abb3c8b2672eda256c1 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sun, 18 Feb 2018 07:54:58 -0400
-Subject: [PATCH 14/32] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
+Subject: [PATCH 14/34] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
  MINIX2_SUPER_MAGIC, MINIX2_SUPER_MAGIC
 
 "there is no setbit/clrbit in bionic"

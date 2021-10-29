@@ -1,7 +1,7 @@
 From 4715ccbe7d0d2e1c25bbe70351624999e3fb5a0c Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 30 Oct 2019 02:47:24 -0300
-Subject: [PATCH 26/32] hack: use dietlibc's resolver to avoid static
+Subject: [PATCH 26/34] hack: use dietlibc's resolver to avoid static
  compiliation issues with bionic's getaddrinfo() returning only null instead
  of opening the expected connection to /dev/socket/dnsproxyd
 

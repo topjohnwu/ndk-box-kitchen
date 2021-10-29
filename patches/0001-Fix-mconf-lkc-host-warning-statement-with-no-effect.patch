@@ -1,7 +1,7 @@
 From d029f3c67469da49ec7893dc30d16377c5762e94 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Fri, 27 Nov 2015 11:40:52 -0400
-Subject: [PATCH 01/32] Fix mconf/lkc host "warning statement with no effect"
+Subject: [PATCH 01/34] Fix mconf/lkc host "warning statement with no effect"
 
 ---
  scripts/kconfig/lkc.h | 4 ++--

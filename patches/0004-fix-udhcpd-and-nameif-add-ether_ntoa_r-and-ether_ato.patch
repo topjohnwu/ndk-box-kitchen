@@ -1,7 +1,7 @@
 From 6bcdc7ab3573411bad843820dd6e200edc594a98 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
-Subject: [PATCH 04/32] fix udhcpd and nameif, add ether_ntoa_r and
+Subject: [PATCH 04/34] fix udhcpd and nameif, add ether_ntoa_r and
  ether_aton_r from glibc
 
 this patch also fixes part of arping and ether-wake, but not sufficiently yet
