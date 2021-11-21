@@ -1,7 +1,7 @@
-From 92aef79a45d0c84d2341c131f08e4b5b3efb0047 Mon Sep 17 00:00:00 2001
+From 8f5d727f217d79c2cb5fe919189c6532357d60a5 Mon Sep 17 00:00:00 2001
 From: YU Jincheng <shana@zju.edu.cn>
 Date: Sun, 10 Oct 2021 02:19:51 +0800
-Subject: [PATCH 34/34] Make const ptr assign as function call in clang
+Subject: [PATCH 30/34] Make const ptr assign as function call in clang
 
 - This can act as memory barrier in clang to avoid
   read before assign of a const ptr
@@ -95,7 +95,7 @@ index a71cc4527..5c75fc48c 100644
  lib-y += copyfd.o
  lib-y += crc32.o
 diff --git a/libbb/appletlib.c b/libbb/appletlib.c
-index 2482bb54e..a07c85347 100644
+index 8b4c0f0e7..a38b968fe 100644
 --- a/libbb/appletlib.c
 +++ b/libbb/appletlib.c
 @@ -247,7 +247,7 @@ void lbb_prepare(const char *applet
@@ -143,10 +143,10 @@ index 0bbbe80de..fc12bfa2d 100644
  
  static void deinit_S(void)
 diff --git a/shell/ash.c b/shell/ash.c
-index 873d035b0..57a38f21a 100644
+index 9250b8f91..150599f36 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -493,7 +493,7 @@ extern struct globals_misc *BB_GLOBAL_CONST ash_ptr_to_globals_misc;
+@@ -492,7 +492,7 @@ extern struct globals_misc *BB_GLOBAL_CONST ash_ptr_to_globals_misc;
  #define random_gen  (G_misc.random_gen )
  #define backgndpid  (G_misc.backgndpid )
  #define INIT_G_misc() do { \
@@ -155,7 +155,7 @@ index 873d035b0..57a38f21a 100644
  	savestatus = -1; \
  	curdir = nullstr; \
  	physdir = nullstr; \
-@@ -1565,7 +1565,7 @@ extern struct globals_memstack *BB_GLOBAL_CONST ash_ptr_to_globals_memstack;
+@@ -1564,7 +1564,7 @@ extern struct globals_memstack *BB_GLOBAL_CONST ash_ptr_to_globals_memstack;
  #define g_stacknleft (G_memstack.g_stacknleft)
  #define stackbase    (G_memstack.stackbase   )
  #define INIT_G_memstack() do { \
@@ -164,7 +164,7 @@ index 873d035b0..57a38f21a 100644
  	g_stackp = &stackbase; \
  	g_stacknxt = stackbase.space; \
  	g_stacknleft = MINSIZE; \
-@@ -2186,7 +2186,7 @@ extern struct globals_var *BB_GLOBAL_CONST ash_ptr_to_globals_var;
+@@ -2185,7 +2185,7 @@ extern struct globals_var *BB_GLOBAL_CONST ash_ptr_to_globals_var;
  #endif
  #define INIT_G_var() do { \
  	unsigned i; \
@@ -174,5 +174,5 @@ index 873d035b0..57a38f21a 100644
  		varinit[i].flags    = varinit_data[i].flags; \
  		varinit[i].var_text = varinit_data[i].var_text; \
 -- 
-2.31.1
+2.34.0
 

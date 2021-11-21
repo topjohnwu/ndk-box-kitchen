@@ -1,4 +1,4 @@
-From b21ea886ecefce34e95197ff1c1e745e4b7589d1 Mon Sep 17 00:00:00 2001
+From c2aa69fe6b243b82fbd62b9a8616defe575f588d Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 6 May 2021 16:30:26 -0300
 Subject: [PATCH 21/34] modinfo/modprobe: use ifdef block for android
@@ -149,5 +149,5 @@ index 235706fd5..4f4ee11e1 100644
  	if (opt & OPT_LIST_ONLY) {
  		int i;
 -- 
-2.31.1
+2.34.0
 

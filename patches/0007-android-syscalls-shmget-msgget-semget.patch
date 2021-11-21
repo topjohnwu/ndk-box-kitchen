@@ -1,4 +1,4 @@
-From aba6433a6a476ad96be92d7e7eb08b021a8eccd1 Mon Sep 17 00:00:00 2001
+From 45474be891c11d8e7268dafab8ecadfc935363a6 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:45:35 -0300
 Subject: [PATCH 07/34] android syscalls: shmget/msgget/semget
@@ -37,5 +37,5 @@ index dc40d9155..82b600ced 100644
  int tcdrain(int fd)
  {
 -- 
-2.31.1
+2.34.0
 

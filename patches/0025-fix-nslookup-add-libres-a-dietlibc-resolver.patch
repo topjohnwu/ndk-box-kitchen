@@ -1,4 +1,4 @@
-From b01c5bdfd1ca84e29e090d3a17b0417ca6647905 Mon Sep 17 00:00:00 2001
+From f8550e4cdcf8746a881c6a628d36aecbc2215ccd Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sat, 21 Jul 2018 20:02:13 -0300
 Subject: [PATCH 25/34] fix nslookup, add libres, a dietlibc resolver
@@ -1241,5 +1241,5 @@ index de7b5c0e7..1de598505 100644
  	/* (but it also says "may be enabled in /etc/resolv.conf") */
  	/*_res.options |= RES_USE_INET6;*/
 -- 
-2.31.1
+2.34.0
 

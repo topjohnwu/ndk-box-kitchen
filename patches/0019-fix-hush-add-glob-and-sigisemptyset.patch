@@ -1,4 +1,4 @@
-From 7d88a2c2f18de02a65bf041f86ac17055a7310b5 Mon Sep 17 00:00:00 2001
+From 3c79498fba088b680c8b6b994485142d775c1d83 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
 Subject: [PATCH 19/34] fix hush, add glob and sigisemptyset
@@ -963,5 +963,5 @@ index 000000000..82973138e
 +  return set;
 +}
 -- 
-2.31.1
+2.34.0
 

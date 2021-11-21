@@ -1,4 +1,4 @@
-From 6bcdc7ab3573411bad843820dd6e200edc594a98 Mon Sep 17 00:00:00 2001
+From 42db86fd1eff54005475fd5817f3a0f0873ae0f8 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
 Subject: [PATCH 04/34] fix udhcpd and nameif, add ether_ntoa_r and
@@ -249,5 +249,5 @@ index 91f70970a..732c0bcfa 100644
  #include "dhcpc.h"
  #include "dhcpd.h"
 -- 
-2.31.1
+2.34.0
 

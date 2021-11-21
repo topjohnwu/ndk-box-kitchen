@@ -1,4 +1,4 @@
-From e1fee59bd3f2dbb133662af39f9bf35e521d9e23 Mon Sep 17 00:00:00 2001
+From 09086b4a3bab1fe6b49c154852119597229d9b95 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 2 Dec 2015 23:44:06 -0400
 Subject: [PATCH 05/34] fix ether-wake, avoid ether_hostton and include
@@ -34,5 +34,5 @@ index 809c0d9f0..920f0c4a0 100644
  		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa_r(eaddr, ether_buf));
  #endif
 -- 
-2.31.1
+2.34.0
 

@@ -1,4 +1,4 @@
-From cc3c79f2693797e230a0cb72c5b2dac2ef9e3364 Mon Sep 17 00:00:00 2001
+From 712d39316387a83ec55eee65862f317f20842254 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 3 Jul 2017 03:17:06 -0300
 Subject: [PATCH 27/34] dietlibc/dnscruft: try to get dns server via command if
@@ -46,5 +46,5 @@ index 142ffecd1..7804765b9 100644
  
      if (parsesockaddr(propvalue,&_diet_res.nsaddr_list[_diet_res.nscount]))
 -- 
-2.31.1
+2.34.0
 
