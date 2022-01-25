@@ -1,7 +1,7 @@
-From c2aa69fe6b243b82fbd62b9a8616defe575f588d Mon Sep 17 00:00:00 2001
+From bf6a4c512499e7df05228a895690f599a0fd8f28 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 6 May 2021 16:30:26 -0300
-Subject: [PATCH 21/34] modinfo/modprobe: use ifdef block for android
+Subject: [PATCH 21/35] modinfo/modprobe: use ifdef block for android
  without-utsrel modules path
 
 and fixes the modules.dep requirement, it is now optional...
@@ -149,5 +149,5 @@ index 235706fd5..4f4ee11e1 100644
  	if (opt & OPT_LIST_ONLY) {
  		int i;
 -- 
-2.34.0
+2.34.1
 

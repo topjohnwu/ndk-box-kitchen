@@ -1,7 +1,7 @@
-From e18f59deb5ccfade1a8ccbce5a8e1f4585014ae6 Mon Sep 17 00:00:00 2001
+From 0da392210ffdf897f9dfbc7ca235b9d2784af466 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sat, 2 Oct 2021 01:11:12 -0300
-Subject: [PATCH 18/34] fix hush: add missing definitions on Android API 21+
+Subject: [PATCH 18/35] fix hush: add missing definitions on Android API 21+
 
 platform FAST_FUNC adjustment to support NDK unified headers by John Wu <topjohnwu@gmail.com>
 
@@ -70,5 +70,5 @@ index 7913353e2..b652a2112 100644
 +}
 +#endif
 -- 
-2.34.0
+2.34.1
 

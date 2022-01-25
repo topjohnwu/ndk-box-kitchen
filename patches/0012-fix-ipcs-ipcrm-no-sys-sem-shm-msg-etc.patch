@@ -1,7 +1,7 @@
-From cb0fb12b6eff24164ae8e45568325c24d94b1dc6 Mon Sep 17 00:00:00 2001
+From 8128d92f56396a819225d1d802956de29bc65bff Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Tue, 20 Mar 2012 21:26:07 +0000
-Subject: [PATCH 12/34] fix ipcs, ipcrm no sys/sem-shm-msg, etc
+Subject: [PATCH 12/35] fix ipcs, ipcrm no sys/sem-shm-msg, etc
 
 patch from 'no-sys-shm,msg,sem' by Dan Drown
 http://dan.drown.org/android/src/busybox/
@@ -41,5 +41,5 @@ index ef2529c05..3a08020e8 100644
  #else
  /* according to X/OPEN we have to define it ourselves */
 -- 
-2.34.0
+2.34.1
 
