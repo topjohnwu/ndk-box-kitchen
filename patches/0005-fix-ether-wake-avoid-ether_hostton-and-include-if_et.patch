@@ -34,5 +34,5 @@ index 809c0d9f0..920f0c4a0 100644
  		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa_r(eaddr, ether_buf));
  #endif
 -- 
-2.34.1
+2.35.0
 

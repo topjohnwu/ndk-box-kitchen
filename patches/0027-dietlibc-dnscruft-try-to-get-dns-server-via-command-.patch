@@ -46,5 +46,5 @@ index 142ffecd1..7804765b9 100644
  
      if (parsesockaddr(propvalue,&_diet_res.nsaddr_list[_diet_res.nscount]))
 -- 
-2.34.1
+2.35.0
 

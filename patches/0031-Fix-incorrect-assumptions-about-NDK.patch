@@ -1,12 +1,29 @@
-From 620384c45d6895e298d79104baf60fa6502047d2 Mon Sep 17 00:00:00 2001
+From df5152c19bb3dc6a827f1de25cb773ad381a2669 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 3 Apr 2020 02:09:55 -0700
-Subject: [PATCH 31/35] Remove unnecessary missing syscalls
+Subject: [PATCH 31/35] Fix incorrect assumptions about NDK
 
 ---
+ include/platform.h       |  4 +++-
  libbb/missing_syscalls.c | 15 ---------------
- 1 file changed, 15 deletions(-)
+ 2 files changed, 3 insertions(+), 16 deletions(-)
 
+diff --git a/include/platform.h b/include/platform.h
+index 8b7ed16e2..8eb5a69db 100644
+--- a/include/platform.h
++++ b/include/platform.h
+@@ -546,8 +546,10 @@ typedef unsigned smalluint;
+ # if __ANDROID_API__ >= 21
+ #  undef HAVE_WAIT3
+ # endif
++# if __ANDROID_API__ < 24
++#  undef HAVE_STRCHRNUL
++# endif
+ # undef HAVE_MEMPCPY
+-# undef HAVE_STRCHRNUL
+ # undef HAVE_STRVERSCMP
+ # undef HAVE_UNLOCKED_LINE_OPS
+ # undef HAVE_NET_ETHERNET_H
 diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
 index f02e8d14c..a6db67da9 100644
 --- a/libbb/missing_syscalls.c
@@ -34,5 +51,5 @@ index f02e8d14c..a6db67da9 100644
  int pivot_root(const char *new_root, const char *put_old)
  {
 -- 
-2.34.1
+2.35.0
 

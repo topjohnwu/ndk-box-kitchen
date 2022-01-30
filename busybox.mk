@@ -8,7 +8,7 @@ LOCAL_STATIC_LIBRARIES := libselinux
 LOCAL_DISABLE_FORMAT_STRING_CHECKS := true
 LOCAL_LDFLAGS := -static
 LOCAL_CFLAGS := \
--w -include include/autoconf.h -D__USE_BSD \
+-w -include include/autoconf.h -D__USE_BSD -D__USE_GNU \
 -DBB_VER=\"$(BB_VER)\" -DBB_BT=AUTOCONF_TIMESTAMP
 
 LOCAL_SRC_FILES := \
