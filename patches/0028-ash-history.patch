@@ -1,7 +1,7 @@
 From 207e3d751c707fca0401613112a30ba8a0ec6fbc Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 11 Aug 2021 23:54:04 -0300
-Subject: [PATCH 28/35] ash history
+Subject: [PATCH 28/36] ash history
 
 allows ash history to work on Android
 
@@ -103,5 +103,5 @@ index 53c140930..eded57508 100644
  			if (hp)
  				line_input_state->hist_file = xstrdup(hp);
 -- 
-2.35.0
+2.35.1
 

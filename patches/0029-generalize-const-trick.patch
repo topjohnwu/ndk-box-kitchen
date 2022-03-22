@@ -1,7 +1,7 @@
 From 9a6dc236900eb57c505888af6e4b974aaff30463 Mon Sep 17 00:00:00 2001
 From: YU Jincheng <shana@zju.edu.cn>
 Date: Wed, 29 Sep 2021 17:37:26 +0800
-Subject: [PATCH 29/35] generalize "const trick"
+Subject: [PATCH 29/36] generalize "const trick"
 
 While at it, change all "__asm__" to "asm"
 
@@ -218,5 +218,5 @@ index eded57508..9250b8f91 100644
  		varinit[i].flags    = varinit_data[i].flags; \
  		varinit[i].var_text = varinit_data[i].var_text; \
 -- 
-2.35.0
+2.35.1
 

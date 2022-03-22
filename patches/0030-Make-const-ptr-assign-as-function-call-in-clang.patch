@@ -1,7 +1,7 @@
 From 9aa7088ec54da743229cfd8868112838e2dcc4c3 Mon Sep 17 00:00:00 2001
 From: YU Jincheng <shana@zju.edu.cn>
 Date: Sun, 10 Oct 2021 02:19:51 +0800
-Subject: [PATCH 30/35] Make const ptr assign as function call in clang
+Subject: [PATCH 30/36] Make const ptr assign as function call in clang
 
 - This can act as memory barrier in clang to avoid
   read before assign of a const ptr
@@ -174,5 +174,5 @@ index 9250b8f91..150599f36 100644
  		varinit[i].flags    = varinit_data[i].flags; \
  		varinit[i].var_text = varinit_data[i].var_text; \
 -- 
-2.35.0
+2.35.1
 
