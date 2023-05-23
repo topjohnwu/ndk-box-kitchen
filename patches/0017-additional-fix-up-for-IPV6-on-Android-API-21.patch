@@ -1,7 +1,7 @@
-From 33f7280a5cd1ce160a2239be320601888292f95f Mon Sep 17 00:00:00 2001
+From 729225f1fc624a0cf773a4eb3107090ed9f75333 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 6 May 2021 16:09:06 -0300
-Subject: [PATCH 16/36] additional fix-up for IPV6 on Android API 21+
+Subject: [PATCH 17/34] additional fix-up for IPV6 on Android API 21+
 
 fixes: networking/interface.c:62:8: error: redefinition of 'struct in6_ifreq'
 
@@ -18,7 +18,7 @@ since sockaddr was moved from linux/socket.h to sys/socket.h in newer NDK revisi
  2 files changed, 3 insertions(+)
 
 diff --git a/networking/interface.c b/networking/interface.c
-index ea6a2c8a8..6f0716680 100644
+index 6b6c0944a..d5ca48dd9 100644
 --- a/networking/interface.c
 +++ b/networking/interface.c
 @@ -55,6 +55,7 @@
@@ -38,7 +38,7 @@ index ea6a2c8a8..6f0716680 100644
  #endif /* HAVE_AFINET6 */
  
 diff --git a/networking/route.c b/networking/route.c
-index 89617db9d..f20070889 100644
+index 7b5be0e73..637433bf8 100644
 --- a/networking/route.c
 +++ b/networking/route.c
 @@ -36,6 +36,7 @@
@@ -50,5 +50,5 @@ index 89617db9d..f20070889 100644
  #include <linux/ipv6_route.h>
  
 -- 
-2.35.1
+2.34.1
 

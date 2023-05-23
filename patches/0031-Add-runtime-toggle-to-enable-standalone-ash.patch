@@ -1,17 +1,17 @@
-From d4c52d4d0b13528849c1ac8231a9c2f1d7396ab2 Mon Sep 17 00:00:00 2001
+From 2648c15b53747345898affdaafe0d6ca6b2822e5 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 7 Feb 2020 14:32:06 -0800
-Subject: [PATCH 33/36] Add runtime toggle to enable standalone ash
+Subject: [PATCH 31/34] Add runtime toggle to enable standalone ash
 
 ---
  shell/ash.c | 42 ++++++++++++++++++++++++------------------
  1 file changed, 24 insertions(+), 18 deletions(-)
 
 diff --git a/shell/ash.c b/shell/ash.c
-index 150599f36..57a38f21a 100644
+index 5dd7f80f1..9ab1cb327 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
-@@ -274,16 +274,14 @@ typedef long arith_t;
+@@ -279,16 +279,14 @@ typedef long arith_t;
  #endif
  
  #include "NUM_APPLETS.h"
@@ -36,10 +36,10 @@ index 150599f36..57a38f21a 100644
  
  #ifndef F_DUPFD_CLOEXEC
  # define F_DUPFD_CLOEXEC F_DUPFD
-@@ -334,7 +332,9 @@ static const char *const optletters_optnames[] = {
- 	"a"   "allexport",
+@@ -344,7 +342,9 @@ static const char *const optletters_optnames[] ALIGN_PTR = {
  	"b"   "notify",
  	"u"   "nounset",
+ 	"E"   "errtrace",
 -	"\0"  "vi"
 +	"\0"  "vi",
 +/* Magisk: toggle whether use standalone shell mode */
@@ -47,26 +47,26 @@ index 150599f36..57a38f21a 100644
  #if BASH_PIPEFAIL
  	,"\0"  "pipefail"
  #endif
-@@ -429,14 +429,15 @@ struct globals_misc {
- #define bflag optlist[12]
+@@ -441,14 +441,15 @@ struct globals_misc {
  #define uflag optlist[13]
- #define viflag optlist[14]
-+#define saflag optlist[15]
+ #define Eflag optlist[14]
+ #define viflag optlist[15]
++#define saflag optlist[16]
  #if BASH_PIPEFAIL
--# define pipefail optlist[15]
-+# define pipefail optlist[16]
+-# define pipefail optlist[16]
++# define pipefail optlist[17]
  #else
  # define pipefail 0
  #endif
  #if DEBUG
--# define nolog optlist[15 + BASH_PIPEFAIL]
--# define debug optlist[16 + BASH_PIPEFAIL]
-+# define nolog optlist[16 + BASH_PIPEFAIL]
-+# define debug optlist[17 + BASH_PIPEFAIL]
+-# define nolog optlist[16 + BASH_PIPEFAIL]
+-# define debug optlist[17 + BASH_PIPEFAIL]
++# define nolog optlist[17 + BASH_PIPEFAIL]
++# define debug optlist[18 + BASH_PIPEFAIL]
  #endif
  
  	/* trap handler commands */
-@@ -8216,7 +8217,7 @@ static void
+@@ -8256,7 +8257,7 @@ static void
  tryexec(IF_FEATURE_SH_STANDALONE(int applet_no,) const char *cmd, char **argv, char **envp)
  {
  #if ENABLE_FEATURE_SH_STANDALONE
@@ -75,7 +75,7 @@ index 150599f36..57a38f21a 100644
  		if (APPLET_IS_NOEXEC(applet_no)) {
  			clearenv();
  			while (*envp)
-@@ -8285,7 +8286,7 @@ static void shellexec(char *prog, char **argv, const char *path, int idx)
+@@ -8325,7 +8326,7 @@ static void shellexec(char *prog, char **argv, const char *path, int idx)
  	envp = listvars(VEXPORT, VUNSET, /*strlist:*/ NULL, /*end:*/ NULL);
  	if (strchr(prog, '/') != NULL
  #if ENABLE_FEATURE_SH_STANDALONE
@@ -84,7 +84,7 @@ index 150599f36..57a38f21a 100644
  #endif
  	) {
  		tryexec(IF_FEATURE_SH_STANDALONE(applet_no,) prog, argv, envp);
-@@ -13715,7 +13716,7 @@ find_command(char *name, struct cmdentry *entry, int act, const char *path)
+@@ -13823,7 +13824,7 @@ find_command(char *name, struct cmdentry *entry, int act, const char *path)
  		goto fail;
  
  #if ENABLE_FEATURE_SH_STANDALONE
@@ -93,7 +93,7 @@ index 150599f36..57a38f21a 100644
  		int applet_no = find_applet_by_name(name);
  		if (applet_no >= 0) {
  			entry->cmdtype = CMDNORMAL;
-@@ -13937,7 +13938,7 @@ helpcmd(int argc UNUSED_PARAM, char **argv UNUSED_PARAM)
+@@ -14045,7 +14046,7 @@ helpcmd(int argc UNUSED_PARAM, char **argv UNUSED_PARAM)
  		}
  	}
  # if ENABLE_FEATURE_SH_STANDALONE
@@ -102,7 +102,7 @@ index 150599f36..57a38f21a 100644
  		const char *a = applet_names;
  		while (*a) {
  			col += out1fmt("%c%s", ((col == 0) ? '\t' : ' '), a);
-@@ -14598,6 +14599,11 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
+@@ -14709,6 +14710,11 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
  	trace_puts_args(argv);
  #endif
  
@@ -115,5 +115,5 @@ index 150599f36..57a38f21a 100644
  		const char *hp;
  
 -- 
-2.35.1
+2.34.1
 

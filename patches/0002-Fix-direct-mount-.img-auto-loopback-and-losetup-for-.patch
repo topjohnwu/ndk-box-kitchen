@@ -1,0 +1,36 @@
+From 7ac428e3a697781aecf00db66219f06643575d3e Mon Sep 17 00:00:00 2001
+From: Chris Renshaw <osm0sis@outlook.com>
+Date: Wed, 24 May 2023 14:15:00 -0300
+Subject: [PATCH 02/34] Fix direct mount .img (auto loopback) and losetup for
+ Android /dev/block/loop
+
+---
+ include/libbb.h | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/include/libbb.h b/include/libbb.h
+index cca33a177..87dd74e48 100644
+--- a/include/libbb.h
++++ b/include/libbb.h
+@@ -2390,9 +2390,15 @@ extern const char bb_default_login_shell[] ALIGN1;
+ # define VC_4 "/dev/tty4"
+ # define VC_5 "/dev/tty5"
+ # define VC_FORMAT "/dev/tty%d"
+-# define LOOP_FORMAT "/dev/loop%u"
+-# define LOOP_NAMESIZE (sizeof("/dev/loop") + sizeof(int)*3 + 1)
+-# define LOOP_NAME "/dev/loop"
++# if defined(__ANDROID__)
++#  define LOOP_FORMAT "/dev/block/loop%u"
++#  define LOOP_NAMESIZE (sizeof("/dev/block/loop") + sizeof(int)*3 + 1)
++#  define LOOP_NAME "/dev/block/loop"
++# else
++#  define LOOP_FORMAT "/dev/loop%u"
++#  define LOOP_NAMESIZE (sizeof("/dev/loop") + sizeof(int)*3 + 1)
++#  define LOOP_NAME "/dev/loop"
++# endif
+ # define FB_0 "/dev/fb0"
+ #endif
+ 
+-- 
+2.34.1
+

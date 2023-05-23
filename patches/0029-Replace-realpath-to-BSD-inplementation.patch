@@ -1,7 +1,7 @@
-From 250bb07b342e81239c71d5f787e82bb4f0b073b8 Mon Sep 17 00:00:00 2001
+From c931a69ce8fa327a94e7e29b0f126a0f2e9d24aa Mon Sep 17 00:00:00 2001
 From: LoveSy <shana@zju.edu.cn>
 Date: Sun, 20 Mar 2022 00:51:25 +0800
-Subject: [PATCH 31/36] Replace `realpath` to BSD inplementation
+Subject: [PATCH 29/34] Replace `realpath` to BSD inplementation
 
 ---
  libbb/Kbuild.src  |   1 +
@@ -10,10 +10,10 @@ Subject: [PATCH 31/36] Replace `realpath` to BSD inplementation
  create mode 100644 libbb/xrealpath.c
 
 diff --git a/libbb/Kbuild.src b/libbb/Kbuild.src
-index 5c75fc48c..88a302edb 100644
+index 33c33b6be..2093c2dff 100644
 --- a/libbb/Kbuild.src
 +++ b/libbb/Kbuild.src
-@@ -115,6 +115,7 @@ lib-y += xrealloc_vector.o
+@@ -120,6 +120,7 @@ lib-y += xrealloc_vector.o
  
  # for android-busybox-ndk
  lib-y += mntent_r.o
@@ -249,5 +249,5 @@ index 000000000..d4548859a
 +    return (resolved);
 +}
 -- 
-2.35.1
+2.34.1
 

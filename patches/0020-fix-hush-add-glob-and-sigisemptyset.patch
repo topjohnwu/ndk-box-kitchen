@@ -1,7 +1,7 @@
-From b0fa1f42f97cdfe4688d8f3a4936de7202cb0534 Mon Sep 17 00:00:00 2001
+From 68c77fe2a544cbdd29083ad46357e0f73f906d86 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
-Subject: [PATCH 19/36] fix hush, add glob and sigisemptyset
+Subject: [PATCH 20/34] fix hush, add glob and sigisemptyset
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'glob' by Dan Drown
 http://dan.drown.org/android/src/busybox/
@@ -928,7 +928,7 @@ index 000000000..e8e65786d
 +
 +#endif /* !_GLOB_H_ */
 diff --git a/shell/hush.c b/shell/hush.c
-index 27092c12f..c3e1321db 100644
+index d111f0cc5..af7f0d50c 100644
 --- a/shell/hush.c
 +++ b/shell/hush.c
 @@ -331,6 +331,7 @@
@@ -963,5 +963,5 @@ index 000000000..82973138e
 +  return set;
 +}
 -- 
-2.35.1
+2.34.1
 
