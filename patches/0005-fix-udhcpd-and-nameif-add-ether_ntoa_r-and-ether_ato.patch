@@ -1,7 +1,7 @@
-From 8fbbf922b761d901768bc752bf0f1b05283fd659 Mon Sep 17 00:00:00 2001
+From 093cfaff6563220c1e0bbbde9313933c5b2ee33f Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
-Subject: [PATCH 04/36] fix udhcpd and nameif, add ether_ntoa_r and
+Subject: [PATCH 05/34] fix udhcpd and nameif, add ether_ntoa_r and
  ether_aton_r from glibc
 
 this patch also fixes part of arping and ether-wake, but not sufficiently yet
@@ -24,7 +24,7 @@ Rebased for busybox 1.26.1 by Chris Renshaw <osm0sis@outlook.com>
  create mode 100644 networking/ether_port.h
 
 diff --git a/networking/arping.c b/networking/arping.c
-index d44d7d697..80e9571ec 100644
+index 86f0221ed..6a1b8bae1 100644
 --- a/networking/arping.c
 +++ b/networking/arping.c
 @@ -14,6 +14,7 @@
@@ -232,7 +232,7 @@ index fcb725fbc..2d5739c7e 100644
  lib-$(CONFIG_DHCPRELAY)  += dhcprelay.o common.o socket.o packet.o
  
 diff --git a/networking/udhcp/dhcpd.c b/networking/udhcp/dhcpd.c
-index 91f70970a..732c0bcfa 100644
+index 66750e2e6..aeebb12f3 100644
 --- a/networking/udhcp/dhcpd.c
 +++ b/networking/udhcp/dhcpd.c
 @@ -40,8 +40,12 @@
@@ -249,5 +249,5 @@ index 91f70970a..732c0bcfa 100644
  #include "dhcpc.h"
  #include "dhcpd.h"
 -- 
-2.35.1
+2.34.1
 

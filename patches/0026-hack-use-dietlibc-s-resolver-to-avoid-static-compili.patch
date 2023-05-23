@@ -1,7 +1,7 @@
-From d8270cbc21e248803c0479771986042c416a2c93 Mon Sep 17 00:00:00 2001
+From 32fe84da06c36c42cdd163b849f00c28a06f173d Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 30 Oct 2019 02:47:24 -0300
-Subject: [PATCH 26/36] hack: use dietlibc's resolver to avoid static
+Subject: [PATCH 26/34] hack: use dietlibc's resolver to avoid static
  compiliation issues with bionic's getaddrinfo() returning only null instead
  of opening the expected connection to /dev/socket/dnsproxyd
 
@@ -10,7 +10,7 @@ Subject: [PATCH 26/36] hack: use dietlibc's resolver to avoid static
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/libbb/xconnect.c b/libbb/xconnect.c
-index 5dd9cfd28..ecfcdaefa 100644
+index 0e0b247b8..2116c0b6f 100644
 --- a/libbb/xconnect.c
 +++ b/libbb/xconnect.c
 @@ -11,6 +11,8 @@
@@ -22,7 +22,7 @@ index 5dd9cfd28..ecfcdaefa 100644
  #if ENABLE_IFPLUGD || ENABLE_FEATURE_MDEV_DAEMON || ENABLE_UEVENT
  # include <linux/netlink.h>
  #endif
-@@ -285,7 +287,7 @@ IF_NOT_FEATURE_IPV6(sa_family_t af = AF_INET;)
+@@ -277,7 +279,7 @@ IF_NOT_FEATURE_IPV6(sa_family_t af = AF_INET;)
  	 * for each possible socket type (tcp,udp,raw...): */
  	hint.ai_socktype = SOCK_STREAM;
  	hint.ai_flags = ai_flags & ~DIE_ON_ERROR;
@@ -31,7 +31,7 @@ index 5dd9cfd28..ecfcdaefa 100644
  	if (rc || !result) {
  		bb_error_msg("bad address '%s'", org_host);
  		if (ai_flags & DIE_ON_ERROR)
-@@ -312,7 +314,7 @@ IF_NOT_FEATURE_IPV6(sa_family_t af = AF_INET;)
+@@ -304,7 +306,7 @@ IF_NOT_FEATURE_IPV6(sa_family_t af = AF_INET;)
  	set_nport(&r->u.sa, htons(port));
   ret:
  	if (result)
@@ -41,5 +41,5 @@ index 5dd9cfd28..ecfcdaefa 100644
  }
  #if !ENABLE_FEATURE_IPV6
 -- 
-2.35.1
+2.34.1
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BUSYBOX_TAG='1_34_1'
+BUSYBOX_TAG='1_36_1'
 
 progress() {
   echo -e "\n\033[44m${1}\033[0m\n"
@@ -18,7 +18,8 @@ parse_kbuild() {
       CONFIG=`echo ${LINE%+=*} | grep -o '$(.*)' | cut -d\( -f2 | cut -d\) -f1`
       if eval [ -z \"$CONFIG\" -o \"\$$CONFIG\" = \"1\" ]; then
         for FILE in `echo $FILE_LIST | grep -o '\S*\.o\b'`; do
-          readlink -f $DIR/$FILE | sed -e "s:${CWD}/::" -e 's/.o$/.c \\/g'
+          EXT=c; [ -f $(readlink -f $DIR/$FILE | sed 's/.o$/.S/g') ] && EXT=S
+          readlink -f $DIR/$FILE | sed -e "s:${CWD}/::" -e 's/.o$/.'"${EXT}"' \\/g'
         done
       fi
     done

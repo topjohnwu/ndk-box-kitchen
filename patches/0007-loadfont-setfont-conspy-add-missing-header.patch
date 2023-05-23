@@ -1,7 +1,7 @@
-From 40cd1220200b93f9db133d0cd68f1cd054c1473c Mon Sep 17 00:00:00 2001
+From a49c61220926ad1fcb938fe3db2fe341db3985ca Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 3 Dec 2015 01:29:35 -0400
-Subject: [PATCH 06/36] loadfont/setfont/conspy: add missing header
+Subject: [PATCH 07/34] loadfont/setfont/conspy: add missing header
 
 Imported from dorimanx's combined ported header toolchain:
 https://github.com/dorimanx/android-busybox-ndk
@@ -51,5 +51,5 @@ index 000000000..8b8e56d4d
 +
 +#endif	/* sys/kd.h */
 -- 
-2.35.1
+2.34.1
 

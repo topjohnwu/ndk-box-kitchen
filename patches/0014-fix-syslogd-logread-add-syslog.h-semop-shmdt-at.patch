@@ -1,7 +1,7 @@
-From bc154ac766f31b242e82cb6b9478abb024881e9c Mon Sep 17 00:00:00 2001
+From cadc8d649f4c6ba0af9121ddd888fc5b4ce7e0c3 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Tue, 20 Mar 2012 21:30:10 +0000
-Subject: [PATCH 13/36] fix syslogd, logread: add syslog.h, semop shmdt-at
+Subject: [PATCH 14/34] fix syslogd, logread: add syslog.h, semop shmdt-at
 
 patch from 'no-sys-shm,msg,sem' and 'sys-syslog' by Dan Drown
 "sys/syslog.h header for syslogd"
@@ -169,5 +169,5 @@ index 94d8273b6..9a768daa5 100644
  #if 0
  /* For the record: with SYSLOG_NAMES <syslog.h> defines
 -- 
-2.35.1
+2.34.1
 

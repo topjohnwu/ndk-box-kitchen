@@ -8,11 +8,11 @@ Clone the following repos:
 
 ```
 git clone https://git.busybox.net/busybox/
-git clone https://github.com/SELinuxProject/selinux.git jni/selinux
+git clone https://github.com/topjohnwu/selinux jni/selinux
 git clone https://android.googlesource.com/platform/external/pcre jni/pcre
 ```
 
-Currently, the script supports BusyBox version `1.34.1`, please checkout to the correct tags before running scripts
+Currently, the script supports BusyBox version `1.36.1`, please checkout to the correct tags before running scripts
 
 ## Busybox
 
