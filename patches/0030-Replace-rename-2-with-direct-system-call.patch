@@ -1,0 +1,53 @@
+From 58bbad659fe0a957023876c1a2a5c6259511d03c Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sat, 2 Sep 2023 05:21:13 -0700
+Subject: [PATCH 30/35] Replace rename(2) with direct system call
+
+NDK r26 introduced the following change:
+https://android-review.googlesource.com/c/platform/bionic/+/2240019
+
+renameat() was added to Linux in kernel 2.6.16
+renameat2() was added to Linux in kernel 3.15
+
+We would love to support kernel versions lower than 3.15
+---
+ libbb/wrap_funcs.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/libbb/wrap_funcs.c b/libbb/wrap_funcs.c
+index d4548859a..ce9c58968 100644
+--- a/libbb/wrap_funcs.c
++++ b/libbb/wrap_funcs.c
+@@ -28,11 +28,13 @@
+ 
+ #include <sys/param.h>
+ #include <sys/stat.h>
++#include <sys/syscall.h>
+ 
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <fcntl.h>
+ 
+ char * __wrap_realpath(const char * __restrict path, char * __restrict resolved)
+ {
+@@ -219,3 +221,15 @@ char * __wrap_realpath(const char * __restrict path, char * __restrict resolved)
+         resolved[resolved_len - 1] = '\0';
+     return (resolved);
+ }
++
++int __wrap_renameat(int old_dir_fd, const char *old_path, int new_dir_fd, const char *new_path) {
++    long out = syscall(__NR_renameat, old_dir_fd, old_path, new_dir_fd, new_path);
++    if (out == -1 && errno == ENOSYS) {
++        out = syscall(__NR_renameat2, old_dir_fd, old_path, new_dir_fd, new_path, 0);
++    }
++    return out;
++}
++
++int __wrap_rename(const char *old_path, const char *new_path) {
++    return __wrap_renameat(AT_FDCWD, old_path, AT_FDCWD, new_path);
++}
+-- 
+2.42.0
+

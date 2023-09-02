@@ -1,7 +1,7 @@
-From 3a7129680c8af82bd8df43389c0946d11fbe60fe Mon Sep 17 00:00:00 2001
+From 9f36b941ea4c5a8f30549cc429fcf12f4462676c Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:45:35 -0300
-Subject: [PATCH 08/34] android syscalls: shmget/msgget/semget
+Subject: [PATCH 08/35] android syscalls: shmget/msgget/semget
 
 Patch modified by Tias Guns <tias@ulyssis.org> from 'no-sys-shm,msg,sem' by Dan Drown
 http://dan.drown.org/android/src/busybox/
@@ -37,5 +37,5 @@ index dc40d9155..82b600ced 100644
  int tcdrain(int fd)
  {
 -- 
-2.34.1
+2.42.0
 

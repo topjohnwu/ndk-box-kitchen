@@ -1,7 +1,7 @@
-From 729225f1fc624a0cf773a4eb3107090ed9f75333 Mon Sep 17 00:00:00 2001
+From b8af7053e631227b9805266475933eb931854447 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 6 May 2021 16:09:06 -0300
-Subject: [PATCH 17/34] additional fix-up for IPV6 on Android API 21+
+Subject: [PATCH 17/35] additional fix-up for IPV6 on Android API 21+
 
 fixes: networking/interface.c:62:8: error: redefinition of 'struct in6_ifreq'
 
@@ -50,5 +50,5 @@ index 7b5be0e73..637433bf8 100644
  #include <linux/ipv6_route.h>
  
 -- 
-2.34.1
+2.42.0
 

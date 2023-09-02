@@ -1,7 +1,7 @@
-From 68c77fe2a544cbdd29083ad46357e0f73f906d86 Mon Sep 17 00:00:00 2001
+From 327c3525a9d3ae7c1f60345d713c0f8dc4411121 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:49:59 -0400
-Subject: [PATCH 20/34] fix hush, add glob and sigisemptyset
+Subject: [PATCH 20/35] fix hush, add glob and sigisemptyset
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'glob' by Dan Drown
 http://dan.drown.org/android/src/busybox/
@@ -950,18 +950,18 @@ index d111f0cc5..af7f0d50c 100644
  # include <fnmatch.h>
 diff --git a/shell/sigisemptyset.c b/shell/sigisemptyset.c
 new file mode 100644
-index 000000000..82973138e
+index 000000000..649b974c0
 --- /dev/null
 +++ b/shell/sigisemptyset.c
 @@ -0,0 +1,8 @@
-+// in androids asm/signal.h, sigset_t is a simple unsigned long
-+
 +#include <signal.h>
 +
 +int sigisemptyset(const sigset_t *set)
 +{
-+  return set;
++    sigset_t empty;
++    sigemptyset(&empty);
++    return memcmp(&empty, set, sizeof(sigset_t)) == 0;
 +}
 -- 
-2.34.1
+2.42.0
 

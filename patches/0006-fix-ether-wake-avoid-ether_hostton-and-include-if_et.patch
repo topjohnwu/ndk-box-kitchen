@@ -1,7 +1,7 @@
-From f6bdc7f3f8d8d1b964a50d4c3a8631e6ccaf9c8c Mon Sep 17 00:00:00 2001
+From fa9b786d8c34bcaf61a3dfdd20138c6172e02755 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 2 Dec 2015 23:44:06 -0400
-Subject: [PATCH 06/34] fix ether-wake, avoid ether_hostton and include
+Subject: [PATCH 06/35] fix ether-wake, avoid ether_hostton and include
  if_ether
 
 Patch by Tias Guns <tias@ulyssis.org>, based on 'no-ether_hostton' by Dan Drown
@@ -34,5 +34,5 @@ index 809c0d9f0..920f0c4a0 100644
  		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa_r(eaddr, ether_buf));
  #endif
 -- 
-2.34.1
+2.42.0
 

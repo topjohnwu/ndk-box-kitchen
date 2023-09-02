@@ -1,7 +1,7 @@
-From 96a4a2663497869af67a842b35fa97388068c36b Mon Sep 17 00:00:00 2001
+From 5db21f6b5607655a3eade845ae0ecb55a220640a Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 3 Apr 2020 02:09:55 -0700
-Subject: [PATCH 30/34] Fix incorrect assumptions about NDK
+Subject: [PATCH 31/35] Fix incorrect assumptions about NDK
 
 ---
  include/platform.h       |  4 +++-
@@ -51,5 +51,5 @@ index f02e8d14c..a6db67da9 100644
  int pivot_root(const char *new_root, const char *put_old)
  {
 -- 
-2.34.1
+2.42.0
 

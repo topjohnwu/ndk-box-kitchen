@@ -1,7 +1,7 @@
-From 089bbedd023b97c2e1f1d83520e39235d9aaa8e7 Mon Sep 17 00:00:00 2001
+From 8ba5becb43f65b01c1f4c3c858ea5557fadf057a Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 14:46:40 -0300
-Subject: [PATCH 09/34] android syscalls: msgctl shmctl
+Subject: [PATCH 09/35] android syscalls: msgctl shmctl
 
 Patch by Tias Guns <tias@ulyssis.org>
 Rebased for busybox 1.25.0 by Chris Renshaw <osm0sis@outlook.com>
@@ -34,5 +34,5 @@ index 82b600ced..018f72d62 100644
  int tcdrain(int fd)
  {
 -- 
-2.34.1
+2.42.0
 

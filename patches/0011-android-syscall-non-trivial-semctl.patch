@@ -1,7 +1,7 @@
-From 44d79b91948149d505320d0d3b08a51331924852 Mon Sep 17 00:00:00 2001
+From f8f14deeffacdb3d3e4df817b87ccb260e6b4c38 Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Sun, 5 Aug 2012 15:25:34 +0200
-Subject: [PATCH 11/34] android syscall (non-trivial): semctl
+Subject: [PATCH 11/35] android syscall (non-trivial): semctl
 
 needed by ipcs and ipcrm, also needed (but not sufficient) for syslogd and logread
 
@@ -80,5 +80,5 @@ index 000000000..2c600e4f0
 +  return syscall(__NR_semctl, semid, semnum, cmd, arg);
 +}
 -- 
-2.34.1
+2.42.0
 

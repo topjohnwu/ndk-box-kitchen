@@ -1,7 +1,7 @@
-From 093cfaff6563220c1e0bbbde9313933c5b2ee33f Mon Sep 17 00:00:00 2001
+From b454f643056e7b0e7799f202370e0a2ec3893665 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Tue, 10 Jan 2017 10:24:29 -0400
-Subject: [PATCH 05/34] fix udhcpd and nameif, add ether_ntoa_r and
+Subject: [PATCH 05/35] fix udhcpd and nameif, add ether_ntoa_r and
  ether_aton_r from glibc
 
 this patch also fixes part of arping and ether-wake, but not sufficiently yet
@@ -249,5 +249,5 @@ index 66750e2e6..aeebb12f3 100644
  #include "dhcpc.h"
  #include "dhcpd.h"
 -- 
-2.34.1
+2.42.0
 
