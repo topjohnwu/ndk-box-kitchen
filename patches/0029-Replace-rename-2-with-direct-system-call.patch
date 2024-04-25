@@ -1,7 +1,7 @@
-From 58bbad659fe0a957023876c1a2a5c6259511d03c Mon Sep 17 00:00:00 2001
+From 00fa13d7d9acfe4f99968ccfd8f6f43cfd49ad3a Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sat, 2 Sep 2023 05:21:13 -0700
-Subject: [PATCH 30/35] Replace rename(2) with direct system call
+Subject: [PATCH 29/35] Replace rename(2) with direct system call
 
 NDK r26 introduced the following change:
 https://android-review.googlesource.com/c/platform/bionic/+/2240019
@@ -15,7 +15,7 @@ We would love to support kernel versions lower than 3.15
  1 file changed, 14 insertions(+)
 
 diff --git a/libbb/wrap_funcs.c b/libbb/wrap_funcs.c
-index d4548859a..ce9c58968 100644
+index d4548859a..e6a13667f 100644
 --- a/libbb/wrap_funcs.c
 +++ b/libbb/wrap_funcs.c
 @@ -28,11 +28,13 @@
@@ -38,16 +38,16 @@ index d4548859a..ce9c58968 100644
  }
 +
 +int __wrap_renameat(int old_dir_fd, const char *old_path, int new_dir_fd, const char *new_path) {
-+    long out = syscall(__NR_renameat, old_dir_fd, old_path, new_dir_fd, new_path);
-+    if (out == -1 && errno == ENOSYS) {
-+        out = syscall(__NR_renameat2, old_dir_fd, old_path, new_dir_fd, new_path, 0);
-+    }
-+    return out;
++#ifdef __NR_renameat
++    return syscall(__NR_renameat, old_dir_fd, old_path, new_dir_fd, new_path);
++#else
++    return syscall(__NR_renameat2, old_dir_fd, old_path, new_dir_fd, new_path, 0);
++#endif
 +}
 +
 +int __wrap_rename(const char *old_path, const char *new_path) {
 +    return __wrap_renameat(AT_FDCWD, old_path, AT_FDCWD, new_path);
 +}
 -- 
-2.42.0
+2.44.0
 

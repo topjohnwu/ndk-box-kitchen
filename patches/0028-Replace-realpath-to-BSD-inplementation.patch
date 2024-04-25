@@ -1,7 +1,7 @@
-From 3d3ffb409a912a9dc8c9a47d47f36f2408ee0dfa Mon Sep 17 00:00:00 2001
+From e58c3ad5272ccb534848d33cbd02a38d6b4d523b Mon Sep 17 00:00:00 2001
 From: LoveSy <shana@zju.edu.cn>
 Date: Sun, 20 Mar 2022 00:51:25 +0800
-Subject: [PATCH 29/35] Replace `realpath` to BSD inplementation
+Subject: [PATCH 28/35] Replace `realpath` to BSD inplementation
 
 ---
  libbb/Kbuild.src   |   1 +
@@ -249,5 +249,5 @@ index 000000000..d4548859a
 +    return (resolved);
 +}
 -- 
-2.42.0
+2.44.0
 

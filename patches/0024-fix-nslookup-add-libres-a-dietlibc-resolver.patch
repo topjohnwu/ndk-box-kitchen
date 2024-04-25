@@ -1,7 +1,7 @@
-From f3182e2a7d143c0b0a30fb6b95b52e0cefff0a13 Mon Sep 17 00:00:00 2001
+From adb9e131ce65e966f95c5f682e8512b5f745683d Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sat, 21 Jul 2018 20:02:13 -0300
-Subject: [PATCH 25/35] fix nslookup, add libres, a dietlibc resolver
+Subject: [PATCH 24/35] fix nslookup, add libres, a dietlibc resolver
 
 Using bionic's resolver functions does not allow changing the dns
 server. Use dietlibc's resolver code instead (see package libres-devel)
@@ -1241,5 +1241,5 @@ index 6da97baf4..8c20d8364 100644
  	/* (but it also says "may be enabled in /etc/resolv.conf") */
  	/*_res.options |= RES_USE_INET6;*/
 -- 
-2.42.0
+2.44.0
 

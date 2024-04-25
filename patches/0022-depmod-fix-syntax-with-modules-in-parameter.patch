@@ -1,7 +1,7 @@
-From 1df531866c7ae9332d1be2c1bc045b9bd05ac041 Mon Sep 17 00:00:00 2001
+From c48e14ccd0add532a5b139c8b400fa283bd9bfb2 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Mon, 12 Sep 2016 16:55:01 -0300
-Subject: [PATCH 23/35] depmod: fix syntax with modules in parameter
+Subject: [PATCH 22/35] depmod: fix syntax with modules in parameter
 
 Patch by Tanguy Pruvot <tanguy.pruvot@gmail.com>
 Change-Id: I21b8664db01cf0132db82f8d6caa1a0e77e71004
@@ -28,5 +28,5 @@ index bb42bbefe..5e4c4c538 100644
  	for (ptr = image; ptr < image + len - 10; ptr++) {
  		if (is_prefixed_with(ptr, "depends=")) {
 -- 
-2.42.0
+2.44.0
 

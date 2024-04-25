@@ -1,7 +1,7 @@
-From fb51bf35aace4368762698f91ec98f08ff4e7641 Mon Sep 17 00:00:00 2001
+From d4d38041c251f53f728473d4f8f4720a5c85dc9c Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Sun, 18 Feb 2018 07:54:58 -0400
-Subject: [PATCH 15/35] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
+Subject: [PATCH 14/35] fix fsck.minix, mkfs.minix: undef HAVE_SETBIT,
  MINIX2_SUPER_MAGIC, MINIX2_SUPER_MAGIC
 
 "there is no setbit/clrbit in bionic"
@@ -43,5 +43,5 @@ index 83ffe6da5..91ced691c 100644
  	BLOCK_SIZE              = 1024,
  	BITS_PER_BLOCK          = BLOCK_SIZE << 3,
 -- 
-2.42.0
+2.44.0
 
