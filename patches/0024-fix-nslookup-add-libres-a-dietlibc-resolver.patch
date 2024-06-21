@@ -1241,5 +1241,5 @@ index 6da97baf4..8c20d8364 100644
  	/* (but it also says "may be enabled in /etc/resolv.conf") */
  	/*_res.options |= RES_USE_INET6;*/
 -- 
-2.44.0
+2.45.2
 

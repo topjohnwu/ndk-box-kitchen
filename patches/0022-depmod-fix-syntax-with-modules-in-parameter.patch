@@ -28,5 +28,5 @@ index bb42bbefe..5e4c4c538 100644
  	for (ptr = image; ptr < image + len - 10; ptr++) {
  		if (is_prefixed_with(ptr, "depends=")) {
 -- 
-2.44.0
+2.45.2
 

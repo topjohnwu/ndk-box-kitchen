@@ -32,5 +32,5 @@ index c0f1c538a..16c014384 100644
  static const char install_longopts[] ALIGN1 =
  	IF_FEATURE_VERBOSE(
 -- 
-2.44.0
+2.45.2
 

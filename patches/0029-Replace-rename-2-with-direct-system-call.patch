@@ -49,5 +49,5 @@ index d4548859a..e6a13667f 100644
 +    return __wrap_renameat(AT_FDCWD, old_path, AT_FDCWD, new_path);
 +}
 -- 
-2.44.0
+2.45.2
 
