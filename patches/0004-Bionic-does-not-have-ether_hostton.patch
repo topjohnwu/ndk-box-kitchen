@@ -1,0 +1,25 @@
+From 41a741b2213a0f127c239e163d1f8f894f5390f6 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sat, 13 Jul 2024 18:35:56 -0700
+Subject: [PATCH 04/17] Bionic does not have ether_hostton
+
+---
+ networking/ether-wake.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/networking/ether-wake.c b/networking/ether-wake.c
+index 36e90acfb..0bbf2057f 100644
+--- a/networking/ether-wake.c
++++ b/networking/ether-wake.c
+@@ -130,7 +130,7 @@ static void get_dest_addr(const char *hostid, struct ether_addr *eaddr)
+ 	eap = ether_aton_r(hostid, eaddr);
+ 	if (eap) {
+ 		bb_debug_msg("The target station address is %s\n\n", ether_ntoa(eap));
+-#if !defined(__UCLIBC__) || UCLIBC_VERSION >= KERNEL_VERSION(0, 9, 30)
++#if !defined(__BIONIC__) && (!defined(__UCLIBC__) || UCLIBC_VERSION >= KERNEL_VERSION(0, 9, 30))
+ 	} else if (ether_hostton(hostid, eaddr) == 0) {
+ 		bb_debug_msg("Station address for hostname %s is %s\n\n", hostid, ether_ntoa(eaddr));
+ #endif
+-- 
+2.45.2
+

@@ -1,0 +1,34 @@
+From f258400ac6119a369865606883245ecf176005ae Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sun, 14 Jul 2024 21:26:56 -0700
+Subject: [PATCH 07/17] Prevent compiling mtab related features
+
+---
+ util-linux/mount.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/util-linux/mount.c b/util-linux/mount.c
+index 4e65b6b46..08058db49 100644
+--- a/util-linux/mount.c
++++ b/util-linux/mount.c
+@@ -768,7 +768,8 @@ static int mount_it_now(struct mntent *mp, unsigned long vfsflags, char *filtero
+ 	// If the mount was successful, and we're maintaining an old-style
+ 	// mtab file by hand, add the new entry to it now.
+  mtab:
+-	if (USE_MTAB && !rc && !(vfsflags & MS_REMOUNT)) {
++ #if USE_MTAB
++	if (!rc && !(vfsflags & MS_REMOUNT)) {
+ 		char *fsname;
+ 		FILE *mountTable = setmntent(bb_path_mtab_file, "a+");
+ 		const char *option_str = mount_option_str;
+@@ -814,6 +815,7 @@ static int mount_it_now(struct mntent *mp, unsigned long vfsflags, char *filtero
+ 			free(fsname);
+ 		}
+ 	}
++#endif // USE_MTAB
+  ret:
+ 	return rc;
+ }
+-- 
+2.45.2
+

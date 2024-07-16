@@ -1,19 +1,14 @@
-From 4e1b8164fb241cba15f4a41871d44f1aecfa2c26 Mon Sep 17 00:00:00 2001
-From: Chris Renshaw <osm0sis@outlook.com>
-Date: Tue, 23 May 2023 18:30:43 -0300
-Subject: [PATCH 27/35] ash history
+From 7d82ae116d7c3a3aa6d9048574fdf0564d513378 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Mon, 15 Jul 2024 17:44:50 -0700
+Subject: [PATCH 11/17] Update shell paths to Android specific values
 
-allows ash history to work on Android
-
-Patch modified by Tias Guns <tias@ulyssis.org> from 'busybox-android.patch' by Alexandre Courbot
-https://github.com/Gnurou/busybox-android
-Rebased for busybox 1.36.1 by Chris Renshaw <osm0sis@outlook.com>
 ---
  include/libbb.h        | 4 ++--
  init/init.c            | 2 +-
  libbb/get_shell_name.c | 4 ++++
- shell/ash.c            | 8 ++++++--
- 4 files changed, 13 insertions(+), 5 deletions(-)
+ shell/ash.c            | 4 ++--
+ 4 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
 index 87dd74e48..112e45197 100644
@@ -63,7 +58,7 @@ index 5aebe9cdc..5af53bdda 100644
  	if (pw && pw->pw_shell && pw->pw_shell[0])
  		return pw->pw_shell;
 diff --git a/shell/ash.c b/shell/ash.c
-index 9344e4de1..5dd7f80f1 100644
+index 9344e4de1..19eed5451 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
 @@ -14537,7 +14537,7 @@ procargs(char **argv)
@@ -84,24 +79,6 @@ index 9344e4de1..5dd7f80f1 100644
   state1:
  		state = 2;
  		hp = lookupvar("HOME");
-@@ -14758,6 +14758,9 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
- 		if (line_input_state) {
- 			const char *hp = lookupvar("HISTFILE");
- 			if (!hp) {
-+#ifdef __ANDROID__
-+				setvar("HISTFILE", "/mnt/sdcard/ash_history", 0);
-+#else
- 				hp = lookupvar("HOME");
- 				if (hp) {
- 					INT_OFF;
-@@ -14767,6 +14770,7 @@ int ash_main(int argc UNUSED_PARAM, char **argv)
- 					INT_ON;
- 					hp = lookupvar("HISTFILE");
- 				}
-+#endif
- 			}
- 			if (hp)
- 				line_input_state->hist_file = xstrdup(hp);
 -- 
 2.45.2
 

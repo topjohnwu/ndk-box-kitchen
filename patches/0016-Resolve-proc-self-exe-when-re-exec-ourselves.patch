@@ -1,7 +1,7 @@
-From 4e6f42c344f6c0af35037cf78bc9431e64e0bad7 Mon Sep 17 00:00:00 2001
+From 9e08908e035682a76ca93410bbd651a0407cddc4 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Thu, 25 Jun 2020 03:54:53 -0700
-Subject: [PATCH 32/35] Resolve /proc/self/exe when re-exec ourselves
+Subject: [PATCH 16/17] Resolve /proc/self/exe when re-exec ourselves
 
 Use resolved path of /proc/self/exe to workaround Samsung kernel
 blocking executables running as UID=0 in paths such as /proc.
@@ -10,7 +10,7 @@ blocking executables running as UID=0 in paths such as /proc.
  1 file changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/shell/ash.c b/shell/ash.c
-index 9ab1cb327..11c9cb4cc 100644
+index 34a540049..4dae9a474 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
 @@ -8252,6 +8252,7 @@ static struct tblentry **cmdtable;

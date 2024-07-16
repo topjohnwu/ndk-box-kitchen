@@ -1,26 +1,28 @@
-From e58c3ad5272ccb534848d33cbd02a38d6b4d523b Mon Sep 17 00:00:00 2001
+From 919bf6bfbe8b8a26ad3fc80d53aa5f2221aff1ed Mon Sep 17 00:00:00 2001
 From: LoveSy <shana@zju.edu.cn>
 Date: Sun, 20 Mar 2022 00:51:25 +0800
-Subject: [PATCH 28/35] Replace `realpath` to BSD inplementation
+Subject: [PATCH 13/17] Replace `realpath` to BSD inplementation
 
 ---
- libbb/Kbuild.src   |   1 +
+ libbb/Kbuild.src   |   3 +
  libbb/wrap_funcs.c | 221 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 222 insertions(+)
+ 2 files changed, 224 insertions(+)
  create mode 100644 libbb/wrap_funcs.c
 
 diff --git a/libbb/Kbuild.src b/libbb/Kbuild.src
-index 33c33b6be..390b1eb10 100644
+index 653025e56..4ac314bdb 100644
 --- a/libbb/Kbuild.src
 +++ b/libbb/Kbuild.src
-@@ -120,6 +120,7 @@ lib-y += xrealloc_vector.o
+@@ -118,6 +118,9 @@ lib-y += xgethostbyname.o
+ lib-y += xreadlink.o
+ lib-y += xrealloc_vector.o
  
- # for android-busybox-ndk
- lib-y += mntent_r.o
++# for android-busybox-ndk
 +lib-y += wrap_funcs.o
- 
++
  lib-$(CONFIG_MOUNT) += match_fstype.o
  lib-$(CONFIG_UMOUNT) += match_fstype.o
+ 
 diff --git a/libbb/wrap_funcs.c b/libbb/wrap_funcs.c
 new file mode 100644
 index 000000000..d4548859a

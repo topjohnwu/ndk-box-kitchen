@@ -1,0 +1,106 @@
+From 4d264bc921b1a74381d356167b4c15673c819456 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sat, 13 Jul 2024 18:26:16 -0700
+Subject: [PATCH 01/17] Fix incorrect assumptions about NDK
+
+---
+ include/platform.h       |  5 ++++-
+ libbb/missing_syscalls.c | 22 ----------------------
+ miscutils/adjtimex.c     |  6 +-----
+ util-linux/swaponoff.c   |  4 +---
+ 4 files changed, 6 insertions(+), 31 deletions(-)
+
+diff --git a/include/platform.h b/include/platform.h
+index ea0512f36..e5bb07799 100644
+--- a/include/platform.h
++++ b/include/platform.h
+@@ -545,12 +545,15 @@ typedef unsigned smalluint;
+ # if __ANDROID_API__ >= 21
+ #  undef HAVE_WAIT3
+ # endif
++# if __ANDROID_API__ < 24
++#  undef HAVE_STRCHRNUL
++# endif
+ # undef HAVE_MEMPCPY
+-# undef HAVE_STRCHRNUL
+ # undef HAVE_STRVERSCMP
+ # undef HAVE_UNLOCKED_LINE_OPS
+ # undef HAVE_NET_ETHERNET_H
+ # undef HAVE_PRINTF_PERCENTM
++# undef HAVE_SETBIT
+ #endif
+ 
+ /*
+diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
+index dc40d9155..92b44b388 100644
+--- a/libbb/missing_syscalls.c
++++ b/libbb/missing_syscalls.c
+@@ -8,33 +8,11 @@
+ #include "libbb.h"
+ 
+ #if defined(ANDROID) || defined(__ANDROID__)
+-/*# include <linux/timex.h> - for struct timex, but may collide with <time.h> */
+ # include <sys/syscall.h>
+-pid_t getsid(pid_t pid)
+-{
+-	return syscall(__NR_getsid, pid);
+-}
+-
+-int sethostname(const char *name, size_t len)
+-{
+-	return syscall(__NR_sethostname, name, len);
+-}
+-
+-struct timex;
+-int adjtimex(struct timex *buf)
+-{
+-	return syscall(__NR_adjtimex, buf);
+-}
+ 
+ int pivot_root(const char *new_root, const char *put_old)
+ {
+ 	return syscall(__NR_pivot_root, new_root, put_old);
+ }
+ 
+-# if __ANDROID_API__ < 21
+-int tcdrain(int fd)
+-{
+-	return ioctl(fd, TCSBRK, 1);
+-}
+-# endif
+ #endif
+diff --git a/miscutils/adjtimex.c b/miscutils/adjtimex.c
+index 209d1d560..06ee8e903 100644
+--- a/miscutils/adjtimex.c
++++ b/miscutils/adjtimex.c
+@@ -33,11 +33,7 @@
+ //usage:     "\n	-p TCONST"
+ 
+ #include "libbb.h"
+-#ifdef __BIONIC__
+-# include <linux/timex.h>
+-#else
+-# include <sys/timex.h>
+-#endif
++#include <sys/timex.h>
+ 
+ static const uint16_t statlist_bit[] ALIGN2 = {
+ 	STA_PLL,
+diff --git a/util-linux/swaponoff.c b/util-linux/swaponoff.c
+index e2ff4b5cc..67c384db6 100644
+--- a/util-linux/swaponoff.c
++++ b/util-linux/swaponoff.c
+@@ -75,9 +75,7 @@
+ #include "libbb.h"
+ #include "common_bufsiz.h"
+ #include <mntent.h>
+-#ifndef __BIONIC__
+-# include <sys/swap.h>
+-#endif
++#include <sys/swap.h>
+ 
+ #if ENABLE_FEATURE_SWAPONOFF_LABEL
+ # include "volume_id.h"
+-- 
+2.45.2
+

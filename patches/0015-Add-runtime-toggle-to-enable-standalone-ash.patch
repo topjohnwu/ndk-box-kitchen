@@ -1,14 +1,14 @@
-From c7e6de2748301c1420e8b39d1e438874e52da4ff Mon Sep 17 00:00:00 2001
+From 0cc05e531c03124e9611f411b97fb32b90a8d229 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 7 Feb 2020 14:32:06 -0800
-Subject: [PATCH 31/35] Add runtime toggle to enable standalone ash
+Subject: [PATCH 15/17] Add runtime toggle to enable standalone ash
 
 ---
  shell/ash.c | 42 ++++++++++++++++++++++++------------------
  1 file changed, 24 insertions(+), 18 deletions(-)
 
 diff --git a/shell/ash.c b/shell/ash.c
-index 5dd7f80f1..9ab1cb327 100644
+index 19eed5451..34a540049 100644
 --- a/shell/ash.c
 +++ b/shell/ash.c
 @@ -279,16 +279,14 @@ typedef long arith_t;

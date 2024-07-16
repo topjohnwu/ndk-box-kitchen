@@ -1,0 +1,45 @@
+From 79bdb8978e9ffcfc4799ed00206602d5e57b5844 Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Sun, 14 Jul 2024 16:54:36 -0700
+Subject: [PATCH 05/17] Prevent duplicate in6_ifreq definition
+
+---
+ networking/ifconfig.c  | 8 --------
+ networking/interface.c | 2 +-
+ 2 files changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/networking/ifconfig.c b/networking/ifconfig.c
+index 9ee232a66..06898b6d2 100644
+--- a/networking/ifconfig.c
++++ b/networking/ifconfig.c
+@@ -127,14 +127,6 @@
+ # define IFF_DYNAMIC     0x8000	/* dialup device with changing addresses */
+ #endif
+ 
+-#if ENABLE_FEATURE_IPV6
+-struct in6_ifreq {
+-	struct in6_addr ifr6_addr;
+-	uint32_t ifr6_prefixlen;
+-	int ifr6_ifindex;
+-};
+-#endif
+-
+ /*
+  * Here are the bit masks for the "flags" member of struct options below.
+  * N_ signifies no arg prefix; M_ signifies arg prefixed by '-'.
+diff --git a/networking/interface.c b/networking/interface.c
+index 6b6c0944a..cf48733da 100644
+--- a/networking/interface.c
++++ b/networking/interface.c
+@@ -54,7 +54,7 @@
+ #define _PATH_PROCNET_IFINET6           "/proc/net/if_inet6"
+ 
+ #ifdef HAVE_AFINET6
+-# ifndef _LINUX_IN6_H
++# ifndef _UAPI_IPV6_H
+ /*
+  * This is from linux/include/net/ipv6.h
+  */
+-- 
+2.45.2
+

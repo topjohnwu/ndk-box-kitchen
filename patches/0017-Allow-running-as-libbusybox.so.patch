@@ -1,7 +1,7 @@
-From 6af96c729231f9266d83e9f06612e150556f1813 Mon Sep 17 00:00:00 2001
+From 0efb2683727f165c1e729db9c2c01a341f038c31 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Thu, 21 Jan 2021 00:07:41 -0800
-Subject: [PATCH 34/35] Allow running as libbusybox.so
+Subject: [PATCH 17/17] Allow running as libbusybox.so
 
 ---
  libbb/appletlib.c | 5 ++++-
