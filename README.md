@@ -8,7 +8,7 @@ Clone the following repos:
 
 ```
 git clone https://git.busybox.net/busybox/
-git clone https://github.com/topjohnwu/selinux jni/selinux
+git clone https://android.googlesource.com/platform/external/selinux jni/selinux
 git clone https://android.googlesource.com/platform/external/pcre jni/pcre
 ```
 
@@ -22,4 +22,4 @@ Currently, the script supports BusyBox version `1.36.1`, please checkout to the 
 
 ## Credits
 
-Most files in `patches` are copied/modified from [osm0sis/android-busybox-ndk](https://github.com/osm0sis/android-busybox-ndk). Theses patches are required for a fully functioning BusyBox building with NDK + Bionic libc.
+Some files in `patches` are modified from [osm0sis/android-busybox-ndk](https://github.com/osm0sis/android-busybox-ndk).

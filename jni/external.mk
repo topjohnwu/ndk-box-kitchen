@@ -1,13 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 
-SE_PATH := $(LOCAL_PATH)/selinux
-
 # libselinux.a
 include $(CLEAR_VARS)
-LIBSELINUX := $(SE_PATH)/libselinux/include
 LOCAL_MODULE:= libselinux
-LOCAL_C_INCLUDES := $(LIBSELINUX)
-LOCAL_EXPORT_C_INCLUDES := $(LIBSELINUX)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/selinux/libselinux/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 LOCAL_STATIC_LIBRARIES := libpcre2
 LOCAL_CFLAGS := \
     -Wno-implicit-function-declaration -Wno-int-conversion -Wno-unused-function \
@@ -76,13 +73,13 @@ include $(BUILD_STATIC_LIBRARY)
 
 # libpcre2.a
 include $(CLEAR_VARS)
-LIBPCRE2 := $(LOCAL_PATH)/pcre/include
 LOCAL_MODULE:= libpcre2
 LOCAL_CFLAGS := -DHAVE_CONFIG_H -DPCRE2_CODE_UNIT_WIDTH=8
-LOCAL_C_INCLUDES := $(LIBPCRE2) $(LIBPCRE2)_internal
-LOCAL_EXPORT_C_INCLUDES := $(LIBPCRE2)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/pcre/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 LOCAL_SRC_FILES := \
     pcre/src/pcre2_auto_possess.c \
+    pcre/src/pcre2_chkdint.c \
     pcre/src/pcre2_compile.c \
     pcre/src/pcre2_config.c \
     pcre/src/pcre2_context.c \
@@ -91,11 +88,10 @@ LOCAL_SRC_FILES := \
     pcre/src/pcre2_error.c \
     pcre/src/pcre2_extuni.c \
     pcre/src/pcre2_find_bracket.c \
-    pcre/src/pcre2_fuzzsupport.c \
+    pcre/src/pcre2_jit_compile.c \
     pcre/src/pcre2_maketables.c \
     pcre/src/pcre2_match.c \
     pcre/src/pcre2_match_data.c \
-    pcre/src/pcre2_jit_compile.c \
     pcre/src/pcre2_newline.c \
     pcre/src/pcre2_ord2utf.c \
     pcre/src/pcre2_pattern_info.c \
