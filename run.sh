@@ -74,8 +74,18 @@ create_patches() {
   mv ../patches.new ../patches
 }
 
+archive_exe() {
+  cd ../
+  for f in libs/*/busybox; do
+    [ ! -f "$f" ] && break
+    mv -v $f $(dirname $f)/libbusybox.so
+  done
+  cd libs
+  zip ../busybox.zip -r .
+}
+
 if [ ! -d busybox ]; then
-  progress "Please clone busybox, checkout to desired tag, apply patches, then run this script"
+  progress "Please clone busybox, checkout to desired tag, then run this script"
   exit 1
 fi
 
@@ -95,6 +105,9 @@ case "$1" in
   create )
     create_patches
     ;;
+  archive )
+    archive_exe
+    ;;
   * )
     echo "Usage:"
     echo "$0 patch"
@@ -105,7 +118,7 @@ case "$1" in
     echo "   Generate configs and makefiles"
     echo "$0 commit"
     echo "   Commit generated configs and makefiles"
+    echo "$0 archive"
+    echo "   Archive artifacts in libs into busybox.zip"
     ;;
 esac
-
-cd ..
