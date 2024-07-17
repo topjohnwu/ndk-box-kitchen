@@ -1,7 +1,7 @@
-From 9e08908e035682a76ca93410bbd651a0407cddc4 Mon Sep 17 00:00:00 2001
+From 86557f542be8f62b583717ae22cf10a4bbbe78f9 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Thu, 25 Jun 2020 03:54:53 -0700
-Subject: [PATCH 16/17] Resolve /proc/self/exe when re-exec ourselves
+Subject: [PATCH 16/18] Resolve /proc/self/exe when re-exec ourselves
 
 Use resolved path of /proc/self/exe to workaround Samsung kernel
 blocking executables running as UID=0 in paths such as /proc.

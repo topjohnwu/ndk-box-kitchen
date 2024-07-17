@@ -1,7 +1,7 @@
-From 8c3bb497fbc8b780c8f6b163882f9b3e636b84ae Mon Sep 17 00:00:00 2001
+From 6e402158a42bab0f1f45053d356beb8ec8d8e615 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sat, 2 Sep 2023 05:21:13 -0700
-Subject: [PATCH 14/17] Replace rename(2) with direct system call
+Subject: [PATCH 14/18] Replace rename(2) with direct system call
 
 NDK r26 introduced the following change:
 https://android-review.googlesource.com/c/platform/bionic/+/2240019

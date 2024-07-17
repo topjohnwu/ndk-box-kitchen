@@ -1,7 +1,7 @@
 From 7d82ae116d7c3a3aa6d9048574fdf0564d513378 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Mon, 15 Jul 2024 17:44:50 -0700
-Subject: [PATCH 11/17] Update shell paths to Android specific values
+Subject: [PATCH 11/18] Update shell paths to Android specific values
 
 ---
  include/libbb.h        | 4 ++--

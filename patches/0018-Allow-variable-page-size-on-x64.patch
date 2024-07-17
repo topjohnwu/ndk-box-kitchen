@@ -1,0 +1,25 @@
+From 091ecfecb34cbc0724dedf07accc7d16880f69ca Mon Sep 17 00:00:00 2001
+From: topjohnwu <topjohnwu@gmail.com>
+Date: Fri, 21 Jun 2024 03:09:47 -0700
+Subject: [PATCH 18/18] Allow variable page size on x64
+
+---
+ include/libbb.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/libbb.h b/include/libbb.h
+index 112e45197..401a8ec9a 100644
+--- a/include/libbb.h
++++ b/include/libbb.h
+@@ -435,7 +435,7 @@ void *mmap_read(int fd, size_t size) FAST_FUNC;
+ void *mmap_anon(size_t size) FAST_FUNC;
+ void *xmmap_anon(size_t size) FAST_FUNC;
+ 
+-#if defined(__x86_64__) || defined(i386)
++#if defined(i386)      /* only 32bit, x64 has emulated variable page size */
+ # define BB_ARCH_FIXED_PAGESIZE 4096
+ #elif defined(__arm__) /* only 32bit, 64bit ARM has variable page size */
+ # define BB_ARCH_FIXED_PAGESIZE 4096
+-- 
+2.45.2
+
