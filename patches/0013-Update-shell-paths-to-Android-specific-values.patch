@@ -1,7 +1,7 @@
-From 7d82ae116d7c3a3aa6d9048574fdf0564d513378 Mon Sep 17 00:00:00 2001
+From b3f7ddd0ca5a8234204cd6171f04225954684c57 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Mon, 15 Jul 2024 17:44:50 -0700
-Subject: [PATCH 11/18] Update shell paths to Android specific values
+Subject: [PATCH 13/18] Update shell paths to Android specific values
 
 ---
  include/libbb.h        | 4 ++--
@@ -11,10 +11,10 @@ Subject: [PATCH 11/18] Update shell paths to Android specific values
  4 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index 87dd74e48..112e45197 100644
+index cae6bfb6c..2f5f61d9e 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -2341,12 +2341,12 @@ void XZALLOC_CONST_PTR(const void *pptr, size_t size) FAST_FUNC;
+@@ -2343,12 +2343,12 @@ void XZALLOC_CONST_PTR(const void *pptr, size_t size) FAST_FUNC;
   * use bb_default_login_shell and following defines.
   * If you change LIBBB_DEFAULT_LOGIN_SHELL,
   * don't forget to change increment constant. */
@@ -80,5 +80,5 @@ index 9344e4de1..19eed5451 100644
  		state = 2;
  		hp = lookupvar("HOME");
 -- 
-2.45.2
+2.46.0
 

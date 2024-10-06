@@ -1,4 +1,4 @@
-From 86557f542be8f62b583717ae22cf10a4bbbe78f9 Mon Sep 17 00:00:00 2001
+From 7eb613f2e12cc47cd8614ad914821bde2b8f8631 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Thu, 25 Jun 2020 03:54:53 -0700
 Subject: [PATCH 16/18] Resolve /proc/self/exe when re-exec ourselves
@@ -62,5 +62,5 @@ index 34a540049..4dae9a474 100644
  	if (argc < 0)
  		/* Non-NULL minusc tells procargs that an embedded script is being run */
 -- 
-2.45.2
+2.46.0
 

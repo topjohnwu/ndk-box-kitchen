@@ -1,4 +1,4 @@
-From 9cf0fa6cd156d864a738c21d34ee273392c56dfc Mon Sep 17 00:00:00 2001
+From c3ef5bfe51715fb2ae7bae2ce90074d5c94b363b Mon Sep 17 00:00:00 2001
 From: Tias Guns <tias@ulyssis.org>
 Date: Tue, 20 Mar 2012 21:26:07 +0000
 Subject: [PATCH 03/18] fix ipcs, ipcrm no sys/sem-shm-msg, etc
@@ -41,5 +41,5 @@ index 5973cbf57..2e43b7758 100644
  #else
  /* according to X/OPEN we have to define it ourselves */
 -- 
-2.45.2
+2.46.0
 

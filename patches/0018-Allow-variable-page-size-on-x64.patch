@@ -1,4 +1,4 @@
-From 091ecfecb34cbc0724dedf07accc7d16880f69ca Mon Sep 17 00:00:00 2001
+From 2cda0b629f8d083f2ea2346d5f452b4d1ba45dfd Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Fri, 21 Jun 2024 03:09:47 -0700
 Subject: [PATCH 18/18] Allow variable page size on x64
@@ -8,7 +8,7 @@ Subject: [PATCH 18/18] Allow variable page size on x64
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index 112e45197..401a8ec9a 100644
+index 2f5f61d9e..68a78e2c3 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
 @@ -435,7 +435,7 @@ void *mmap_read(int fd, size_t size) FAST_FUNC;
@@ -21,5 +21,5 @@ index 112e45197..401a8ec9a 100644
  #elif defined(__arm__) /* only 32bit, 64bit ARM has variable page size */
  # define BB_ARCH_FIXED_PAGESIZE 4096
 -- 
-2.45.2
+2.46.0
 

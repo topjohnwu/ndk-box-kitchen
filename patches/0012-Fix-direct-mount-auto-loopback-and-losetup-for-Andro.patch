@@ -1,17 +1,17 @@
-From 9cb8d202d99a8126413283d50dbe83e457387689 Mon Sep 17 00:00:00 2001
+From ee26ea829b0c9e8d3c79d0264f0fb6b47882cbe2 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Wed, 24 May 2023 14:15:00 -0300
-Subject: [PATCH 10/18] Fix direct mount auto loopback and losetup for Android
+Subject: [PATCH 12/18] Fix direct mount auto loopback and losetup for Android
 
 ---
  include/libbb.h | 12 +++++++++---
  1 file changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/include/libbb.h b/include/libbb.h
-index cca33a177..87dd74e48 100644
+index 6a7f4fc11..cae6bfb6c 100644
 --- a/include/libbb.h
 +++ b/include/libbb.h
-@@ -2390,9 +2390,15 @@ extern const char bb_default_login_shell[] ALIGN1;
+@@ -2392,9 +2392,15 @@ extern const char bb_default_login_shell[] ALIGN1;
  # define VC_4 "/dev/tty4"
  # define VC_5 "/dev/tty5"
  # define VC_FORMAT "/dev/tty%d"
@@ -31,5 +31,5 @@ index cca33a177..87dd74e48 100644
  #endif
  
 -- 
-2.45.2
+2.46.0
 

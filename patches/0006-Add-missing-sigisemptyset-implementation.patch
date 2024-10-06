@@ -1,4 +1,4 @@
-From 1b95c833d8cda62bf79f0ec8da7cca8f3ea1e4d8 Mon Sep 17 00:00:00 2001
+From 2b383c89a8021b6ff0983f706e54e0ff7de4c803 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sun, 14 Jul 2024 16:55:01 -0700
 Subject: [PATCH 06/18] Add missing sigisemptyset implementation
@@ -28,5 +28,5 @@ index d111f0cc5..5fbceaae3 100644
  {
  	sigaddset(&G.pending_set, sig);
 -- 
-2.45.2
+2.46.0
 

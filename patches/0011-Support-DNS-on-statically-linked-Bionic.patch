@@ -1,19 +1,22 @@
-From 2eb6acaf13508003e26d51cbce7bc42b49634e3c Mon Sep 17 00:00:00 2001
+From 047d382f9fa49119cd1d901b8515e14939763f49 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Mon, 15 Jul 2024 17:20:17 -0700
-Subject: [PATCH 09/18] Use bionic libresolv for nslookup
+Subject: [PATCH 11/18] Support DNS on statically linked Bionic
 
 ---
- networking/bionic_resolv.h | 112 +++++++++++++++++++++++++++++++++++++
- networking/nslookup.c      |  27 ++++-----
- 2 files changed, 124 insertions(+), 15 deletions(-)
- create mode 100644 networking/bionic_resolv.h
+ include/bionic_resolv.h | 112 ++++++++++++++++++++++++++++++++++++++++
+ include/libbb.h         |   2 +
+ libbb/wrap_funcs.c      |  11 ++++
+ libbb/xconnect.c        |  37 +++++++++++++
+ networking/nslookup.c   |  29 +++++------
+ 5 files changed, 176 insertions(+), 15 deletions(-)
+ create mode 100644 include/bionic_resolv.h
 
-diff --git a/networking/bionic_resolv.h b/networking/bionic_resolv.h
+diff --git a/include/bionic_resolv.h b/include/bionic_resolv.h
 new file mode 100644
 index 000000000..a15cb587b
 --- /dev/null
-+++ b/networking/bionic_resolv.h
++++ b/include/bionic_resolv.h
 @@ -0,0 +1,112 @@
 +#pragma once
 +
@@ -127,8 +130,99 @@ index 000000000..a15cb587b
 +
 +extern struct __res_state *__res_get_state(void);
 +#define _res (*__res_get_state())
+diff --git a/include/libbb.h b/include/libbb.h
+index cca33a177..6a7f4fc11 100644
+--- a/include/libbb.h
++++ b/include/libbb.h
+@@ -831,6 +831,8 @@ char* xmalloc_sockaddr2dotted_noport(const struct sockaddr *sa) FAST_FUNC RETURN
+ struct hostent *xgethostbyname(const char *name) FAST_FUNC;
+ // Also mount.c and inetd.c are using gethostbyname(),
+ // + inet_common.c has additional IPv4-only stuff
++/* Set the dns server in the global _res nameserver structure */
++void set_default_dns(const char *server);
+ 
+ 
+ struct tls_aes {
+diff --git a/libbb/wrap_funcs.c b/libbb/wrap_funcs.c
+index e6a13667f..24b7e7f23 100644
+--- a/libbb/wrap_funcs.c
++++ b/libbb/wrap_funcs.c
+@@ -36,6 +36,9 @@
+ #include <unistd.h>
+ #include <fcntl.h>
+ 
++#include "libbb.h"
++#include "bionic_resolv.h"
++
+ char * __wrap_realpath(const char * __restrict path, char * __restrict resolved)
+ {
+     struct stat sb;
+@@ -233,3 +236,11 @@ int __wrap_renameat(int old_dir_fd, const char *old_path, int new_dir_fd, const
+ int __wrap_rename(const char *old_path, const char *new_path) {
+     return __wrap_renameat(AT_FDCWD, old_path, AT_FDCWD, new_path);
+ }
++
++extern typeof(getaddrinfo) __real_getaddrinfo;
++
++int __wrap_getaddrinfo(const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res) {
++    // Statically linked bionic does not have a global DNS, need to set it
++    set_default_dns(NULL);
++    return __real_getaddrinfo(node, service, hints, res);
++}
+diff --git a/libbb/xconnect.c b/libbb/xconnect.c
+index 0e0b247b8..d444fa577 100644
+--- a/libbb/xconnect.c
++++ b/libbb/xconnect.c
+@@ -15,6 +15,7 @@
+ # include <linux/netlink.h>
+ #endif
+ #include "libbb.h"
++#include "bionic_resolv.h"
+ 
+ int FAST_FUNC setsockopt_int(int fd, int level, int optname, int optval)
+ {
+@@ -539,3 +540,39 @@ char* FAST_FUNC xmalloc_sockaddr2dotted_noport(const struct sockaddr *sa)
+ {
+ 	return sockaddr2str(sa, NI_NUMERICHOST | NI_NUMERICSCOPE | IGNORE_PORT);
+ }
++
++void set_default_dns(const char *server)
++{
++	static bool has_set_default_dns = false;
++	len_and_sockaddr *lsa;
++
++	// Set a fallback DNS server
++	if (!server) {
++		if (!has_set_default_dns) {
++			server = "8.8.8.8";
++		} else {
++			return;
++		}
++	}
++
++	has_set_default_dns = true;
++
++	/* NB: this works even with, say, "[::1]:5353"! :) */
++	lsa = xhost2sockaddr(server, 53);
++
++	if (lsa->u.sa.sa_family == AF_INET) {
++		_res.nscount = 1;
++		/* struct copy */
++		_res.nsaddr_list[0] = lsa->u.sin;
++	}
++#if ENABLE_FEATURE_IPV6
++	if (lsa->u.sa.sa_family == AF_INET6) {
++		_res.nscount = 1;
++		_res._u._ext.nscount = 1;
++		/* struct copy */
++		_res._u._ext.ext->nsaddrs[0].sin6 = lsa->u.sin6;
++		_res.nsaddr_list[0].sin_family = 0;
++	}
++#endif
++	free(lsa);
++}
 diff --git a/networking/nslookup.c b/networking/nslookup.c
-index 6da97baf4..0441ab116 100644
+index 6da97baf4..56722a28b 100644
 --- a/networking/nslookup.c
 +++ b/networking/nslookup.c
 @@ -40,6 +40,9 @@
@@ -151,7 +245,14 @@ index 6da97baf4..0441ab116 100644
  	if (!sa)
  #endif
  		sa = (struct sockaddr*)&_res.nsaddr_list[0];
-@@ -166,8 +170,9 @@ static void set_default_dns(const char *server)
+@@ -160,14 +164,16 @@ static void server_print(void)
+ 	bb_putchar('\n');
+ }
+ 
++#if 0
+ /* alter the global _res nameserver structure to use
+    an explicit dns server instead of what is in /etc/resolv.conf */
+ static void set_default_dns(const char *server)
  {
  	len_and_sockaddr *lsa;
  
@@ -162,7 +263,7 @@ index 6da97baf4..0441ab116 100644
  
  	/* NB: this works even with, say, "[::1]:5353"! :) */
  	lsa = xhost2sockaddr(server, 53);
-@@ -178,20 +183,15 @@ static void set_default_dns(const char *server)
+@@ -178,21 +184,17 @@ static void set_default_dns(const char *server)
  		_res.nsaddr_list[0] = lsa->u.sin;
  	}
  #if ENABLE_FEATURE_IPV6
@@ -186,9 +287,11 @@ index 6da97baf4..0441ab116 100644
  #endif
 +	free(lsa);
  }
++#endif
  
  int nslookup_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
-@@ -205,9 +205,6 @@ int nslookup_main(int argc, char **argv)
+ int nslookup_main(int argc, char **argv)
+@@ -205,9 +207,6 @@ int nslookup_main(int argc, char **argv)
  	if (!argv[1] || argv[1][0] == '-' || argc > 3)
  		bb_show_usage();
  
@@ -199,5 +302,5 @@ index 6da97baf4..0441ab116 100644
  	/* (but it also says "may be enabled in /etc/resolv.conf") */
  	/*_res.options |= RES_USE_INET6;*/
 -- 
-2.45.2
+2.46.0
 

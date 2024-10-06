@@ -1,4 +1,4 @@
-From 62dc3c2191e35983b619fc750f9f731c4a84a232 Mon Sep 17 00:00:00 2001
+From fea349b03d474af1747ac271a4bc399560dc7868 Mon Sep 17 00:00:00 2001
 From: Chris Renshaw <osm0sis@outlook.com>
 Date: Thu, 3 Dec 2015 01:29:35 -0400
 Subject: [PATCH 02/18] loadfont/setfont/conspy: add missing header
@@ -51,5 +51,5 @@ index 000000000..8b8e56d4d
 +
 +#endif	/* sys/kd.h */
 -- 
-2.45.2
+2.46.0
 

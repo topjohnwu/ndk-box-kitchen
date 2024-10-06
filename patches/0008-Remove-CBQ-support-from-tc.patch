@@ -1,4 +1,4 @@
-From 12334c3e19a1e902a90b7d4898f61b08301de94d Mon Sep 17 00:00:00 2001
+From 53971e30edd14c1151e7bf0330302ff3d17fcf7e Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Mon, 15 Jul 2024 18:50:57 -0700
 Subject: [PATCH 08/18] Remove CBQ support from tc
@@ -60,5 +60,5 @@ index 43187f7ee..92601d6e3 100644
  			/* don't know how to print options for this class */
  			printf("(options for %s)", name);
 -- 
-2.45.2
+2.46.0
 

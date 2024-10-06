@@ -1,7 +1,7 @@
-From 6e402158a42bab0f1f45053d356beb8ec8d8e615 Mon Sep 17 00:00:00 2001
+From 893dcbb6e92c3aa4dda33c5766191c1b386be621 Mon Sep 17 00:00:00 2001
 From: topjohnwu <topjohnwu@gmail.com>
 Date: Sat, 2 Sep 2023 05:21:13 -0700
-Subject: [PATCH 14/18] Replace rename(2) with direct system call
+Subject: [PATCH 10/18] Replace rename(2) with direct system call
 
 NDK r26 introduced the following change:
 https://android-review.googlesource.com/c/platform/bionic/+/2240019
@@ -49,5 +49,5 @@ index d4548859a..e6a13667f 100644
 +    return __wrap_renameat(AT_FDCWD, old_path, AT_FDCWD, new_path);
 +}
 -- 
-2.45.2
+2.46.0
 
